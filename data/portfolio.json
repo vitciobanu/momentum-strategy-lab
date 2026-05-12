@@ -1,0 +1,8 @@
+{
+  "_account_type": "IBKR DEMO (Paper Trading)",
+  "_purpose": "This file tracks the live state of the strategy on an IBKR paper trading account. It is committed to the public repo for transparency. See data/portfolio.example.json for field documentation.",
+  "cash_eur": 0,
+  "positions": {},
+  "last_rebalance": null,
+  "initial_capital_eur": 2000.0
+}

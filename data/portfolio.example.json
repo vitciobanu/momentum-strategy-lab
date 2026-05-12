@@ -1,0 +1,32 @@
+{
+  "_documentation": {
+    "purpose": "Your live portfolio state. Updated manually after each IBKR trade execution.",
+    "fields": {
+      "cash_eur": "Available cash balance in EUR. Updated after sells (added) and buys (subtracted, including commission).",
+      "positions": "Object containing all open positions, keyed by ticker symbol.",
+      "positions.<ticker>.shares": "Integer number of shares held (no fractions in IBKR for European stocks).",
+      "positions.<ticker>.avg_price_eur": "Average purchase price in EUR (use price_usd / eur_usd_rate for SP500 stocks).",
+      "positions.<ticker>.market": "Either 'IBEX' for Spanish stocks (BME) or 'SP' for US stocks (NYSE/NASDAQ).",
+      "positions.<ticker>.buy_date": "ISO date (YYYY-MM-DD) when the position was opened. Useful for fiscal tracking.",
+      "last_rebalance": "ISO date of the last rebalance executed. Helps track if you're on schedule.",
+      "initial_capital_eur": "The initial capital you started with. Used for performance tracking. Never change after setup."
+    },
+    "_note": "Lines starting with underscore (_) are documentation only and are ignored by the script."
+  },
+  "cash_eur": 0,
+  "positions": {},
+  "last_rebalance": null,
+  "initial_capital_eur": 2000.0,
+  "_example_after_first_rebalance": {
+    "cash_eur": 8.45,
+    "positions": {
+      "NVDA": { "shares": 12, "avg_price_eur": 28.50, "market": "SP", "buy_date": "2026-05-13" },
+      "MSFT": { "shares": 4,  "avg_price_eur": 85.30, "market": "SP", "buy_date": "2026-05-13" },
+      "AVGO": { "shares": 1,  "avg_price_eur": 320.00, "market": "SP", "buy_date": "2026-05-13" },
+      "META": { "shares": 1,  "avg_price_eur": 305.00, "market": "SP", "buy_date": "2026-05-13" },
+      "BBVA": { "shares": 35, "avg_price_eur": 9.40, "market": "IBEX", "buy_date": "2026-05-13" },
+      "IBE":  { "shares": 22, "avg_price_eur": 14.85, "market": "IBEX", "buy_date": "2026-05-13" }
+    },
+    "last_rebalance": "2026-05-13"
+  }
+}

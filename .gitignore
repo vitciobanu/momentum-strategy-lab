@@ -1,0 +1,38 @@
+# Note: data/portfolio.json IS committed in this repo because it tracks
+# the public IBKR DEMO account. If you fork this repo and connect it to a real
+# account, you should add `data/portfolio.json` here to keep it private.
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local data dumps
+*.csv
+*.xlsx
+!docs/*.csv
+!docs/*.xlsx
