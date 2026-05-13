@@ -60,6 +60,7 @@ def load_portfolio():
         default = {
             "_account_type": "IBKR DEMO (Paper Trading)",
             "initial_capital_eur": 2000.0,
+            "net_capital_contributed_eur": 2000.0,
             "cash_eur": 0,
             "positions": {},
             "last_rebalance": None,
@@ -69,7 +70,13 @@ def load_portfolio():
     with open(PORTFOLIO_FILE, "r") as f:
         data = json.load(f)
     # Remove comment keys (any key starting with _)
-    return {k: v for k, v in data.items() if not k.startswith("_")}
+    data = {k: v for k, v in data.items() if not k.startswith("_")}
+    # Backward compatibility: if net_capital_contributed_eur is missing
+    # (older portfolio.json from before this field existed), default it to
+    # initial_capital_eur so existing users don't break.
+    if "net_capital_contributed_eur" not in data:
+        data["net_capital_contributed_eur"] = data.get("initial_capital_eur", 2000.0)
+    return data
 
 def load_history():
     if not HISTORY_FILE.exists():
@@ -366,6 +373,12 @@ def print_report(plan, portfolio, mom_sp, mom_ibex,
     else:
         print(f"   (No positions — fresh portfolio)")
     print(f"   TOTAL VALUE:          {plan['total_value']:>10,.2f} EUR")
+    # Show return on net contributed capital (real performance, ignoring cash flows)
+    net_contributed = portfolio.get("net_capital_contributed_eur", 0)
+    if net_contributed > 0:
+        return_on_contributions = (plan['total_value'] / net_contributed - 1) * 100
+        print(f"   Net capital contributed:  {net_contributed:>10,.2f} EUR  "
+              f"(return on contributions: {return_on_contributions:+.2f}%)")
     print(f"   Target per SP500 pos: {plan['target_per_sp_eur']:>10,.2f} EUR")
     print(f"   Target per IBEX  pos: {plan['target_per_ibex_eur']:>10,.2f} EUR")
 

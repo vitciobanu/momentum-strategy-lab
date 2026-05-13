@@ -2,8 +2,9 @@
   "_documentation": {
     "purpose": "Your live portfolio state. Updated manually after each IBKR trade execution.",
     "fields": {
-      "initial_capital_eur": "The starting capital you committed to the strategy. Edit this BEFORE the first run. The script reads this value to initialize `cash_eur` when no positions exist. After the first rebalance, this is informational only.",
-      "cash_eur": "Available cash balance in EUR right now. Updated after each rebalance: add proceeds from sells, subtract cost of buys and commissions paid.",
+      "initial_capital_eur": "The starting capital you committed to the strategy on day 1. Set this BEFORE the first run. Never changes after the first rebalance — it stays as a historical reference.",
+      "net_capital_contributed_eur": "Cumulative NET amount of capital you have put into the strategy (additions minus withdrawals). Initially equals initial_capital_eur. Update this every time you add or withdraw money. Used to calculate real return on capital after cash flows.",
+      "cash_eur": "Available cash balance in EUR right now. Updated after each rebalance: add proceeds from sells, subtract cost of buys and commissions paid. Also update when injecting or withdrawing capital.",
       "positions": "Object containing all open positions, keyed by ticker symbol.",
       "positions.<ticker>.shares": "Number of shares held. Can be fractional if your broker and the specific stock support it (most US stocks and many European ones do on IBKR).",
       "positions.<ticker>.avg_price_eur": "Average purchase price PER SHARE in EUR. For IBEX stocks this is just the EUR price. For US stocks you need to convert from USD using the exchange rate at the time of purchase. See _example_avg_price_calculation below.",
@@ -22,13 +23,25 @@
     "note": "Always use the exchange rate AT THE TIME OF PURCHASE shown in your IBKR trade confirmation, not today's rate. IBKR shows the rate on each trade ticket."
   },
 
+  "_example_capital_flow_tracking": {
+    "scenario": "Day 1: deposit 2,000 EUR. Year 1: deposit 1,000 EUR more. Year 2: withdraw 500 EUR.",
+    "field_progression": [
+      "After day 1:    initial_capital_eur=2000, net_capital_contributed_eur=2000",
+      "After year 1:   initial_capital_eur=2000, net_capital_contributed_eur=3000  (added 1000)",
+      "After year 2:   initial_capital_eur=2000, net_capital_contributed_eur=2500  (withdrew 500)"
+    ],
+    "return_calculation": "If portfolio is worth 5,800 EUR at end of year 2, real return = (5800 - 2500) / 2500 = 132%. NOT (5800 - 2000) / 2000 = 190%, which would mix returns with new money."
+  },
+
   "initial_capital_eur": 2000.0,
+  "net_capital_contributed_eur": 2000.0,
   "cash_eur": 0,
   "positions": {},
   "last_rebalance": null,
 
   "_example_after_first_rebalance": {
     "initial_capital_eur": 2000.0,
+    "net_capital_contributed_eur": 2000.0,
     "cash_eur": 8.45,
     "positions": {
       "NVDA": { "shares": 4.5, "avg_price_eur": 65.20, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },

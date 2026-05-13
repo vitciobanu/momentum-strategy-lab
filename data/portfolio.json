@@ -1,8 +1,9 @@
 {
   "_account_type": "IBKR DEMO (Paper Trading)",
   "_purpose": "This file tracks the live state of the strategy on an IBKR paper trading account. It is committed to the public repo for transparency. See data/portfolio.example.json for full field documentation.",
-  "_how_to_change_initial_capital": "Edit `initial_capital_eur` BEFORE the first run. The script reads this value to initialize `cash_eur` when no positions exist yet. After the first rebalance has happened, this field is informational only — the script uses `cash_eur` and `positions` for state.",
+  "_how_to_change_initial_capital": "Edit `initial_capital_eur` AND `net_capital_contributed_eur` BEFORE the first run (both should be the same value). After the first rebalance has happened, modify `net_capital_contributed_eur` when adding or withdrawing capital — see README section 'Adding or withdrawing capital later'.",
   "initial_capital_eur": 2000.0,
+  "net_capital_contributed_eur": 2000.0,
   "cash_eur": 0,
   "positions": {},
   "last_rebalance": null
