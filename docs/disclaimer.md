@@ -2,13 +2,8 @@
 
 ## Not financial advice
 
-<<<<<<< HEAD
 The content of this repository — including code, documentation, results, and
 commentary — is provided for **educational and research purposes only**. It does
-=======
-The content of this repository - including code, documentation, results, and
-commentary - is provided for **educational and research purposes only**. It does
->>>>>>> 9cb58e0 (Updates: minor updates to the docs and comments in the scripts)
 not constitute investment advice, financial advice, trading advice, or any other
 sort of advice.
 
@@ -36,11 +31,7 @@ The backtest results in this repository:
 - Cover a specific 7-year period (2019-2025) that included unique events
   (COVID-19, AI boom, rate cycle) unlikely to repeat in the same way
 - Do not include important real-world frictions (slippage, currency risk,
-<<<<<<< HEAD
   dividends, survivorship bias) — see [methodology.md](methodology.md)
-=======
-  dividends, survivorship bias) - see [methodology.md](methodology.md)
->>>>>>> 9cb58e0 (Updates: minor updates to the docs and comments in the scripts)
 - Should be understood as **upper-bound estimates** of what the strategy could
   achieve under favorable conditions
 
@@ -72,21 +63,10 @@ performance of the code or its outputs.
 
 ## Privacy
 
-<<<<<<< HEAD
 The repository does not contain personal financial data. The user's actual
 portfolio is stored locally in `data/portfolio.json`, which is excluded from
 version control via `.gitignore`. Never commit your real portfolio to a public
 repository.
-=======
-This repository tracks an IBKR DEMO (paper trading) account, not a real
-money account. All portfolio data in data/portfolio.json and data/history.json
-reflects simulated trades with simulated capital. No personal financial data,
-real positions, or actual brokerage balances are exposed by this repo.
-If you fork this repository to apply the strategy to a real money account, add
-data/portfolio.json to your .gitignore before committing anything. See the
-note in the project's .gitignore file for the exact line to uncomment. Never
-commit real portfolio data to a public repository.
->>>>>>> 9cb58e0 (Updates: minor updates to the docs and comments in the scripts)
 
 ## Regulatory note (Spain)
 
