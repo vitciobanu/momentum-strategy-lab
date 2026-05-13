@@ -296,7 +296,7 @@ def main():
     returns_net.iloc[0] = valor_serie.iloc[0] / INITIAL_CAPITAL - 1
     n_years = len(returns_net) / 12
 
-    print(f"\n{'Year':<6}{'V.start':>12}{'V.end net':>14}{'Return net':>13}{'Tax':>12}{'Ops':>6}")
+    print(f"\n{'Year':<6}{'Initial capital':>12}{'Final capital net':>14}{'Return net':>13}{'Tax':>12}{'Ops':>6}")
     print("-"*78)
     for s in yearly_summary:
         print(f"{s['year']:<6}{s['start']:>11,.0f}€{s['end_net']:>13,.0f}€"
