@@ -11,8 +11,8 @@ Personal lab for testing the **"buy past winners, sell past losers"** momentum s
 ## What this is
 
 A backtested implementation of the classic **momentum 12-1** strategy applied quarterly to a mixed portfolio of:
-- **4 stocks from the S&P 500** (67% of capital)
-- **2 stocks from the IBEX 35** (33% of capital)
+- **4 stocks from the S&P 500** (65% of capital)
+- **2 stocks from the IBEX 35** (30% of capital)
 
 Selection of stocks happens dynamically each quarter based on their 12-month price momentum (excluding the most recent month, a common technique to avoid short-term reversal noise).
 
@@ -24,7 +24,7 @@ Selection of stocks happens dynamically each quarter based on their 12-month pri
 | Lookback period | 12 months, skipping the last 1 (i.e. "12-1") |
 | Rebalancing frequency | Quarterly (every 3 months) |
 | Number of positions | 6 (4 US + 2 ES) |
-| Position weights | Fixed 67% US / 33% ES (equal-weighted within each region) |
+| Position weights | Fixed 65% US / 30% ES (equal-weighted within each region) |
 | Universe pre-selection | Top 20 by historical momentum (2015-2018) within each market |
 | Stock universe | IBEX 35 (35 stocks) + S&P 500 (~93 representative stocks) |
 | Initial capital | 2,000 EUR (configurable) |
@@ -98,7 +98,7 @@ python src/rebalance.py
 The script will:
 1. Download recent monthly prices for the IBEX 35 and S&P 500 universes
 2. Calculate momentum 12-1 for each stock
-3. Select top 4 from S&P 500 (with weight 67%) and top 2 from IBEX (with weight 33%)
+3. Select top 4 from S&P 500 (with weight 65%) and top 2 from IBEX (with weight 30%)
 4. Compare with the current portfolio state in `data/portfolio.json`
 5. Print buy/sell orders to execute in IBKR
 6. Save a record of the decision in `data/history.json`

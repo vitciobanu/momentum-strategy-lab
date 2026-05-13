@@ -6,7 +6,7 @@ known historical annual returns.
 ## Strategy parameters
 
 - **4 stocks from S&P 500** + **2 stocks from IBEX 35** = 6 positions total
-- Weights: **67% USA / 33% Spain**, equal-weighted within each region
+- Weights: **65% USA / 30% Spain**, equal-weighted within each region
 - Rebalancing: **quarterly** (Jan, Apr, Jul, Oct)
 - Pre-selected universe: top 20 of each market by momentum 2015-2018
 - Initial capital: **2,000 EUR**

@@ -79,8 +79,9 @@ CONFIG = {
     "N_IBEX_POSITIONS": 2,          # Number of IBEX stocks to hold
     
     # Capital weights (must sum to 1.0)
-    "WEIGHT_SP500": 0.67,           # 67% of capital in US stocks
-    "WEIGHT_IBEX": 0.33,            # 33% of capital in Spanish stocks
+    "WEIGHT_SP500": 0.65,           # 65% of capital in US stocks
+    "WEIGHT_IBEX": 0.30,            # 30% of capital in Spanish stocks
+    "WEIGHT_CASH": 0.05,            # 5% cash buffer for commissions and slippage
     
     # Momentum calculation
     "LOOKBACK_MONTHS": 12,          # Total lookback window

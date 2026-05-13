@@ -4,7 +4,7 @@ MOMENTUM 12-1 QUARTERLY REBALANCE — Mixed USA/Spain portfolio
 ================================================================================
 
 Strategy: Buy past winners (top 4 from S&P 500, top 2 from IBEX 35 by 12-1
-momentum) with fixed 67%/33% capital allocation. Rebalance every 3 months.
+momentum) with fixed 65%/30% capital allocation. Rebalance every 3 months.
 
 This script is your "decision maker". Each quarter:
 1. Downloads recent monthly prices via yfinance
@@ -160,8 +160,8 @@ def compute_rebalance(portfolio, mom_sp, mom_ibex, prices_sp, prices_ibex, eur_u
     Decide what to buy and sell.
     
     Targets:
-    - Top N_SP500_POSITIONS from S&P 500, weighted 67% total, equal-weight within
-    - Top N_IBEX_POSITIONS from IBEX, weighted 33% total, equal-weight within
+    - Top N_SP500_POSITIONS from S&P 500, weighted 65% total, equal-weight within
+    - Top N_IBEX_POSITIONS from IBEX, weighted 30% total, equal-weight within
     """
     cash_eur = portfolio["cash_eur"]
     positions = portfolio["positions"]  # {ticker: {shares, avg_price_eur, market}}
