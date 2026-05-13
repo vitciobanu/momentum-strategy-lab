@@ -44,7 +44,7 @@ These results assume the strategy was followed without intervention for 7 full y
 | Capital final | 20,112 € |
 | Total return | +905.60% |
 | CAGR (net of taxes) | **+39.06%** |
-| Annualized volatility | 19.84% |
+| Annualized volatility | 19.82% |
 | Sharpe ratio (rf=0) | **1.78** |
 | Max drawdown | **-17.24%** |
 | Total taxes paid | 4,182 € |
