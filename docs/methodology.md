@@ -23,24 +23,32 @@ The reason to **skip the most recent month** is well-established in the literatu
 1-month returns exhibit short-term reversal (the opposite of momentum), so including
 them adds noise.
 
-## Universe pre-selection (one-time)
+## Universe definition (dynamic, not pre-selected)
 
-Rather than using all S&P 500 / IBEX 35 stocks, we pre-select the **top 20 of each
-market based on their average momentum during 2015-2018** (4-year pre-selection
-period).
+The strategy scans **two complete universes** every quarter:
+- The **IBEX 35**: all 35 components of the Spanish benchmark index
+- The **S&P 500 large-cap subset**: the ~100 largest US stocks by market cap, representing approximately 80% of the total S&P 500 index weight
 
-Why pre-select?
-- Reduces computational cost
-- Concentrates on stocks with persistent momentum behavior
-- Avoids stocks with random, unstable returns
+There is **no static pre-selection** of "best stocks". Every quarter, the script:
+1. Downloads recent prices for every stock in both universes
+2. Computes 12-1 momentum for each
+3. Picks the 4 strongest from the S&P universe and the 2 strongest from the IBEX universe
 
-Why use a pre-period (2015-2018)?
-- Avoids **look-ahead bias**: we don't use 2019+ data to select the universe we'll
-  test on 2019+
-- The 4-year window is long enough to filter out luck
-- It mimics what a real investor in early 2019 could have done
+Why not use the full S&P 500 (all 503 stocks)?
+- The top 100 represent ~80% of total index weight
+- These stocks have deep liquidity (important for execution)
+- Smaller S&P components have noisier momentum signals
+- It keeps each quarterly data download fast (~135 vs. ~500 tickers)
 
-The top 20 lists are fixed in `src/universe.py`.
+Why not pre-select "good momentum stocks" once and stick with them?
+- The whole point of momentum is that **the winners change over time**
+- A static list would miss new entrants (recent IPOs, sector rotations)
+- A static list of 20 stocks would have only ~6% of the dynamic universe's breadth
+- Bad picks made years ago would still be tested every quarter
+
+**Universe maintenance**: the lists in `src/universe.py` should be reviewed periodically as index compositions change:
+- **IBEX 35**: composition is reviewed twice a year (June and December) by BME's Technical Advisory Committee. Update the file after each review.
+- **S&P 500 large-cap subset**: review yearly. The top 100 by market cap shifts gradually, but new IPOs (e.g., a future Palantir-like) can be missed if the list goes stale.
 
 ## Portfolio construction
 
@@ -80,6 +88,19 @@ lot may be partially trimmed even if it stays in the top 6 (though in practice t
 script only rebalances new vs. closed positions, not within held ones, to minimize
 unnecessary trades).
 
+### Fractional shares
+
+By default the strategy uses **fractional shares** (`ALLOW_FRACTIONAL_SHARES = True`
+in `src/universe.py`). This is essential for small capital sizes: with 2,000 EUR
+split into 6 positions, each target is ~333 EUR — too small to afford one whole
+share of expensive stocks like BKNG (~5,000 USD), AVGO (~2,000 USD), or COST
+(~900 USD).
+
+IBKR supports fractional shares on most US stocks and many European ones. If your
+broker doesn't or you prefer whole shares, set the flag to `False` and the script
+will fall back to integer-share orders (with a warning if a target stock is
+unaffordable at one full share).
+
 ## Tax modeling
 
 The backtest applies Spanish IRPF "base del ahorro" brackets per year:
@@ -95,22 +116,41 @@ Taxes are calculated on **realized gains** (gains from positions sold during the
 year). Losses can offset gains within the same year (and carry forward 4 years).
 The backtest simplifies this to within-year offsetting only.
 
-## Commission model
+## Commissions
 
-- **IBEX (BME) stocks**: 3 EUR per trade (IBKR tier rate for Madrid)
-- **S&P 500 stocks**: 1 USD per trade (IBKR Tiered rate)
+The backtest **does not model commissions**. The reason is that IBKR commissions
+vary significantly by:
 
-A round-trip (buy + sell) costs 6 EUR for an IBEX stock or 2 USD for a US stock.
+- Account tier (Tiered vs Fixed pricing)
+- Monthly trading volume (volume discounts kick in at certain thresholds)
+- Account size (some markets charge more for small accounts)
+- Market venue (BME, NYSE, NASDAQ have different rate cards)
+- Currency conversion fees (if you operate a single-currency account)
+
+A single hardcoded number (e.g., "3 EUR per trade") would either underestimate or
+overestimate actual costs depending on your specific situation. Instead, the
+real-execution workflow records **actual commissions per trade** in
+`data/history.json` after each rebalance.
+
+For a rough estimate, expect commissions to subtract roughly 0.1-0.3% per year of
+CAGR for a small-to-medium portfolio. For 2,000 EUR with ~25 trades per year at
+1-3 EUR each, that's 25-75 EUR per year, or ~1.5-3.5% of starting capital.
 
 ## Currency handling
 
-In the live script (`rebalance.py`), the EUR/USD rate is fetched dynamically. All
-positions are valued in EUR (USD values are converted at the live rate). 
+In the live script (`rebalance.py`), the EUR/USD rate is fetched dynamically from
+Yahoo Finance at each rebalance. All positions are valued in EUR.
 
-The backtest uses a **constant reference rate** (1 EUR = 1.1758 USD as of 12 May 2026)
-for simplicity. In reality, the EUR/USD moved between 0.95 and 1.20 during 2019-2025,
-which would add ±15% to the final result depending on exact entry/exit timing. This
-is a known simplification of the backtest.
+When you record a US position in `portfolio.json`, the `avg_price_eur` field
+captures the cost basis in EUR using the exchange rate **at the moment of
+purchase**. This is the rate IBKR shows on each trade confirmation. Once
+recorded, this value doesn't change — even if EUR/USD moves later, the cost
+basis stays fixed at what you actually paid.
+
+The backtest uses a **constant reference rate** (1 EUR = 1.1758 USD as of 12 May
+2026) for simplicity. In reality, the EUR/USD moved between 0.95 and 1.20 during
+2019-2025, which would add ±10-15% to the final result depending on exact entry
+and exit timing. This is a known simplification of the backtest.
 
 ## What the strategy does NOT model
 
@@ -118,17 +158,16 @@ To be transparent about the limitations:
 
 1. **Currency risk**: real EUR/USD fluctuations during 2019-2025 are not in the
    backtest (constant rate used). This could change results by ±10-15%.
-2. **Slippage**: orders execute at the close price, not at a real market price.
-3. **Dividend reinvestment**: dividends are not modeled (yfinance auto_adjust=True
-   helps, but isn't perfect).
-4. **Survivorship bias**: the universe contains stocks that survived to 2025. Stocks
-   that delisted or went bankrupt during the period are not represented.
-5. **Look-ahead bias in universe selection**: although we use 2015-2018 for
-   pre-selection, the choice of "top 20 by momentum" was itself informed by
-   knowing momentum works. A truly bias-free study would use a random universe.
+2. **Commissions**: not modeled in the backtest; recorded manually in
+   `history.json` for the live strategy.
+3. **Slippage**: orders execute at the close price, not at a real market price.
+4. **Dividend reinvestment**: dividends are not modeled (yfinance
+   `auto_adjust=True` helps, but isn't perfect).
+5. **Survivorship bias**: the universe contains stocks that survived to 2025.
+   Stocks that delisted or went bankrupt during the period are not represented.
 6. **Stress periods**: COVID-2020 and rate-hike-2022 were rare events. The
-   strategy worked well during recovery (2020-2021 and 2023-2024). Future regimes
-   may differ.
+   strategy worked well during recovery (2020-2021 and 2023-2024). Future
+   regimes may differ.
 
 ## References
 

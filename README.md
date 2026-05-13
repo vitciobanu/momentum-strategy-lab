@@ -13,8 +13,9 @@ Personal lab for testing the **"buy past winners, sell past losers"** momentum s
 A backtested implementation of the classic **momentum 12-1** strategy applied quarterly to a mixed portfolio of:
 - **4 stocks from the S&P 500** (65% of capital)
 - **2 stocks from the IBEX 35** (30% of capital)
+- **5% of cash reserve** left for flexibility and commissions
 
-Selection of stocks happens dynamically each quarter based on their 12-month price momentum (excluding the most recent month, a common technique to avoid short-term reversal noise).
+Selection of stocks happens dynamically each quarter based on their 12-month price momentum (excluding the most recent month, a common technique to avoid short-term reversal noise). **Every quarter the script scans the entire universe** — all 35 IBEX components plus the top ~100 S&P 500 stocks by market cap — and picks the 6 stocks with the strongest momentum signal at that exact moment. No static "favorites list" is used.
 
 ## Strategy summary
 
@@ -25,10 +26,11 @@ Selection of stocks happens dynamically each quarter based on their 12-month pri
 | Rebalancing frequency | Quarterly (every 3 months) |
 | Number of positions | 6 (4 US + 2 ES) |
 | Position weights | Fixed 65% US / 30% ES (equal-weighted within each region) |
-| Universe pre-selection | Top 20 by historical momentum (2015-2018) within each market |
-| Stock universe | IBEX 35 (35 stocks) + S&P 500 (~93 representative stocks) |
-| Initial capital | 2,000 EUR (configurable) |
-| Commissions | 3 EUR per IBEX trade, 1 USD per S&P 500 trade (IBKR tier) |
+| Stock universe | IBEX 35 (35 stocks) + S&P 500 top ~100 by market cap |
+| Selection | Dynamic each quarter, no static pre-selection |
+| Initial capital | Configurable via `initial_capital_eur` in `data/portfolio.json` |
+| Fractional shares | Enabled by default (essential for small capital with expensive stocks) |
+| Commissions | Recorded manually per-trade in `data/history.json` (IBKR varies by tier/volume) |
 | Tax framework | Spanish IRPF (Base del Ahorro), W-8BEN active for US dividends |
 | Accounting currency | EUR |
 
@@ -39,14 +41,15 @@ These results assume the strategy was followed without intervention for 7 full y
 | Metric | Value |
 |---|---|
 | Capital initial | 2,000 € |
-| Capital final | 17,934 € |
-| Total return | +796.71% |
-| CAGR (net of taxes & commissions) | **+36.80%** |
-| Annualized volatility | 17.09% |
-| Sharpe ratio (rf=0) | **1.94** |
-| Max drawdown | **-12.23%** |
-| Total commissions paid | 131 € |
-| Total taxes paid | 2,639 € |
+| Capital final | 20,112 € |
+| Total return | +905.60% |
+| CAGR (net of taxes) | **+39.06%** |
+| Annualized volatility | 19.84% |
+| Sharpe ratio (rf=0) | **1.78** |
+| Max drawdown | **-17.24%** |
+| Total taxes paid | 4,182 € |
+
+**Note**: the backtest excludes commissions (they vary by IBKR tier/volume/account size and can't be modeled accurately upfront). In real execution you record actual commissions per trade in `data/history.json`. Expect commissions to subtract roughly 0.1-0.3% per year of CAGR.
 
 For comparison, the S&P 500 buy-and-hold over the same period returned ~14% CAGR. The strategy outperforms thanks to the dynamic rotation, but with concentration risk.
 
@@ -104,6 +107,60 @@ The script will:
 6. Save a record of the decision in `data/history.json`
 
 After executing the trades in your IBKR DEMO account, manually update `data/portfolio.json` with the resulting positions and commit the change.
+
+### Setting the initial capital
+
+Before the very first run, open `data/portfolio.json` and edit the `initial_capital_eur` field to whatever amount you want to commit to the strategy. The default is 2,000 EUR.
+
+```json
+{
+  "initial_capital_eur": 5000.0,
+  "cash_eur": 0,
+  "positions": {}
+}
+```
+
+When `cash_eur` is 0 and `positions` is empty (i.e. on the first run), the script reads `initial_capital_eur` and uses it to initialize `cash_eur`. After that, the script tracks state via `cash_eur` and `positions`.
+
+### Recording avg_price_eur for US (S&P 500) positions
+
+For Spanish stocks, the trade is already in EUR, so `avg_price_eur` is just the fill price.
+
+For US stocks, the fill price is in USD, and you need to convert it using the EUR/USD exchange rate **at the moment of the trade** (IBKR shows this rate on each trade confirmation).
+
+**Example:** you bought 5 shares of NVDA at 100 USD each. On that day, 1 EUR = 1.1743 USD.
+
+```
+avg_price_eur = avg_price_usd / eur_usd_rate
+              = 100 / 1.1743
+              = 85.16 EUR per share
+```
+
+Total cost in EUR: 5 shares × 85.16 EUR = 425.79 EUR.
+
+This `avg_price_eur` is the cost basis used to calculate P&L in EUR for tax purposes. Once recorded, it doesn't change — even if EUR/USD moves later, the cost basis stays fixed at what you actually paid.
+
+### Adding extra capital later
+
+If at some point you want to add more capital (e.g., 1,000 EUR after a year), the cleanest way is:
+
+1. **Add the EUR to your IBKR account** as you normally would (wire transfer, etc.)
+2. **Wait for the next quarterly rebalance date** (don't add mid-quarter — it breaks weight balance)
+3. **Before running the script**, edit `data/portfolio.json` to add the extra cash:
+
+```json
+{
+  "initial_capital_eur": 2000.0,        // leave as historical record
+  "cash_eur": 1245.30,                  // increase by 1000 EUR -> 2245.30
+  "positions": { ... unchanged ... },
+  "last_rebalance": "2027-04-07"
+}
+```
+
+4. **Run `python src/rebalance.py`**. The script will use the new total value (existing positions + increased cash) to compute target weights, and will rebalance positions to match.
+5. **Optionally**, add a note to history.json documenting the capital injection for transparency.
+
+The `initial_capital_eur` field is kept as a historical reference for total return calculations. To track CAGR correctly when adding capital over time, consider computing **time-weighted returns** externally — the simple `final_value / initial_capital - 1` formula no longer reflects strategy performance once you add money mid-stream.
 
 ### Forking for real money
 

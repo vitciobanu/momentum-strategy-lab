@@ -2,30 +2,41 @@
   "_documentation": {
     "purpose": "Your live portfolio state. Updated manually after each IBKR trade execution.",
     "fields": {
-      "cash_eur": "Available cash balance in EUR. Updated after sells (added) and buys (subtracted, including commission).",
+      "initial_capital_eur": "The starting capital you committed to the strategy. Edit this BEFORE the first run. The script reads this value to initialize `cash_eur` when no positions exist. After the first rebalance, this is informational only.",
+      "cash_eur": "Available cash balance in EUR right now. Updated after each rebalance: add proceeds from sells, subtract cost of buys and commissions paid.",
       "positions": "Object containing all open positions, keyed by ticker symbol.",
-      "positions.<ticker>.shares": "Integer number of shares held (no fractions in IBKR for European stocks).",
-      "positions.<ticker>.avg_price_eur": "Average purchase price in EUR (use price_usd / eur_usd_rate for SP500 stocks).",
+      "positions.<ticker>.shares": "Number of shares held. Can be fractional if your broker and the specific stock support it (most US stocks and many European ones do on IBKR).",
+      "positions.<ticker>.avg_price_eur": "Average purchase price PER SHARE in EUR. For IBEX stocks this is just the EUR price. For US stocks you need to convert from USD using the exchange rate at the time of purchase. See _example_avg_price_calculation below.",
       "positions.<ticker>.market": "Either 'IBEX' for Spanish stocks (BME) or 'SP' for US stocks (NYSE/NASDAQ).",
       "positions.<ticker>.buy_date": "ISO date (YYYY-MM-DD) when the position was opened. Useful for fiscal tracking.",
-      "last_rebalance": "ISO date of the last rebalance executed. Helps track if you're on schedule.",
-      "initial_capital_eur": "The initial capital you started with. Used for performance tracking. Never change after setup."
+      "positions.<ticker>.commission_paid_eur": "(Optional) The actual commission you paid for opening this position, in EUR. Useful for accurate P&L tracking.",
+      "last_rebalance": "ISO date of the last rebalance executed."
     },
     "_note": "Lines starting with underscore (_) are documentation only and are ignored by the script."
   },
+
+  "_example_avg_price_calculation": {
+    "scenario": "You bought 5 shares of NVDA at 100 USD each on a day when 1 EUR = 1.1743 USD.",
+    "calculation": "avg_price_eur = avg_price_usd / eur_usd_rate = 100 / 1.1743 = 85.16 EUR per share",
+    "total_cost_eur": "5 shares * 85.16 EUR = 425.79 EUR (this is what you'd see deducted from your EUR cash if IBKR auto-converts; if you have a USD sub-account, your USD balance drops by 500 USD instead)",
+    "note": "Always use the exchange rate AT THE TIME OF PURCHASE shown in your IBKR trade confirmation, not today's rate. IBKR shows the rate on each trade ticket."
+  },
+
+  "initial_capital_eur": 2000.0,
   "cash_eur": 0,
   "positions": {},
   "last_rebalance": null,
-  "initial_capital_eur": 2000.0,
+
   "_example_after_first_rebalance": {
+    "initial_capital_eur": 2000.0,
     "cash_eur": 8.45,
     "positions": {
-      "NVDA": { "shares": 12, "avg_price_eur": 28.50, "market": "SP", "buy_date": "2026-05-13" },
-      "MSFT": { "shares": 4,  "avg_price_eur": 85.30, "market": "SP", "buy_date": "2026-05-13" },
-      "AVGO": { "shares": 1,  "avg_price_eur": 320.00, "market": "SP", "buy_date": "2026-05-13" },
-      "META": { "shares": 1,  "avg_price_eur": 305.00, "market": "SP", "buy_date": "2026-05-13" },
-      "BBVA": { "shares": 35, "avg_price_eur": 9.40, "market": "IBEX", "buy_date": "2026-05-13" },
-      "IBE":  { "shares": 22, "avg_price_eur": 14.85, "market": "IBEX", "buy_date": "2026-05-13" }
+      "NVDA": { "shares": 4.5, "avg_price_eur": 65.20, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "MSFT": { "shares": 0.85, "avg_price_eur": 340.10, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "AVGO": { "shares": 0.18, "avg_price_eur": 1850.00, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "META": { "shares": 0.55, "avg_price_eur": 605.30, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "BBVA": { "shares": 35,   "avg_price_eur": 9.40, "market": "IBEX", "buy_date": "2026-05-13", "commission_paid_eur": 3.00 },
+      "IBE":  { "shares": 22,   "avg_price_eur": 14.85, "market": "IBEX", "buy_date": "2026-05-13", "commission_paid_eur": 3.00 }
     },
     "last_rebalance": "2026-05-13"
   }

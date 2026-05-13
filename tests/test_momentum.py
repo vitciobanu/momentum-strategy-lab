@@ -13,34 +13,43 @@ import pandas as pd
 # Add src/ to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from universe import IBEX_TOP20, SP500_TOP20, CONFIG
+from universe import IBEX_35, SP500_LARGE_CAP, CONFIG
 
 
 class TestUniverse(unittest.TestCase):
     """Tests on the universe configuration."""
 
-    def test_ibex_has_20_stocks(self):
-        self.assertEqual(len(IBEX_TOP20), 20)
+    def test_ibex_has_35_stocks(self):
+        """IBEX 35 should contain exactly 35 stocks (or close to it after BME reviews)."""
+        self.assertEqual(len(IBEX_35), 35,
+                         f"IBEX_35 has {len(IBEX_35)} stocks, expected 35. "
+                         f"Check if BME has changed composition.")
 
-    def test_sp500_has_20_stocks(self):
-        self.assertEqual(len(SP500_TOP20), 20)
+    def test_sp500_has_meaningful_size(self):
+        """SP500 universe should be reasonably large to capture momentum signal."""
+        self.assertGreaterEqual(len(SP500_LARGE_CAP), 50,
+                                f"SP500_LARGE_CAP has only {len(SP500_LARGE_CAP)} stocks; "
+                                f"too small for dynamic momentum selection")
+        self.assertLessEqual(len(SP500_LARGE_CAP), 200,
+                             f"SP500_LARGE_CAP has {len(SP500_LARGE_CAP)} stocks; "
+                             f"larger than intended (we target ~100)")
 
     def test_ibex_tickers_have_mc_suffix(self):
         """All IBEX tickers should end with .MC for Yahoo Finance."""
-        for short, yahoo in IBEX_TOP20.items():
+        for short, yahoo in IBEX_35.items():
             self.assertTrue(yahoo.endswith(".MC"),
                             f"{yahoo} does not end with .MC")
 
     def test_sp500_tickers_no_suffix(self):
         """SP500 tickers should not have exchange suffixes."""
-        for short, yahoo in SP500_TOP20.items():
+        for short, yahoo in SP500_LARGE_CAP.items():
             self.assertFalse(yahoo.endswith(".MC"),
                              f"{yahoo} unexpectedly ends with .MC")
 
     def test_no_overlap_between_universes(self):
         """A stock should not appear in both lists."""
-        ibex_set = set(IBEX_TOP20.keys())
-        sp_set = set(SP500_TOP20.keys())
+        ibex_set = set(IBEX_35.keys())
+        sp_set = set(SP500_LARGE_CAP.keys())
         self.assertEqual(len(ibex_set & sp_set), 0,
                          "Stocks appearing in both universes")
 
@@ -48,10 +57,24 @@ class TestUniverse(unittest.TestCase):
 class TestConfig(unittest.TestCase):
     """Tests on strategy configuration sanity."""
 
-    def test_weights_sum_to_one(self):
+    def test_weights_sum_reasonable(self):
+        """Weights should sum to at most 1.0 (invested fraction).
+        
+        A sum below 1.0 is valid: it represents an intentional cash buffer.
+        For example, 0.65 + 0.30 = 0.95 keeps 5% in cash for commissions, 
+        dividends, or operational safety.
+        A sum above 1.0 would mean leverage, which this strategy does NOT use.
+        """
         total = CONFIG["WEIGHT_SP500"] + CONFIG["WEIGHT_IBEX"]
-        self.assertAlmostEqual(total, 1.0, places=2,
-                               msg=f"Weights sum to {total}, not 1.0")
+        self.assertLessEqual(total, 1.0,
+                             f"Weights sum to {total} > 1.0 — strategy is not designed for leverage")
+        self.assertGreaterEqual(total, 0.5,
+                                f"Weights sum to {total} < 0.5 — too much cash for a momentum strategy")
+        # Optional informational print (only shows on failure or with -v)
+        if total < 1.0:
+            cash_buffer_pct = (1.0 - total) * 100
+            # This print only matters if the user wants to see it; tests pass either way
+            print(f"\n  [info] Cash buffer: {cash_buffer_pct:.1f}% (weights sum to {total})")
 
     def test_position_counts_reasonable(self):
         self.assertGreater(CONFIG["N_SP500_POSITIONS"], 0)
@@ -63,9 +86,16 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(CONFIG["LOOKBACK_MONTHS"], 12)
         self.assertEqual(CONFIG["SKIP_MONTHS"], 1)
 
-    def test_commissions_positive(self):
-        self.assertGreater(CONFIG["COMMISSION_IBEX_EUR"], 0)
-        self.assertGreater(CONFIG["COMMISSION_SP500_USD"], 0)
+    def test_fractional_shares_flag_exists(self):
+        """The fractional shares flag must be defined (boolean)."""
+        self.assertIn("ALLOW_FRACTIONAL_SHARES", CONFIG)
+        self.assertIsInstance(CONFIG["ALLOW_FRACTIONAL_SHARES"], bool)
+
+    def test_eur_usd_reference_reasonable(self):
+        """EUR/USD reference rate should be in a reasonable range."""
+        rate = CONFIG["EUR_USD_REFERENCE"]
+        self.assertGreater(rate, 0.5)
+        self.assertLess(rate, 2.0)
 
 
 class TestMomentumCalculation(unittest.TestCase):
