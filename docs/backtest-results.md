@@ -6,7 +6,7 @@ known historical annual returns.
 ## Strategy parameters
 
 - **4 stocks from S&P 500** + **2 stocks from IBEX 35** = 6 positions total
-- Weights: **65% USA / 30% Spain**, equal-weighted within each region
+- Weights: **67% USA / 33% Spain**, equal-weighted within each region
 - Rebalancing: **quarterly** (Jan, Apr, Jul, Oct)
 - Universe: full IBEX 35 + 49-stock S&P 500 representative sample
 - Selection: **dynamic each quarter** (no static pre-selection)
@@ -14,6 +14,8 @@ known historical annual returns.
 - Initial capital: **2,000 EUR**
 - Commissions: not modeled in the backtest (recorded manually in real execution)
 - Tax framework: Spanish IRPF "base del ahorro"
+
+Note: if you change `WEIGHT_SP500` and `WEIGHT_IBEX` in `src/universe.py` (e.g., to leave a cash buffer like 0.65/0.30), re-running the backtest will reflect your custom weights and produce slightly different numbers from the ones shown below.
 
 ## Global summary
 
@@ -23,10 +25,45 @@ known historical annual returns.
 | Final capital | **20,112 €** |
 | Total return | +905.60% |
 | **CAGR (net of taxes)** | **+39.06%** |
-| Annualized volatility | 19.84% |
+| Annualized volatility | 19.82% |
 | **Sharpe ratio** | **1.78** |
 | **Max drawdown** | **-17.24%** |
 | Total taxes | 4,182 € |
+
+## Year-by-year breakdown
+
+| Year | Capital start | Capital end (net) | Net return | Tax paid | Operations |
+|------|--------------:|------------------:|-----------:|---------:|-----------:|
+| 2019 | 2,000 € | 3,239 € | **+61.93%** | 39 € | 19 |
+| 2020 | 3,277 € | 5,603 € | **+70.97%** | 302 € | 16 |
+| 2021 | 5,905 € | 6,336 € | +7.29% | 566 € | 19 |
+| 2022 | 6,902 € | 6,577 € | **−4.71%** | 0 € | 20 |
+| 2023 | 6,577 € | 10,003 € | **+52.10%** | 400 € | 17 |
+| 2024 | 10,403 € | 18,018 € | **+73.19%** | 950 € | 7 |
+| 2025 | 18,968 € | 20,112 € | +6.03% | 963 € | 15 |
+
+### Reading the year-by-year results
+
+**The two stand-out years (2020 and 2024)** drove most of the long-term CAGR. Both
+were periods of strong, sustained momentum: 2020 with the COVID-recovery tech
+rally, 2024 with the AI boom. Momentum strategies thrive when trends persist
+across multiple quarters.
+
+**2022 was the only losing year (-4.71%)**. This was the rate-hike year:
+high-growth/tech stocks that had been winning since 2020 reversed sharply, and
+the strategy was caught holding the previous winners as they crashed. Notably,
+zero tax was paid — losses offset gains within the year.
+
+**2021 and 2025 look weak (+7%, +6%)** despite being decent years for the
+markets. The reason: high taxes on the gains crystallized at year-end from
+prior winners. In 2025 specifically, the IRPF rate was bumped to 30% for very
+high gains, eating a larger share. This shows how Spanish fiscality drags on
+high-rotation strategies — see [methodology.md](methodology.md) for the full
+tax model.
+
+**Operations count varies a lot** (7 to 20 per year). Years with strong
+persistent trends require fewer rebalances (2024: only 7 ops); years with
+regime changes require more (2022, 2021: 19-20 ops each).
 
 ## Stocks the strategy gravitated to
 
