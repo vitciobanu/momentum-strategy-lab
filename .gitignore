@@ -32,7 +32,5 @@ Thumbs.db
 *.log
 
 # Local data dumps
-*.csv
-*.xlsx
 !docs/*.csv
 !docs/*.xlsx
