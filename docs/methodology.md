@@ -57,8 +57,8 @@ Each quarter (Jan, Apr, Jul, Oct, days 5-10):
 1. Compute 12-1 momentum for the 20 IBEX top stocks and the 20 SP500 top stocks
 2. Select the **4 best** from S&P 500 and **2 best** from IBEX (by momentum rank)
 3. Allocate capital with **fixed regional weights**:
-   - 65% to the 4 US stocks (16.75% each)
-   - 30% to the 2 Spanish stocks (16.5% each)
+   - 65% to the 4 US stocks (16.25% each)
+   - 30% to the 2 Spanish stocks (15% each)
 4. Sell positions no longer in the top 6
 5. Buy new positions to fill the gaps
 6. Hold positions that are still in the top 6 (no rebalancing of weights within a
@@ -80,8 +80,8 @@ We could let momentum freely pick the top 6 across both markets. We don't, becau
 ## Position sizing
 
 Within each region, positions are **equal-weighted**:
-- S&P 500: 65% / 4 = 16.75% per position
-- IBEX: 30% / 2 = 16.5% per position
+- S&P 500: 65% / 4 = 16.25% per position
+- IBEX: 30% / 2 = 15% per position
 
 At each rebalance, weights are reset to target. This means a position that grew a
 lot may be partially trimmed even if it stays in the top 6 (though in practice the
