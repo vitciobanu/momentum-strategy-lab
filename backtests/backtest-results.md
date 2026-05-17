@@ -1,5 +1,37 @@
 # Backtest results (2019-2025)
 
+> ## ⚠️ Important: this is a sample backtest with synthetic prices
+>
+> This backtest uses **synthetic monthly prices** calibrated to known annual
+> returns 2014-2025 for a limited universe of ~25 US stocks plus 21 IBEX
+> stocks. Real EUR/USD historical rates are used for currency conversion.
+>
+> **The numbers below should be treated as a sample**, not as a precise
+> forecast of the strategy's actual performance.
+>
+> **A migration to fully real prices is underway.** The repository now
+> contains `data/monthly-historic-prices.csv` with real daily prices
+> for 35 IBEX stocks (full coverage) and 18 US stocks (partial coverage).
+> Once the US side is extended to the full ~117 stocks in `src/universe.py`,
+> `src/backtest.py` will be refactored to read from this CSV.
+>
+> **Preliminary analysis on the partial real dataset** shows several
+> important differences from the synthetic results:
+>
+> - Real momentum 12-1 readings often reach +500% to +1000%+ during bull
+>   periods. The synthetic calibration produces much smoother signals.
+> - About **47% of all top-4 US selections** would have been stocks
+>   OUTSIDE the S&P 500 (BE, AAOI, LITE, PLTR, ENPH, NU, ARM, SNDK).
+>   The decision to widen the universe beyond the S&P 500 (issue #8) was
+>   not a marginal improvement - it is fundamental.
+> - The real CAGR is likely **higher than the +41.69% reported below**,
+>   plausibly in the +50-70% range.
+>
+> When the real-data backtest is complete, this section will be removed
+> and the numbers below will be replaced.
+>
+---
+
 Reproducible run of `src/backtest.py` against synthetic price data calibrated to known historical annual returns, using **real historical EUR/USD exchange rates** from `data/eurusd_rates.csv`.
 
 > Re-running `python src/backtest.py` regenerates `backtest-portfolio.json`, `backtest-history.json`, `backtest-trades.csv`, `backtest-metrics.json` and this file. Re-running `python scripts/build_backtest_dashboard.py` regenerates `backtest-dashboard.png`.

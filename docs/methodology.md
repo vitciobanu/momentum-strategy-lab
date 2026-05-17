@@ -152,6 +152,94 @@ The backtest uses a **constant reference rate** (1 EUR = 1.1758 USD as of 12 May
 2019-2025, which would add ±10-15% to the final result depending on exact entry
 and exit timing. This is a known simplification of the backtest.
 
+## Operational realities and known biases
+
+This section documents behaviors that emerge in real execution and that are
+NOT obvious from the strategy description. Read this before getting surprised
+by them in practice.
+
+### The "giveback" on exit
+
+Momentum is a trend-following strategy: positions are sold only at the
+quarterly rebalance, never at intra-quarter peaks. The consequence is that
+when a winner finally drops out of the top 4, you typically sell it
+significantly below its peak — often 15-30% below.
+
+Example: a stock you bought at 100 USD rises to 200 USD over two quarters,
+then drops to 140 USD in the third quarter (when its momentum 12-1 falls
+below the top 4 threshold). The script will sell at 140, not at 200. You
+still made +40% from your entry, but you "gave back" 60 USD of unrealized
+gain.
+
+This is inherent to systematic momentum. The alternative — selling at peaks
+— requires daily monitoring, emotional decisions, and continuous trading.
+Studies consistently show that adding stop-losses or peak-detection rules to
+momentum strategies **worsens long-term returns**, because most of those
+"peaks" are temporary dips that recover. Accept the giveback as the cost of
+systematization.
+
+### Winners are held, not topped up
+
+When a position remains in the top 4 over multiple quarters, the script does
+NOT add capital to it. It is simply held. The position grows organically as
+the price rises, which means it can drift well above the target weight
+(e.g., from 16.75% at entry to 30% after a strong run).
+
+This is intentional. The momentum philosophy is "let winners run". Forcing
+the position back to equal weight each quarter would mean partially selling
+the winner — incurring taxes, commissions, and reducing exposure to the
+trend that is working.
+
+The trade-off: concentration risk grows over time. If a single position
+reaches 35-40% of the portfolio, a sharp drop in that one stock will hurt
+disproportionately. Currently the script does not enforce any concentration
+cap. A future enhancement could add a max-position rule (e.g., trim back to
+25% if any position exceeds 30%), but this would only matter for positions
+that have already produced large gains — a problem worth having.
+
+### Extreme momentum signals are normal
+
+In the real data 2019-2025, the strategy sometimes selected stocks with
+momentum 12-1 readings of +500%, +700%, even +1000% or more (e.g., TSLA in
+Q4 2020, AAOI in Q1 2024, SNDK in Q2 2026). These extreme readings are not
+errors and they do not signal an imminent crash. Statistically:
+
+- High-momentum stocks DO have higher volatility (both up and down)
+- They DO have larger maximum drawdowns
+- But on average their forward returns over the next 3-12 months are
+  POSITIVE, not negative
+- Filtering them out (e.g., "don't buy if momentum > 500%") would have
+  reduced backtest returns substantially
+
+The instinct to avoid stocks "that already went up too much" is a
+behavioral bias documented as "anchoring to past prices". It works in
+everyday shopping but fails in trend-following finance. The strategy is
+designed to override that instinct.
+
+### Real-data backtest is work in progress
+
+The current `src/backtest.py` uses synthetic prices calibrated to known
+annual returns. **This is a known limitation.** The repository now includes
+`data/monthly-historic-prices.csv` with real daily prices for 53
+tickers (all 35 IBEX + 18 selected US). The plan is to:
+
+1. Expand this dataset to cover all ~117 US universe stocks over the next
+   updates.
+2. Refactor `src/backtest.py` to read from the CSV instead of generating
+   synthetic prices.
+3. Re-generate `backtests/backtest-results.md` and `backtest-dashboard.png`
+   with real data.
+
+The synthetic backtest gave CAGR +41.69%. Preliminary analysis on the
+partial real dataset suggests the real CAGR is likely higher (+50-70%),
+because real data shows much more extreme momentum signals than the
+synthetic calibration captured, AND because the strategy heavily favors
+stocks outside the S&P 500 (Bloom Energy, Applied Optoelectronics,
+Sandisk, etc.) which the synthetic calibration did not include.
+
+The real number will only be known after the full migration. **The synthetic
+backtest should be treated as a sample, not as a forecast.**
+
 ## What the strategy does NOT model
 
 To be transparent about the limitations:
@@ -177,3 +265,4 @@ To be transparent about the limitations:
   Everywhere.* Journal of Finance, 68(3), 929-985.
 - Fama, E. F., & French, K. R. (2012). *Size, value, and momentum in international
   stock returns.* Journal of Financial Economics, 105(3), 457-472.
+
