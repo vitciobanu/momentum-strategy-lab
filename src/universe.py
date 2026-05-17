@@ -49,7 +49,7 @@ Yahoo Finance ticker conventions:
 
 # ============================================================================
 # IBEX 35 — All 35 components (official BME composition)
-# Source: BME, last review September 2024
+# Source: BME, last review May 2026 - https://www.bolsasymercados.es/es/bme-exchange/mercados-y-cotizaciones/acciones/ibex-35-es0si0000005.html and https://es.investing.com/indices/spain-35-components
 # ============================================================================
 IBEX_35 = {
     "ACS":  "ACS.MC",    # ACS - Construction
