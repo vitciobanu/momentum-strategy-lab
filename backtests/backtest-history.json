@@ -1,0 +1,1756 @@
+[
+  {
+    "date": "2019-01-31",
+    "eur_usd_rate": 1.1488,
+    "portfolio_value_eur_before": 2000.0,
+    "portfolio_value_eur_after": 2000.0,
+    "cash_before_eur": 100.0,
+    "selected_sp500": [
+      "AMZN",
+      "ADBE",
+      "LLY",
+      "MSFT"
+    ],
+    "selected_ibex": [
+      "NTGY",
+      "ELE"
+    ],
+    "momentum_sp500_top": {
+      "AMZN": 1.0377,
+      "ADBE": 0.7073,
+      "LLY": 0.6774,
+      "MSFT": 0.5803
+    },
+    "momentum_ibex_top": {
+      "NTGY": 0.5863,
+      "ELE": 0.5308
+    },
+    "orders_to_sell": [],
+    "orders_to_buy": [
+      {
+        "ticker": "AMZN",
+        "market": "SP",
+        "shares": 1.9316,
+        "ref_price": 193.2869,
+        "currency": "USD",
+        "value_eur": 325.0
+      },
+      {
+        "ticker": "ADBE",
+        "market": "SP",
+        "shares": 2.0408,
+        "ref_price": 182.9492,
+        "currency": "USD",
+        "value_eur": 325.0
+      },
+      {
+        "ticker": "LLY",
+        "market": "SP",
+        "shares": 2.5543,
+        "ref_price": 146.1719,
+        "currency": "USD",
+        "value_eur": 325.0
+      },
+      {
+        "ticker": "MSFT",
+        "market": "SP",
+        "shares": 2.5443,
+        "ref_price": 146.7441,
+        "currency": "USD",
+        "value_eur": 325.0
+      },
+      {
+        "ticker": "NTGY",
+        "market": "IBEX",
+        "shares": 5.6595,
+        "ref_price": 53.0086,
+        "currency": "EUR",
+        "value_eur": 300.0
+      },
+      {
+        "ticker": "ELE",
+        "market": "IBEX",
+        "shares": 6.8684,
+        "ref_price": 43.6785,
+        "currency": "EUR",
+        "value_eur": 300.0
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2019-04-30",
+    "eur_usd_rate": 1.1185,
+    "portfolio_value_eur_before": 2051.84,
+    "portfolio_value_eur_after": 2051.84,
+    "cash_before_eur": 45.37,
+    "selected_sp500": [
+      "CRM",
+      "MSFT",
+      "ADBE",
+      "GOOGL"
+    ],
+    "selected_ibex": [
+      "ELE",
+      "CLNX"
+    ],
+    "momentum_sp500_top": {
+      "CRM": 0.8237,
+      "MSFT": 0.5901,
+      "ADBE": 0.5518,
+      "GOOGL": 0.5324
+    },
+    "momentum_ibex_top": {
+      "ELE": 0.5,
+      "CLNX": 0.4719
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "AMZN",
+        "market": "SP",
+        "shares": 1.9316,
+        "ref_price": 189.8472,
+        "currency": "USD",
+        "value_eur": 327.86
+      },
+      {
+        "ticker": "LLY",
+        "market": "SP",
+        "shares": 2.5543,
+        "ref_price": 132.1544,
+        "currency": "USD",
+        "value_eur": 301.79
+      },
+      {
+        "ticker": "NTGY",
+        "market": "IBEX",
+        "shares": 5.6595,
+        "ref_price": 51.3015,
+        "currency": "EUR",
+        "value_eur": 290.34
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "CRM",
+        "market": "SP",
+        "shares": 1.8226,
+        "ref_price": 204.6196,
+        "currency": "USD",
+        "value_eur": 333.42
+      },
+      {
+        "ticker": "GOOGL",
+        "market": "SP",
+        "shares": 1.6129,
+        "ref_price": 231.2266,
+        "currency": "USD",
+        "value_eur": 333.42
+      },
+      {
+        "ticker": "CLNX",
+        "market": "IBEX",
+        "shares": 14.8873,
+        "ref_price": 20.6737,
+        "currency": "EUR",
+        "value_eur": 307.78
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2019-07-31",
+    "eur_usd_rate": 1.1158,
+    "portfolio_value_eur_before": 2096.08,
+    "portfolio_value_eur_after": 2096.08,
+    "cash_before_eur": 89.18,
+    "selected_sp500": [
+      "TSLA",
+      "CRM",
+      "PLTR",
+      "ADBE"
+    ],
+    "selected_ibex": [
+      "SCYR",
+      "CLNX"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 1.8797,
+      "CRM": 0.732,
+      "PLTR": 0.5735,
+      "ADBE": 0.4445
+    },
+    "momentum_ibex_top": {
+      "SCYR": 0.7099,
+      "CLNX": 0.4629
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "MSFT",
+        "market": "SP",
+        "shares": 2.5443,
+        "ref_price": 158.3839,
+        "currency": "USD",
+        "value_eur": 361.15
+      },
+      {
+        "ticker": "ELE",
+        "market": "IBEX",
+        "shares": 6.8684,
+        "ref_price": 49.2657,
+        "currency": "EUR",
+        "value_eur": 338.38
+      },
+      {
+        "ticker": "GOOGL",
+        "market": "SP",
+        "shares": 1.6129,
+        "ref_price": 235.161,
+        "currency": "USD",
+        "value_eur": 339.92
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "TSLA",
+        "market": "SP",
+        "shares": 7.3671,
+        "ref_price": 51.5881,
+        "currency": "USD",
+        "value_eur": 340.61
+      },
+      {
+        "ticker": "PLTR",
+        "market": "SP",
+        "shares": 150.8581,
+        "ref_price": 2.5193,
+        "currency": "USD",
+        "value_eur": 340.61
+      },
+      {
+        "ticker": "SCYR",
+        "market": "IBEX",
+        "shares": 94.4379,
+        "ref_price": 3.3293,
+        "currency": "EUR",
+        "value_eur": 314.41
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2019-10-31",
+    "eur_usd_rate": 1.1154,
+    "portfolio_value_eur_before": 2471.93,
+    "portfolio_value_eur_after": 2471.93,
+    "cash_before_eur": 142.38,
+    "selected_sp500": [
+      "TSLA",
+      "CRM",
+      "PLTR",
+      "JPM"
+    ],
+    "selected_ibex": [
+      "SCYR",
+      "CLNX"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 2.7462,
+      "CRM": 0.6871,
+      "PLTR": 0.6127,
+      "JPM": 0.6046
+    },
+    "momentum_ibex_top": {
+      "SCYR": 1.0516,
+      "CLNX": 0.5343
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "ADBE",
+        "market": "SP",
+        "shares": 2.0408,
+        "ref_price": 248.6192,
+        "currency": "USD",
+        "value_eur": 454.88
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "JPM",
+        "market": "SP",
+        "shares": 2.8756,
+        "ref_price": 155.8074,
+        "currency": "USD",
+        "value_eur": 401.69
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2020-01-31",
+    "eur_usd_rate": 1.1029,
+    "portfolio_value_eur_before": 2940.77,
+    "portfolio_value_eur_after": 2940.77,
+    "cash_before_eur": 422.19,
+    "selected_sp500": [
+      "TSLA",
+      "JPM",
+      "WMT",
+      "NOW"
+    ],
+    "selected_ibex": [
+      "SAN",
+      "SCYR"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 1.9267,
+      "JPM": 0.9661,
+      "WMT": 0.8137,
+      "NOW": 0.6042
+    },
+    "momentum_ibex_top": {
+      "SAN": 1.0415,
+      "SCYR": 0.8422
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "CRM",
+        "market": "SP",
+        "shares": 1.8226,
+        "ref_price": 247.8351,
+        "currency": "USD",
+        "value_eur": 409.55
+      },
+      {
+        "ticker": "CLNX",
+        "market": "IBEX",
+        "shares": 14.8873,
+        "ref_price": 25.0656,
+        "currency": "EUR",
+        "value_eur": 373.16
+      },
+      {
+        "ticker": "PLTR",
+        "market": "SP",
+        "shares": 150.8581,
+        "ref_price": 3.3107,
+        "currency": "USD",
+        "value_eur": 452.85
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "WMT",
+        "market": "SP",
+        "shares": 2.4507,
+        "ref_price": 215.0644,
+        "currency": "USD",
+        "value_eur": 477.87
+      },
+      {
+        "ticker": "NOW",
+        "market": "SP",
+        "shares": 2.4749,
+        "ref_price": 212.9613,
+        "currency": "USD",
+        "value_eur": 477.87
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2020-04-30",
+    "eur_usd_rate": 1.0877,
+    "portfolio_value_eur_before": 3594.93,
+    "portfolio_value_eur_after": 3594.93,
+    "cash_before_eur": 152.93,
+    "selected_sp500": [
+      "TSLA",
+      "AMD",
+      "NOW",
+      "NFLX"
+    ],
+    "selected_ibex": [
+      "SAN",
+      "ROVI"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 2.2334,
+      "AMD": 1.6859,
+      "NOW": 1.149,
+      "NFLX": 0.8498
+    },
+    "momentum_ibex_top": {
+      "SAN": 0.7037,
+      "ROVI": 0.5983
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "SCYR",
+        "market": "IBEX",
+        "shares": 94.4379,
+        "ref_price": 3.9039,
+        "currency": "EUR",
+        "value_eur": 368.67
+      },
+      {
+        "ticker": "JPM",
+        "market": "SP",
+        "shares": 2.8756,
+        "ref_price": 214.478,
+        "currency": "USD",
+        "value_eur": 567.03
+      },
+      {
+        "ticker": "WMT",
+        "market": "SP",
+        "shares": 2.4507,
+        "ref_price": 223.0857,
+        "currency": "USD",
+        "value_eur": 502.63
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "AMD",
+        "market": "SP",
+        "shares": 164.4217,
+        "ref_price": 3.8645,
+        "currency": "USD",
+        "value_eur": 584.18
+      },
+      {
+        "ticker": "NFLX",
+        "market": "SP",
+        "shares": 5.4178,
+        "ref_price": 117.2804,
+        "currency": "USD",
+        "value_eur": 584.18
+      },
+      {
+        "ticker": "SAN",
+        "market": "IBEX",
+        "shares": 93.7057,
+        "ref_price": 5.7546,
+        "currency": "EUR",
+        "value_eur": 539.24
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2020-07-31",
+    "eur_usd_rate": 1.1872,
+    "portfolio_value_eur_before": 4128.02,
+    "portfolio_value_eur_after": 4128.02,
+    "cash_before_eur": 78.14,
+    "selected_sp500": [
+      "TSLA",
+      "AMD",
+      "NOW",
+      "QCOM"
+    ],
+    "selected_ibex": [
+      "SAN",
+      "ROVI"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 2.9141,
+      "AMD": 1.5997,
+      "NOW": 1.1976,
+      "QCOM": 1.1866
+    },
+    "momentum_ibex_top": {
+      "SAN": 0.5439,
+      "ROVI": 0.5217
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "NFLX",
+        "market": "SP",
+        "shares": 5.4178,
+        "ref_price": 130.6031,
+        "currency": "USD",
+        "value_eur": 596.01
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "QCOM",
+        "market": "SP",
+        "shares": 19.3237,
+        "ref_price": 41.2125,
+        "currency": "USD",
+        "value_eur": 670.8
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2020-10-31",
+    "eur_usd_rate": 1.1679,
+    "portfolio_value_eur_before": 5520.65,
+    "portfolio_value_eur_after": 5520.65,
+    "cash_before_eur": 208.43,
+    "selected_sp500": [
+      "TSLA",
+      "AMD",
+      "NFLX",
+      "NVDA"
+    ],
+    "selected_ibex": [
+      "ANE",
+      "COL"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 6.207,
+      "AMD": 2.0554,
+      "NFLX": 1.7619,
+      "NVDA": 1.3624
+    },
+    "momentum_ibex_top": {
+      "ANE": 0.4953,
+      "COL": 0.4266
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "NOW",
+        "market": "SP",
+        "shares": 2.4749,
+        "ref_price": 298.9848,
+        "currency": "USD",
+        "value_eur": 633.57
+      },
+      {
+        "ticker": "SAN",
+        "market": "IBEX",
+        "shares": 93.7057,
+        "ref_price": 4.5892,
+        "currency": "EUR",
+        "value_eur": 430.04
+      },
+      {
+        "ticker": "QCOM",
+        "market": "SP",
+        "shares": 19.3237,
+        "ref_price": 52.0313,
+        "currency": "USD",
+        "value_eur": 860.89
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "NFLX",
+        "market": "SP",
+        "shares": 6.4654,
+        "ref_price": 162.0508,
+        "currency": "USD",
+        "value_eur": 897.11
+      },
+      {
+        "ticker": "NVDA",
+        "market": "SP",
+        "shares": 83.7759,
+        "ref_price": 12.5063,
+        "currency": "USD",
+        "value_eur": 897.11
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2021-01-31",
+    "eur_usd_rate": 1.212,
+    "portfolio_value_eur_before": 7141.1,
+    "portfolio_value_eur_after": 7141.1,
+    "cash_before_eur": 208.43,
+    "selected_sp500": [
+      "AMD",
+      "TSLA",
+      "NVDA",
+      "NFLX"
+    ],
+    "selected_ibex": [
+      "FER",
+      "ANE"
+    ],
+    "momentum_sp500_top": {
+      "AMD": 5.1318,
+      "TSLA": 4.2349,
+      "NVDA": 1.2276,
+      "NFLX": 1.1117
+    },
+    "momentum_ibex_top": {
+      "FER": 0.4805,
+      "ANE": 0.431
+    },
+    "orders_to_sell": [],
+    "orders_to_buy": [],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2021-04-30",
+    "eur_usd_rate": 1.2127,
+    "portfolio_value_eur_before": 8750.35,
+    "portfolio_value_eur_after": 8750.35,
+    "cash_before_eur": 994.97,
+    "selected_sp500": [
+      "TSLA",
+      "NVDA",
+      "AMD",
+      "NOW"
+    ],
+    "selected_ibex": [
+      "ANE",
+      "ANA"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 3.2266,
+      "NVDA": 2.2504,
+      "AMD": 2.0999,
+      "NOW": 1.222
+    },
+    "momentum_ibex_top": {
+      "ANE": 0.7443,
+      "ANA": 0.4381
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "NFLX",
+        "market": "SP",
+        "shares": 6.4654,
+        "ref_price": 147.5297,
+        "currency": "USD",
+        "value_eur": 786.55
+      }
+    ],
+    "orders_to_buy": [],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2021-07-31",
+    "eur_usd_rate": 1.1893,
+    "portfolio_value_eur_before": 9422.34,
+    "portfolio_value_eur_after": 9422.34,
+    "cash_before_eur": 994.97,
+    "selected_sp500": [
+      "TSLA",
+      "NVDA",
+      "AMD",
+      "AAPL"
+    ],
+    "selected_ibex": [
+      "ROVI",
+      "CABK"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 2.0708,
+      "NVDA": 1.5139,
+      "AMD": 1.2435,
+      "AAPL": 0.9542
+    },
+    "momentum_ibex_top": {
+      "ROVI": 0.5132,
+      "CABK": 0.5039
+    },
+    "orders_to_sell": [],
+    "orders_to_buy": [],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2021-10-31",
+    "eur_usd_rate": 1.1684,
+    "portfolio_value_eur_before": 8426.92,
+    "portfolio_value_eur_after": 8426.92,
+    "cash_before_eur": 1259.65,
+    "selected_sp500": [
+      "NVDA",
+      "TSLA",
+      "UNH",
+      "LLY"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "ROVI"
+    ],
+    "momentum_sp500_top": {
+      "NVDA": 0.9837,
+      "TSLA": 0.9563,
+      "UNH": 0.7972,
+      "LLY": 0.7648
+    },
+    "momentum_ibex_top": {
+      "CABK": 1.3662,
+      "ROVI": 0.9183
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "AMD",
+        "market": "SP",
+        "shares": 164.4217,
+        "ref_price": 11.6118,
+        "currency": "USD",
+        "value_eur": 1634.05
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "UNH",
+        "market": "SP",
+        "shares": 2.3439,
+        "ref_price": 682.5995,
+        "currency": "USD",
+        "value_eur": 1369.37
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2022-01-31",
+    "eur_usd_rate": 1.1152,
+    "portfolio_value_eur_before": 7821.18,
+    "portfolio_value_eur_after": 7821.18,
+    "cash_before_eur": 186.06,
+    "selected_sp500": [
+      "UNH",
+      "AAPL",
+      "AVGO",
+      "COST"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "ROVI"
+    ],
+    "momentum_sp500_top": {
+      "UNH": 0.9435,
+      "AAPL": 0.62,
+      "AVGO": 0.5674,
+      "COST": 0.514
+    },
+    "momentum_ibex_top": {
+      "CABK": 1.9863,
+      "ROVI": 0.6704
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "TSLA",
+        "market": "SP",
+        "shares": 7.3671,
+        "ref_price": 473.9772,
+        "currency": "USD",
+        "value_eur": 3131.14
+      },
+      {
+        "ticker": "NVDA",
+        "market": "SP",
+        "shares": 83.7759,
+        "ref_price": 26.017,
+        "currency": "USD",
+        "value_eur": 1954.45
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "AAPL",
+        "market": "SP",
+        "shares": 2.8426,
+        "ref_price": 498.6127,
+        "currency": "USD",
+        "value_eur": 1270.94
+      },
+      {
+        "ticker": "AVGO",
+        "market": "SP",
+        "shares": 38.1728,
+        "ref_price": 37.1299,
+        "currency": "USD",
+        "value_eur": 1270.94
+      },
+      {
+        "ticker": "COST",
+        "market": "SP",
+        "shares": 2.352,
+        "ref_price": 602.6263,
+        "currency": "USD",
+        "value_eur": 1270.94
+      },
+      {
+        "ticker": "CABK",
+        "market": "IBEX",
+        "shares": 313.2984,
+        "ref_price": 3.7446,
+        "currency": "EUR",
+        "value_eur": 1173.18
+      },
+      {
+        "ticker": "ROVI",
+        "market": "IBEX",
+        "shares": 30.1348,
+        "ref_price": 38.931,
+        "currency": "EUR",
+        "value_eur": 1173.18
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2022-04-30",
+    "eur_usd_rate": 1.0504,
+    "portfolio_value_eur_before": 8420.74,
+    "portfolio_value_eur_after": 8420.74,
+    "cash_before_eur": 1044.91,
+    "selected_sp500": [
+      "UNH",
+      "XOM",
+      "LLY",
+      "AVGO"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "NTGY"
+    ],
+    "momentum_sp500_top": {
+      "UNH": 0.7043,
+      "XOM": 0.3447,
+      "LLY": 0.3295,
+      "AVGO": 0.2668
+    },
+    "momentum_ibex_top": {
+      "CABK": 1.5329,
+      "NTGY": 0.3354
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "AAPL",
+        "market": "SP",
+        "shares": 2.8426,
+        "ref_price": 447.7919,
+        "currency": "USD",
+        "value_eur": 1211.82
+      },
+      {
+        "ticker": "COST",
+        "market": "SP",
+        "shares": 2.352,
+        "ref_price": 584.3079,
+        "currency": "USD",
+        "value_eur": 1308.33
+      },
+      {
+        "ticker": "ROVI",
+        "market": "IBEX",
+        "shares": 30.1348,
+        "ref_price": 35.6877,
+        "currency": "EUR",
+        "value_eur": 1075.44
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "XOM",
+        "market": "SP",
+        "shares": 60.2797,
+        "ref_price": 23.8444,
+        "currency": "USD",
+        "value_eur": 1368.37
+      },
+      {
+        "ticker": "LLY",
+        "market": "SP",
+        "shares": 2.7598,
+        "ref_price": 520.8148,
+        "currency": "USD",
+        "value_eur": 1368.37
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2022-07-31",
+    "eur_usd_rate": 1.0192,
+    "portfolio_value_eur_before": 8473.14,
+    "portfolio_value_eur_after": 8473.14,
+    "cash_before_eur": 1098.13,
+    "selected_sp500": [
+      "XOM",
+      "NOW",
+      "LLY",
+      "ORCL"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "ANA"
+    ],
+    "momentum_sp500_top": {
+      "XOM": 0.6605,
+      "NOW": 0.6075,
+      "LLY": 0.505,
+      "ORCL": 0.3687
+    },
+    "momentum_ibex_top": {
+      "CABK": 0.8827,
+      "ANA": 0.719
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "UNH",
+        "market": "SP",
+        "shares": 2.3439,
+        "ref_price": 714.0052,
+        "currency": "USD",
+        "value_eur": 1642.06
+      },
+      {
+        "ticker": "AVGO",
+        "market": "SP",
+        "shares": 38.1728,
+        "ref_price": 31.1029,
+        "currency": "USD",
+        "value_eur": 1164.92
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "NOW",
+        "market": "SP",
+        "shares": 2.2036,
+        "ref_price": 636.8291,
+        "currency": "USD",
+        "value_eur": 1376.89
+      },
+      {
+        "ticker": "ORCL",
+        "market": "SP",
+        "shares": 31.1036,
+        "ref_price": 45.1177,
+        "currency": "USD",
+        "value_eur": 1376.89
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2022-10-31",
+    "eur_usd_rate": 0.9955,
+    "portfolio_value_eur_before": 8996.93,
+    "portfolio_value_eur_after": 8996.93,
+    "cash_before_eur": 1165.01,
+    "selected_sp500": [
+      "XOM",
+      "LLY",
+      "V",
+      "NOW"
+    ],
+    "selected_ibex": [
+      "NTGY",
+      "ANA"
+    ],
+    "momentum_sp500_top": {
+      "XOM": 0.7731,
+      "LLY": 0.6243,
+      "V": 0.2911,
+      "NOW": 0.2209
+    },
+    "momentum_ibex_top": {
+      "NTGY": 0.8829,
+      "ANA": 0.5787
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "CABK",
+        "market": "IBEX",
+        "shares": 313.2984,
+        "ref_price": 4.7122,
+        "currency": "EUR",
+        "value_eur": 1476.33
+      },
+      {
+        "ticker": "ORCL",
+        "market": "SP",
+        "shares": 31.1036,
+        "ref_price": 44.8753,
+        "currency": "USD",
+        "value_eur": 1402.09
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "V",
+        "market": "SP",
+        "shares": 7.3598,
+        "ref_price": 197.7532,
+        "currency": "USD",
+        "value_eur": 1462.0
+      },
+      {
+        "ticker": "NTGY",
+        "market": "IBEX",
+        "shares": 13.8357,
+        "ref_price": 97.5402,
+        "currency": "EUR",
+        "value_eur": 1349.54
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2023-01-31",
+    "eur_usd_rate": 1.0851,
+    "portfolio_value_eur_before": 8707.98,
+    "portfolio_value_eur_after": 8707.98,
+    "cash_before_eur": 1001.59,
+    "selected_sp500": [
+      "LLY",
+      "XOM",
+      "NOW",
+      "ORCL"
+    ],
+    "selected_ibex": [
+      "ANA",
+      "NTGY"
+    ],
+    "momentum_sp500_top": {
+      "LLY": 0.7392,
+      "XOM": 0.5637,
+      "NOW": 0.1576,
+      "ORCL": 0.1503
+    },
+    "momentum_ibex_top": {
+      "ANA": 0.6243,
+      "NTGY": 0.5055
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "V",
+        "market": "SP",
+        "shares": 7.3598,
+        "ref_price": 184.5355,
+        "currency": "USD",
+        "value_eur": 1251.63
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "ORCL",
+        "market": "SP",
+        "shares": 34.1907,
+        "ref_price": 44.9089,
+        "currency": "USD",
+        "value_eur": 1415.05
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2023-04-30",
+    "eur_usd_rate": 1.1032,
+    "portfolio_value_eur_before": 8766.87,
+    "portfolio_value_eur_after": 8766.87,
+    "cash_before_eur": 1148.17,
+    "selected_sp500": [
+      "TSLA",
+      "NOW",
+      "ORCL",
+      "XOM"
+    ],
+    "selected_ibex": [
+      "SCYR",
+      "FER"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 0.3888,
+      "NOW": 0.3235,
+      "ORCL": 0.269,
+      "XOM": 0.237
+    },
+    "momentum_ibex_top": {
+      "SCYR": 0.7248,
+      "FER": 0.5055
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "LLY",
+        "market": "SP",
+        "shares": 2.7598,
+        "ref_price": 678.6628,
+        "currency": "USD",
+        "value_eur": 1697.75
+      },
+      {
+        "ticker": "NTGY",
+        "market": "IBEX",
+        "shares": 13.8357,
+        "ref_price": 85.8985,
+        "currency": "EUR",
+        "value_eur": 1188.47
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "TSLA",
+        "market": "SP",
+        "shares": 3.9577,
+        "ref_price": 397.1094,
+        "currency": "USD",
+        "value_eur": 1424.62
+      },
+      {
+        "ticker": "SCYR",
+        "market": "IBEX",
+        "shares": 323.8313,
+        "ref_price": 4.0609,
+        "currency": "EUR",
+        "value_eur": 1315.03
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2023-07-31",
+    "eur_usd_rate": 1.1024,
+    "portfolio_value_eur_before": 9030.72,
+    "portfolio_value_eur_after": 9030.72,
+    "cash_before_eur": 1285.02,
+    "selected_sp500": [
+      "NOW",
+      "MSFT",
+      "AMD",
+      "BA"
+    ],
+    "selected_ibex": [
+      "UNI",
+      "FER"
+    ],
+    "momentum_sp500_top": {
+      "NOW": 0.5203,
+      "MSFT": 0.4346,
+      "AMD": 0.3767,
+      "BA": 0.3581
+    },
+    "momentum_ibex_top": {
+      "UNI": 0.5825,
+      "FER": 0.4072
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "XOM",
+        "market": "SP",
+        "shares": 60.2797,
+        "ref_price": 33.1846,
+        "currency": "USD",
+        "value_eur": 1814.55
+      },
+      {
+        "ticker": "ORCL",
+        "market": "SP",
+        "shares": 34.1907,
+        "ref_price": 44.1685,
+        "currency": "USD",
+        "value_eur": 1369.88
+      },
+      {
+        "ticker": "TSLA",
+        "market": "SP",
+        "shares": 3.9577,
+        "ref_price": 392.9559,
+        "currency": "USD",
+        "value_eur": 1410.74
+      },
+      {
+        "ticker": "SCYR",
+        "market": "IBEX",
+        "shares": 323.8313,
+        "ref_price": 4.0107,
+        "currency": "EUR",
+        "value_eur": 1298.77
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "MSFT",
+        "market": "SP",
+        "shares": 4.5419,
+        "ref_price": 356.1868,
+        "currency": "USD",
+        "value_eur": 1467.49
+      },
+      {
+        "ticker": "AMD",
+        "market": "SP",
+        "shares": 91.0743,
+        "ref_price": 17.7631,
+        "currency": "USD",
+        "value_eur": 1467.49
+      },
+      {
+        "ticker": "BA",
+        "market": "SP",
+        "shares": 35.5006,
+        "ref_price": 45.57,
+        "currency": "USD",
+        "value_eur": 1467.49
+      },
+      {
+        "ticker": "UNI",
+        "market": "IBEX",
+        "shares": 48.3988,
+        "ref_price": 27.9885,
+        "currency": "EUR",
+        "value_eur": 1354.61
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2023-10-31",
+    "eur_usd_rate": 1.0615,
+    "portfolio_value_eur_before": 10716.25,
+    "portfolio_value_eur_after": 10716.25,
+    "cash_before_eur": 1498.13,
+    "selected_sp500": [
+      "AMD",
+      "MSFT",
+      "PLTR",
+      "TSLA"
+    ],
+    "selected_ibex": [
+      "FER",
+      "UNI"
+    ],
+    "momentum_sp500_top": {
+      "AMD": 1.9167,
+      "MSFT": 0.8859,
+      "PLTR": 0.6953,
+      "TSLA": 0.6105
+    },
+    "momentum_ibex_top": {
+      "FER": 0.7062,
+      "UNI": 0.6965
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "NOW",
+        "market": "SP",
+        "shares": 2.2036,
+        "ref_price": 1054.2289,
+        "currency": "USD",
+        "value_eur": 2188.51
+      },
+      {
+        "ticker": "BA",
+        "market": "SP",
+        "shares": 35.5006,
+        "ref_price": 45.0718,
+        "currency": "USD",
+        "value_eur": 1507.38
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "PLTR",
+        "market": "SP",
+        "shares": 1342.5078,
+        "ref_price": 1.3769,
+        "currency": "USD",
+        "value_eur": 1741.39
+      },
+      {
+        "ticker": "TSLA",
+        "market": "SP",
+        "shares": 4.2826,
+        "ref_price": 431.6232,
+        "currency": "USD",
+        "value_eur": 1741.39
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2024-01-31",
+    "eur_usd_rate": 1.0843,
+    "portfolio_value_eur_before": 13956.36,
+    "portfolio_value_eur_after": 13956.36,
+    "cash_before_eur": 1713.96,
+    "selected_sp500": [
+      "AMD",
+      "NVDA",
+      "TSLA",
+      "MSFT"
+    ],
+    "selected_ibex": [
+      "UNI",
+      "FER"
+    ],
+    "momentum_sp500_top": {
+      "AMD": 2.4894,
+      "NVDA": 1.5839,
+      "TSLA": 1.3388,
+      "MSFT": 1.1992
+    },
+    "momentum_ibex_top": {
+      "UNI": 0.723,
+      "FER": 0.6743
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "PLTR",
+        "market": "SP",
+        "shares": 1342.5078,
+        "ref_price": 2.006,
+        "currency": "USD",
+        "value_eur": 2483.74
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "NVDA",
+        "market": "SP",
+        "shares": 139.4532,
+        "ref_price": 17.6338,
+        "currency": "USD",
+        "value_eur": 2267.91
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2024-04-30",
+    "eur_usd_rate": 1.0716,
+    "portfolio_value_eur_before": 17470.32,
+    "portfolio_value_eur_after": 17470.32,
+    "cash_before_eur": 1308.45,
+    "selected_sp500": [
+      "TSLA",
+      "AVGO",
+      "AMD",
+      "CRM"
+    ],
+    "selected_ibex": [
+      "UNI",
+      "SCYR"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 2.2773,
+      "AVGO": 1.9073,
+      "AMD": 1.4399,
+      "CRM": 1.3014
+    },
+    "momentum_ibex_top": {
+      "UNI": 0.9179,
+      "SCYR": 0.8364
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "MSFT",
+        "market": "SP",
+        "shares": 4.5419,
+        "ref_price": 671.5375,
+        "currency": "USD",
+        "value_eur": 2846.26
+      },
+      {
+        "ticker": "NVDA",
+        "market": "SP",
+        "shares": 139.4532,
+        "ref_price": 18.6427,
+        "currency": "USD",
+        "value_eur": 2426.08
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "AVGO",
+        "market": "SP",
+        "shares": 46.4918,
+        "ref_price": 65.435,
+        "currency": "USD",
+        "value_eur": 2838.93
+      },
+      {
+        "ticker": "CRM",
+        "market": "SP",
+        "shares": 8.6972,
+        "ref_price": 349.7915,
+        "currency": "USD",
+        "value_eur": 2838.93
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2024-07-31",
+    "eur_usd_rate": 1.0816,
+    "portfolio_value_eur_before": 18921.74,
+    "portfolio_value_eur_after": 18921.74,
+    "cash_before_eur": 1022.58,
+    "selected_sp500": [
+      "TSLA",
+      "CRM",
+      "PLTR",
+      "AVGO"
+    ],
+    "selected_ibex": [
+      "SCYR",
+      "UNI"
+    ],
+    "momentum_sp500_top": {
+      "TSLA": 3.5328,
+      "CRM": 1.4926,
+      "PLTR": 1.3609,
+      "AVGO": 1.2232
+    },
+    "momentum_ibex_top": {
+      "SCYR": 1.1865,
+      "UNI": 0.9195
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "AMD",
+        "market": "SP",
+        "shares": 91.0743,
+        "ref_price": 33.1212,
+        "currency": "USD",
+        "value_eur": 2788.91
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "PLTR",
+        "market": "SP",
+        "shares": 1011.7674,
+        "ref_price": 3.287,
+        "currency": "USD",
+        "value_eur": 3074.78
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2024-10-31",
+    "eur_usd_rate": 1.0859,
+    "portfolio_value_eur_before": 21038.68,
+    "portfolio_value_eur_after": 21038.68,
+    "cash_before_eur": 373.11,
+    "selected_sp500": [
+      "AVGO",
+      "TSLA",
+      "PLTR",
+      "CRM"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "SCYR"
+    ],
+    "momentum_sp500_top": {
+      "AVGO": 1.9675,
+      "TSLA": 1.9138,
+      "PLTR": 1.6465,
+      "CRM": 1.541
+    },
+    "momentum_ibex_top": {
+      "CABK": 0.9519,
+      "SCYR": 0.816
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "UNI",
+        "market": "IBEX",
+        "shares": 48.3988,
+        "ref_price": 51.785,
+        "currency": "EUR",
+        "value_eur": 2506.33
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "CABK",
+        "market": "IBEX",
+        "shares": 247.9472,
+        "ref_price": 12.7277,
+        "currency": "EUR",
+        "value_eur": 3155.8
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2025-01-31",
+    "eur_usd_rate": 1.0397,
+    "portfolio_value_eur_before": 25777.19,
+    "portfolio_value_eur_after": 25777.19,
+    "cash_before_eur": 2108.58,
+    "selected_sp500": [
+      "PLTR",
+      "NVDA",
+      "AVGO",
+      "CRM"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "IBE"
+    ],
+    "momentum_sp500_top": {
+      "PLTR": 2.2156,
+      "NVDA": 1.8687,
+      "AVGO": 1.6528,
+      "CRM": 1.1013
+    },
+    "momentum_ibex_top": {
+      "CABK": 1.3382,
+      "IBE": 0.6371
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "TSLA",
+        "market": "SP",
+        "shares": 4.2826,
+        "ref_price": 1438.2391,
+        "currency": "USD",
+        "value_eur": 5924.27
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "NVDA",
+        "market": "SP",
+        "shares": 81.7447,
+        "ref_price": 53.2767,
+        "currency": "USD",
+        "value_eur": 4188.79
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2025-04-30",
+    "eur_usd_rate": 1.1389,
+    "portfolio_value_eur_before": 24866.85,
+    "portfolio_value_eur_after": 24866.85,
+    "cash_before_eur": 2960.29,
+    "selected_sp500": [
+      "NVDA",
+      "PLTR",
+      "WMT",
+      "ORCL"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "IBE"
+    ],
+    "momentum_sp500_top": {
+      "NVDA": 1.9489,
+      "PLTR": 1.6833,
+      "WMT": 0.8039,
+      "ORCL": 0.7716
+    },
+    "momentum_ibex_top": {
+      "CABK": 1.602,
+      "IBE": 0.3775
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "AVGO",
+        "market": "SP",
+        "shares": 46.4918,
+        "ref_price": 113.286,
+        "currency": "USD",
+        "value_eur": 4624.52
+      },
+      {
+        "ticker": "CRM",
+        "market": "SP",
+        "shares": 8.6972,
+        "ref_price": 564.2561,
+        "currency": "USD",
+        "value_eur": 4308.92
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "WMT",
+        "market": "SP",
+        "shares": 6.9176,
+        "ref_price": 665.28,
+        "currency": "USD",
+        "value_eur": 4040.86
+      },
+      {
+        "ticker": "ORCL",
+        "market": "SP",
+        "shares": 48.2987,
+        "ref_price": 95.2849,
+        "currency": "USD",
+        "value_eur": 4040.86
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2025-07-31",
+    "eur_usd_rate": 1.1429,
+    "portfolio_value_eur_before": 24457.53,
+    "portfolio_value_eur_after": 24457.53,
+    "cash_before_eur": 3276.47,
+    "selected_sp500": [
+      "NFLX",
+      "ORCL",
+      "PLTR",
+      "NVDA"
+    ],
+    "selected_ibex": [
+      "CABK",
+      "BKT"
+    ],
+    "momentum_sp500_top": {
+      "NFLX": 0.795,
+      "ORCL": 0.6317,
+      "PLTR": 0.5927,
+      "NVDA": 0.5776
+    },
+    "momentum_ibex_top": {
+      "CABK": 1.2132,
+      "BKT": 0.8745
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "WMT",
+        "market": "SP",
+        "shares": 6.9176,
+        "ref_price": 708.865,
+        "currency": "USD",
+        "value_eur": 4290.53
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "NFLX",
+        "market": "SP",
+        "shares": 42.2441,
+        "ref_price": 107.5248,
+        "currency": "USD",
+        "value_eur": 3974.35
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  },
+  {
+    "date": "2025-10-31",
+    "eur_usd_rate": 1.1572,
+    "portfolio_value_eur_before": 27767.67,
+    "portfolio_value_eur_after": 27767.67,
+    "cash_before_eur": 1388.38,
+    "selected_sp500": [
+      "QCOM",
+      "META",
+      "LLY",
+      "NOW"
+    ],
+    "selected_ibex": [
+      "BBVA",
+      "BKT"
+    ],
+    "momentum_sp500_top": {
+      "QCOM": 0.4912,
+      "META": 0.4907,
+      "LLY": 0.4807,
+      "NOW": 0.4576
+    },
+    "momentum_ibex_top": {
+      "BBVA": 1.1553,
+      "BKT": 0.9896
+    },
+    "orders_to_sell": [
+      {
+        "ticker": "PLTR",
+        "market": "SP",
+        "shares": 1011.7674,
+        "ref_price": 7.0495,
+        "currency": "USD",
+        "value_eur": 6163.58
+      },
+      {
+        "ticker": "CABK",
+        "market": "IBEX",
+        "shares": 247.9472,
+        "ref_price": 24.5278,
+        "currency": "EUR",
+        "value_eur": 6081.6
+      },
+      {
+        "ticker": "NVDA",
+        "market": "SP",
+        "shares": 81.7447,
+        "ref_price": 40.9115,
+        "currency": "USD",
+        "value_eur": 2889.99
+      },
+      {
+        "ticker": "ORCL",
+        "market": "SP",
+        "shares": 48.2987,
+        "ref_price": 114.6664,
+        "currency": "USD",
+        "value_eur": 4785.9
+      },
+      {
+        "ticker": "NFLX",
+        "market": "SP",
+        "shares": 42.2441,
+        "ref_price": 125.1904,
+        "currency": "USD",
+        "value_eur": 4570.13
+      }
+    ],
+    "orders_to_buy": [
+      {
+        "ticker": "QCOM",
+        "market": "SP",
+        "shares": 87.813,
+        "ref_price": 59.4624,
+        "currency": "USD",
+        "value_eur": 4512.25
+      },
+      {
+        "ticker": "META",
+        "market": "SP",
+        "shares": 24.6154,
+        "ref_price": 212.1264,
+        "currency": "USD",
+        "value_eur": 4512.25
+      },
+      {
+        "ticker": "LLY",
+        "market": "SP",
+        "shares": 7.4317,
+        "ref_price": 702.6073,
+        "currency": "USD",
+        "value_eur": 4512.25
+      },
+      {
+        "ticker": "NOW",
+        "market": "SP",
+        "shares": 4.7389,
+        "ref_price": 1101.8622,
+        "currency": "USD",
+        "value_eur": 4512.25
+      },
+      {
+        "ticker": "BBVA",
+        "market": "IBEX",
+        "shares": 817.4755,
+        "ref_price": 5.0951,
+        "currency": "EUR",
+        "value_eur": 4165.15
+      },
+      {
+        "ticker": "BKT",
+        "market": "IBEX",
+        "shares": 260.3703,
+        "ref_price": 15.997,
+        "currency": "EUR",
+        "value_eur": 4165.15
+      }
+    ],
+    "_note": "Backtest entry. Commissions excluded."
+  }
+]

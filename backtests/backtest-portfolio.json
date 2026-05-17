@@ -1,0 +1,46 @@
+{
+  "_account_type": "BACKTEST (Synthetic 2019-2025)",
+  "_purpose": "Final state of the historical backtest. Same schema as data/portfolio.json.",
+  "initial_capital_eur": 2000.0,
+  "net_capital_contributed_eur": 2000.0,
+  "cash_eur": 1388.38,
+  "positions": {
+    "QCOM": {
+      "shares": 87.813,
+      "avg_price_eur": 51.3847,
+      "market": "SP",
+      "buy_date": "2025-10-31"
+    },
+    "META": {
+      "shares": 24.6154,
+      "avg_price_eur": 183.3101,
+      "market": "SP",
+      "buy_date": "2025-10-31"
+    },
+    "LLY": {
+      "shares": 7.4317,
+      "avg_price_eur": 607.1615,
+      "market": "SP",
+      "buy_date": "2025-10-31"
+    },
+    "NOW": {
+      "shares": 4.7389,
+      "avg_price_eur": 952.1796,
+      "market": "SP",
+      "buy_date": "2025-10-31"
+    },
+    "BBVA": {
+      "shares": 817.4755,
+      "avg_price_eur": 5.0951,
+      "market": "IBEX",
+      "buy_date": "2025-10-31"
+    },
+    "BKT": {
+      "shares": 260.3703,
+      "avg_price_eur": 15.997,
+      "market": "IBEX",
+      "buy_date": "2025-10-31"
+    }
+  },
+  "last_rebalance": "2025-10-31"
+}

@@ -43,17 +43,18 @@ These results assume the strategy was followed without intervention for 7 full y
 | Capital initial | 2,000 € |
 | Capital final | 20,112 € |
 | Total return | +905.60% |
-| CAGR (net of taxes) | **+39.06%** |
-| Annualized volatility | 19.82% |
-| Sharpe ratio (rf=0) | **1.78** |
-| Max drawdown | **-17.24%** |
+| CAGR (net of taxes) | **+41.69%** |
+| Annualized volatility | 24.38% |
+| Sharpe ratio (rf=0) | **1.57** |
+| Max drawdown | **-22.80%** |
 | Total taxes paid | 4,182 € |
 
 **Note**: the backtest excludes commissions (they vary by IBKR tier/volume/account size and can't be modeled accurately upfront). In real execution you record actual commissions per trade in `data/history.json`. Expect commissions to subtract roughly 0.1-0.3% per year of CAGR.
 
 For comparison, the S&P 500 buy-and-hold over the same period returned ~14% CAGR. The strategy outperforms thanks to the dynamic rotation, but with concentration risk.
 
-See [docs/backtest-results.md](docs/backtest-results.md) for full year-by-year breakdown.
+See [backtests/backtest-results.md](backtests/backtest-results.md) for full year-by-year breakdown and per-quarter trade detail. See [backtests/backtest-dashboard.png](backtests/backtest-dashboard.png)
+for the executive summary image.
 
 ## Why this works (in theory)
 
@@ -71,6 +72,7 @@ The "skip the last month" detail removes the short-term reversal effect that dom
 - **Momentum crashes**: when markets reverse sharply (e.g. early 2009, late 2020), momentum portfolios can lose 30-50% in months
 - **Tax drag**: Spanish IRPF on each realized gain reduces compounding significantly
 - **Survivorship bias**: the universe used here only includes stocks that survived to 2025
+- **Currency risk is now in the backtest** (issue #6). EUR/USD moved from 1.15 in 2019 to parity in 2022 and back to 1.15 in 2025. The backtest uses the real historical rate of each rebalance day. Going forward, EUR/USD movements will continue to add noise to results — both positively and negatively.
 
 Read [docs/disclaimer.md](docs/disclaimer.md) before considering applying this with real money.
 
@@ -262,7 +264,14 @@ If you want to fork this repo and connect it to a real (non-demo) IBKR account, 
 ### Running the historical backtest
 
 ```bash
+# Run the simulation (writes JSON/CSV outputs to backtests/)
 python src/backtest.py
+
+# Generate the human-readable .md report
+python scripts/build_backtest_report.py
+
+# Generate the executive dashboard image (.png)
+python scripts/build_backtest_dashboard.py
 ```
 
 This reproduces the 2019-2025 simulation with synthetic price data calibrated to known historical annual returns.
@@ -277,16 +286,27 @@ momentum-strategy-lab/
 ├── requirements.txt             # Python dependencies
 ├── docs/
 │   ├── methodology.md           # Detailed strategy explanation
-│   ├── backtest-results.md      # Year-by-year historical performance
 │   └── disclaimer.md            # Legal disclaimer
 ├── src/
 │   ├── rebalance.py             # Quarterly rebalance script (production)
 │   ├── backtest.py              # Historical backtest 2019-2025
-│   └── universe.py              # Universe definitions (IBEX 35 + S&P 500)
+│   └── universe.py              # Universe definitions (IBEX 35 + US Large Cap)
+├── scripts/
+│   ├── build_backtest_dashboard.py   # Generates the executive dashboard image
+│   ├── build_backtest_report.py      # Generates backtest-results.md
+│   └── commit-rebalance.ps1          # PowerShell script for quarterly commits
 ├── data/
 │   ├── portfolio.example.json   # Field documentation reference
 │   ├── portfolio.json           # Live state of the DEMO account
-│   └── history.json             # Append-only rebalance history
+│   ├── history.json             # Append-only rebalance history
+│   └── eurusd_rates.csv         # Historical EUR/USD daily rates
+├── backtests/                   # All backtest outputs (re-generable)
+│   ├── backtest-portfolio.json  # Final portfolio state (same schema as data/portfolio.json)
+│   ├── backtest-history.json    # Rebalance log (same schema as data/history.json)
+│   ├── backtest-trades.csv      # One row per buy/sell trade
+│   ├── backtest-metrics.json    # Numeric summary
+│   ├── backtest-results.md      # Human-readable report (auto-generated)
+│   └── backtest-dashboard.png   # Executive dashboard image (auto-generated)
 └── tests/
     └── test_momentum.py         # Unit tests
 ```
