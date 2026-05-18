@@ -44,10 +44,10 @@
     "net_capital_contributed_eur": 2000.0,
     "cash_eur": 8.45,
     "positions": {
-      "NVDA": { "shares": 4.5, "avg_price_eur": 65.20, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
-      "MSFT": { "shares": 0.85, "avg_price_eur": 340.10, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
-      "AVGO": { "shares": 0.18, "avg_price_eur": 1850.00, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
-      "META": { "shares": 0.55, "avg_price_eur": 605.30, "market": "SP", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "NVDA": { "shares": 4.5, "avg_price_eur": 65.20, "market": "US", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "MSFT": { "shares": 0.85, "avg_price_eur": 340.10, "market": "US", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "AVGO": { "shares": 0.18, "avg_price_eur": 1850.00, "market": "US", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
+      "META": { "shares": 0.55, "avg_price_eur": 605.30, "market": "US", "buy_date": "2026-05-13", "commission_paid_eur": 1.20 },
       "BBVA": { "shares": 35,   "avg_price_eur": 9.40, "market": "IBEX", "buy_date": "2026-05-13", "commission_paid_eur": 3.00 },
       "IBE":  { "shares": 22,   "avg_price_eur": 14.85, "market": "IBEX", "buy_date": "2026-05-13", "commission_paid_eur": 3.00 }
     },

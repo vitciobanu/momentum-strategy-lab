@@ -314,7 +314,7 @@ def main():
 
                     orders_to_sell.append({
                         "ticker": t,
-                        "market": "IBEX" if t in ibex_set else "SP",
+                        "market": "IBEX" if t in ibex_set else "US",
                         "shares": round(info["shares"], 4),
                         "ref_price": round(float(price), 4),
                         "currency": currency,
@@ -326,7 +326,7 @@ def main():
                         "quarter": f"Q{(date.month - 1) // 3 + 1} {year}",
                         "action": "SELL",
                         "ticker": t,
-                        "market": "IBEX" if t in ibex_set else "SP",
+                        "market": "IBEX" if t in ibex_set else "US",
                         "shares": round(info["shares"], 4),
                         "price_local": round(float(price), 4),
                         "currency": currency,

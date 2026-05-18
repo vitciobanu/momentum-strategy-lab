@@ -179,7 +179,7 @@ def compute_momentum(prices):
 def compute_position_value_eur(ticker, info, current_prices_sp_usd,
                                 current_prices_ibex_eur, eur_usd):
     """Compute current EUR value of a position, handling missing prices gracefully."""
-    market = info.get("market", "SP")
+    market = info.get("market", "US")
     shares = info["shares"]
     if market == "IBEX":
         price = current_prices_ibex_eur.get(ticker)
@@ -235,7 +235,7 @@ def compute_rebalance(portfolio, mom_sp, mom_ibex,
     to_sell = []
     for ticker, info in positions.items():
         if ticker not in new_top_all:
-            market = info.get("market", "SP")
+            market = info.get("market", "US")
             shares = info["shares"]
             if market == "IBEX":
                 price = current_prices_ibex_eur.get(ticker)
@@ -363,7 +363,7 @@ def print_report(plan, portfolio, mom_sp, mom_ibex,
     if portfolio["positions"]:
         print(f"   Open positions:       {len(portfolio['positions'])}")
         for t, info in portfolio["positions"].items():
-            market = info.get("market", "SP")
+            market = info.get("market", "US")
             value_eur = plan["position_values_eur"].get(t, 0)
             cost_eur = info["shares"] * info["avg_price_eur"]
             gain_pct = (value_eur / cost_eur - 1) * 100 if cost_eur > 0 else 0

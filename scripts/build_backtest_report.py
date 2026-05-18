@@ -115,7 +115,7 @@ def build_report():
 
     # ----- Most-selected stocks -----
     buys = trades[trades["action"] == "BUY"]
-    us_freq = buys[buys["market"] == "SP"]["ticker"].value_counts().head(15)
+    us_freq = buys[buys["market"] == "US"]["ticker"].value_counts().head(15)
     ibex_freq = buys[buys["market"] == "IBEX"]["ticker"].value_counts().head(10)
 
     lines.append("## Most-selected stocks")
