@@ -171,99 +171,148 @@ Once the strategy is running, you may want to add new capital (e.g., yearly top-
 
 **Golden rule for both operations**: always wait for the next quarterly rebalance window (day 5-10 of Jan/Apr/Jul/Oct). Don't add or withdraw mid-quarter — it breaks the weight balance and triggers unnecessary rebalancing complexity.
 
-#### Adding capital (example: +1,000 EUR after one year)
+### Adding extra capital later
 
-Imagine your portfolio file looks like this right before the new injection:
+If at some point you want to add more capital (e.g., 1,000 EUR a year from now),
+follow these steps. The example assumes you currently have a portfolio worth
+~3,500 EUR (positions + cash) and want to inject 1,000 EUR more.
+
+**Step 1: Wait for the rebalance date**
+
+Don't add money mid-quarter. The strategy is designed for clean quarterly cuts.
+Wait until the next rebalance window (between day 5-10 of Jan/Apr/Jul/Oct).
+
+**Step 2: Transfer the money to your IBKR account**
+
+Do this on the rebalance day, BEFORE running the script. Wire/SEPA transfers
+to IBKR usually clear within 1-2 business days, so plan ahead.
+
+**Step 3: Update `portfolio.json` BEFORE running the rebalance script**
+
+Open `data/portfolio.json` and edit two fields:
+
+- `cash_eur`: add the new money to your existing cash balance
+- `net_capital_contributed_eur`: increase by the same amount
+
+Example, right before the new injection:
 
 ```json
 {
   "initial_capital_eur": 2000.0,
   "net_capital_contributed_eur": 2000.0,
   "cash_eur": 45.20,
-  "positions": { ... your 6 positions ... },
+  "positions": { "...your 6 positions..." },
   "last_rebalance": "2027-01-08"
 }
 ```
 
-**Step 1:** Transfer 1,000 EUR to your IBKR account (wire/SEPA). Plan ahead — transfers take 1-2 business days.
-
-**Step 2:** On the next rebalance day, BEFORE running the script, edit `data/portfolio.json`:
+After adding 1,000 EUR (and IBKR confirming the deposit):
 
 ```json
 {
   "initial_capital_eur": 2000.0,
   "net_capital_contributed_eur": 3000.0,
   "cash_eur": 1045.20,
-  "positions": { ... same positions, unchanged ... },
+  "positions": { "...same positions, unchanged..." },
   "last_rebalance": "2027-01-08"
 }
 ```
 
-Changes made:
-- `cash_eur`: added 1,000 EUR (45.20 → 1,045.20)
-- `net_capital_contributed_eur`: increased by 1,000 EUR (2,000 → 3,000)
-- `initial_capital_eur`: unchanged (historical reference)
+**Step 4: Append a capital-injection entry to `history.json`**
 
-**Step 3:** Run `python src/rebalance.py`. The script sees a larger total portfolio and will issue BUY orders to bring positions up to the new equal-weight targets, using the extra cash.
-
-**Step 4:** Append an entry to `data/history.json` documenting the injection:
+Add this entry so the return calculator (`src/cagr.py`) can track the cash
+flow correctly:
 
 ```json
 {
   "date": "2027-04-06",
   "event": "CAPITAL_INJECTION",
   "amount_eur": 1000.0,
-  "new_net_contributed_eur": 3000.0,
+  "new_total_contributed_eur": 3000.0,
   "reason": "Yearly top-up from savings"
 }
 ```
 
-#### Withdrawing capital (example: -500 EUR after two years)
+**Step 5: Run `python src/rebalance.py`**
 
-Withdrawals are slightly trickier because you need to free up cash before transferring out. The cleanest approach:
+The script now sees the new total portfolio value (positions + increased cash)
+and will calculate target weights accordingly. It will issue BUY orders to put
+the fresh cash to work.
 
-**Step 1:** Wait for the rebalance day.
+**Step 6: See your real annualized return with `src/cagr.py`**
 
-**Step 2:** Run `python src/rebalance.py` FIRST (don't withdraw yet). The script tells you which positions to sell (the ones no longer in the top 6 by momentum).
+Once you've added capital, the simple formula
+`(current - net_contributed) / net_contributed` shows your *total* return but
+not your *annualized* return — it mixes investments held for different periods.
 
-**Step 3:** Execute the sells in IBKR. After the sells, your `cash_eur` will be higher than usual because of the sale proceeds.
+Run the new return calculator to get the proper numbers:
 
-**Step 4:** Check if you have enough cash to cover the 500 EUR withdrawal AFTER the script's planned buys:
+```bash
+python src/cagr.py
+```
 
-- **If YES (typical case):** Reduce the script's BUYS proportionally to keep 500 EUR aside. For example, if the script wants you to buy 800 EUR of NVDA and 800 EUR of MSFT, buy 550 EUR and 550 EUR instead — keeping 500 EUR for the withdrawal. The strategy is now slightly underinvested for that quarter, but it self-corrects next time.
+Or, if you want to override the current value (e.g., to check what the return
+would be at a hypothetical valuation):
 
-- **If NO (rare):** You need to sell more than the script suggested. Sell extra shares of the position with the LOWEST current momentum 12-1 (the script's ranking output shows this). This is the position closest to being dropped anyway.
+```bash
+python src/cagr.py 5800
+```
 
-**Step 5:** Once the 500 EUR is in cash, transfer it out of IBKR.
+You will see two metrics:
 
-**Step 6:** Update `portfolio.json`:
+- **Money-weighted CAGR (XIRR)** — the annualized return your money actually
+  experienced, accounting for when each deposit happened. This is the same
+  metric used by professional fund managers and what your broker statement
+  typically shows.
+- **Time-weighted CAGR (TWR)** — the pure strategy performance, independent
+  of when you added or withdrew money. Use this to compare the strategy
+  against benchmarks like the S&P 500.
+
+Both metrics also appear in the output of `python src/rebalance.py` after
+each quarterly rebalance, so you can track them over time.
+
+> The `cagr.py` module has no external dependencies (no `pyxirr`, no Excel
+> needed). It implements XIRR with a Newton-Raphson solver and a bisection
+> fallback. See `tests/test_cagr.py` for the unit tests.
+````
+
+
+## Change 2: Add a note in "Repository structure" about cagr.py and tests
+
+```
+├── src/
+│   ├── rebalance.py
+│   ├── backtest.py
+│   ├── universe.py
+│   └── cagr.py                  # Money-weighted and time-weighted return
+├── tests/
+│   ├── test_momentum.py
+│   └── test_cagr.py             # Tests for src/cagr.py (8 unit tests)
+```
+
+
+## Change 3: Add `inception_date` field to portfolio.example.json (recommended)
+
+Update `data/portfolio.example.json` to include a documented `inception_date`
+field. This lets `cagr.py` compute correct annualized returns even before any
+rebalance is recorded. Suggested update:
 
 ```json
 {
+  "_account_type": "IBKR DEMO (Paper Trading)",
+  "_purpose": "Reference. Copy to portfolio.json before first run and edit values.",
   "initial_capital_eur": 2000.0,
-  "net_capital_contributed_eur": 2500.0,
-  "cash_eur": 32.15,
-  "positions": { ... updated post-rebalance positions ... },
-  "last_rebalance": "2028-01-07"
+  "net_capital_contributed_eur": 2000.0,
+  "inception_date": "2026-05-19",
+  "cash_eur": 0,
+  "positions": {},
+  "last_rebalance": null
 }
 ```
 
-Changes:
-- `cash_eur`: reflects real balance after sells, buys, and withdrawal
-- `net_capital_contributed_eur`: decreased by 500 EUR (3,000 → 2,500)
-- `positions`: reflects whatever you actually hold after the rebalance
-
-**Step 7:** Append to `data/history.json`:
-
-```json
-{
-  "date": "2028-01-07",
-  "event": "CAPITAL_WITHDRAWAL",
-  "amount_eur": -500.0,
-  "new_net_contributed_eur": 2500.0,
-  "reason": "Personal expense"
-}
-```
+If `inception_date` is omitted, `cagr.py` falls back to the date of the first
+history entry, which is also fine — but having `inception_date` explicit makes
+the data more self-documenting.
 
 #### Calculating real return after capital changes
 

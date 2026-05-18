@@ -3,14 +3,8 @@
 MOMENTUM 12-1 QUARTERLY REBALANCE — Mixed USA/Spain portfolio
 ================================================================================
 
-Strategy: Buy past winners (top 4 from the US universe, top 2 from IBEX 35
-by 12-1 momentum) with fixed 65%/30% capital allocation. Rebalance every
-3 months.
-
-The US universe covers ~120 large-cap stocks across NYSE and NASDAQ. It
-includes both S&P 500 components and large NYSE/NASDAQ companies that are
-NOT part of the S&P 500 (foreign-domiciled ADRs, recent IPOs, etc.). See
-src/universe.py for the rationale.
+Strategy: Buy past winners (top 4 from S&P 500, top 2 from IBEX 35 by 12-1
+momentum) with fixed 65%/30% capital allocation. Rebalance every 3 months.
 
 This script is your "decision maker". Each quarter:
 1. Downloads recent monthly prices via yfinance for the FULL universe
@@ -38,7 +32,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from universe import IBEX_35, US_LARGE_CAP, CONFIG
+from universe import IBEX_35, SP500_LARGE_CAP, CONFIG
 
 # ============================================================================
 # CONSTANTS
@@ -204,7 +198,7 @@ def compute_rebalance(portfolio, mom_sp, mom_ibex,
     """Decide what to buy and sell.
 
     Targets:
-    - Top N_SP500_POSITIONS from the US universe, weighted 65% total
+    - Top N_SP500_POSITIONS from S&P 500, weighted 65% total
     - Top N_IBEX_POSITIONS from IBEX, weighted 30% total
     - Equal weight within each region
     """
@@ -272,7 +266,7 @@ def compute_rebalance(portfolio, mom_sp, mom_ibex,
     to_buy = []
     warnings = []
 
-    # US universe buys
+    # S&P 500 buys
     for ticker in new_top_sp:
         if ticker not in positions:
             price_usd = current_prices_sp_usd.get(ticker)
@@ -385,6 +379,24 @@ def print_report(plan, portfolio, mom_sp, mom_ibex,
         return_on_contributions = (plan['total_value'] / net_contributed - 1) * 100
         print(f"   Net capital contributed:  {net_contributed:>10,.2f} EUR  "
               f"(return on contributions: {return_on_contributions:+.2f}%)")
+
+    # Compute annualized MWR (XIRR) and TWR if cagr module is available.
+    # These are the proper metrics when capital has been added/withdrawn.
+    try:
+        from cagr import compute_returns_from_files
+        cagr_summary = compute_returns_from_files(today_value_eur=plan['total_value'])
+        mwr = cagr_summary.get("money_weighted_annualized_return")
+        twr = cagr_summary.get("time_weighted_annualized_return")
+        if mwr is not None:
+            print(f"   Money-weighted CAGR (XIRR): {mwr*100:>+8.2f}%   "
+                  f"(your money's actual annualized return)")
+        if twr is not None and twr != mwr:
+            print(f"   Time-weighted CAGR (TWR):   {twr*100:>+8.2f}%   "
+                  f"(pure strategy performance)")
+    except Exception as _cagr_err:
+        # CAGR module is optional; do not fail the rebalance over it
+        pass
+
     print(f"   Target per SP500 pos: {plan['target_per_sp_eur']:>10,.2f} EUR")
     print(f"   Target per IBEX  pos: {plan['target_per_ibex_eur']:>10,.2f} EUR")
 
@@ -402,7 +414,7 @@ def print_report(plan, portfolio, mom_sp, mom_ibex,
             print(f"   ... ({n_total - 15} more stocks not shown)")
 
     _print_ranking(mom_sp, current_prices_sp_usd, CONFIG["N_SP500_POSITIONS"],
-                   "USD", "US LARGE CAP (NYSE + NASDAQ)")
+                   "USD", "S&P 500 LARGE CAP")
     _print_ranking(mom_ibex, current_prices_ibex_eur, CONFIG["N_IBEX_POSITIONS"],
                    "EUR", "IBEX 35")
 
@@ -517,8 +529,8 @@ def main():
     print(f"\n[2/4] Downloading monthly prices...")
     try:
         prices_sp_monthly = download_universe(
-            US_LARGE_CAP.values(),
-            f"US large cap NYSE+NASDAQ ({len(US_LARGE_CAP)} stocks)"
+            SP500_LARGE_CAP.values(),
+            f"S&P 500 large cap ({len(SP500_LARGE_CAP)} stocks)"
         )
         prices_ibex_monthly = download_universe(
             IBEX_35.values(),
@@ -526,22 +538,22 @@ def main():
         )
 
         # Rename columns from Yahoo tickers back to short names
-        sp_rename = {v: k for k, v in US_LARGE_CAP.items()}
+        sp_rename = {v: k for k, v in SP500_LARGE_CAP.items()}
         ibex_rename = {v: k for k, v in IBEX_35.items()}
         prices_sp_monthly = prices_sp_monthly.rename(columns=sp_rename)
         prices_ibex_monthly = prices_ibex_monthly.rename(columns=ibex_rename)
 
         # Current daily prices (use ffill to recover from late/missing data)
-        prices_sp_now = download_current_prices(US_LARGE_CAP.values())
+        prices_sp_now = download_current_prices(SP500_LARGE_CAP.values())
         prices_ibex_now = download_current_prices(IBEX_35.values())
         prices_sp_now.index = [sp_rename.get(t, t) for t in prices_sp_now.index]
         prices_ibex_now.index = [ibex_rename.get(t, t) for t in prices_ibex_now.index]
 
         # Report any tickers with no live price
-        nan_sp = [t for t in US_LARGE_CAP if pd.isna(prices_sp_now.get(t, np.nan))]
+        nan_sp = [t for t in SP500_LARGE_CAP if pd.isna(prices_sp_now.get(t, np.nan))]
         nan_ibex = [t for t in IBEX_35 if pd.isna(prices_ibex_now.get(t, np.nan))]
         if nan_sp:
-            print(f"      [!] No live price for {len(nan_sp)} US ticker(s): "
+            print(f"      [!] No live price for {len(nan_sp)} SP500 ticker(s): "
                   f"{', '.join(nan_sp[:5])}{'...' if len(nan_sp) > 5 else ''}")
         if nan_ibex:
             print(f"      [!] No live price for {len(nan_ibex)} IBEX ticker(s): "
@@ -550,7 +562,7 @@ def main():
         print(f"\n[ERROR] Failed to download prices: {e}")
         sys.exit(1)
 
-    print(f"      US universe: {len(prices_sp_monthly)} months, "
+    print(f"      S&P 500: {len(prices_sp_monthly)} months, "
           f"IBEX: {len(prices_ibex_monthly)} months")
 
     # 4. Compute momentum
