@@ -26,7 +26,7 @@ Selection of stocks happens dynamically each quarter based on their 12-month pri
 | Rebalancing frequency | Quarterly (every 3 months) |
 | Number of positions | 6 (4 US + 2 ES) |
 | Position weights | Fixed 65% US / 30% ES (equal-weighted within each region) |
-| Stock universe | IBEX 35 (35 stocks) + S&P 500 top ~100 by market cap |
+| Stock universe | IBEX 35 (35 stocks) + 157 stocks across NYSE and NASDAQ |
 | Selection | Dynamic each quarter, no static pre-selection |
 | Initial capital | Configurable via `initial_capital_eur` in `data/portfolio.json` |
 | Fractional shares | Enabled by default (essential for small capital with expensive stocks) |
@@ -34,20 +34,43 @@ Selection of stocks happens dynamically each quarter based on their 12-month pri
 | Tax framework | Spanish IRPF (Base del Ahorro), W-8BEN active for US dividends |
 | Accounting currency | EUR |
 
+### US Universe
+The US universe has grown to **157 stocks** across NYSE and NASDAQ:
+
+- ~100 S&P 500 large caps (NVDA, AAPL, MSFT, AMZN, etc.)
+- 16 large stocks outside the S&P 500 (Sandisk, Bloom Energy, Lumentum,
+  Applied Optoelectronics, Cerebras, ARM, ASML, TSM, MercadoLibre, PDD,
+  BABA, Novo Nordisk, AstraZeneca, NU, HOOD, Enphase)
+- 41 momentum mid-caps that have shown strong recent performance
+  (Astera Labs, Argan, Vertiv, MP Materials, Rocket Lab, IES Holdings,
+  Sterling Construction, Powell Industries, Modine, and more)
+
+The IBEX universe is the full 35 stocks of the index, refreshed periodically
+when BME publishes a composition change.
+
 ## Historical backtest results (2019-2025)
 
 These results assume the strategy was followed without intervention for 7 full years:
 
 | Metric | Value |
 |---|---|
-| Capital initial | 2,000 € |
-| Capital final | 20,112 € |
-| Total return | +905.60% |
-| CAGR (net of taxes) | **+41.69%** |
-| Annualized volatility | 24.38% |
-| Sharpe ratio (rf=0) | **1.57** |
-| Max drawdown | **-22.80%** |
-| Total taxes paid | 4,182 € |
+| Initial capital | 2.000 € |
+| Final capital | **46.916 €** |
+| Total return | +2245.78% |
+| **CAGR (net of taxes)** | **+56.95%** |
+| Annualized volatility | 44.41% |
+| **Sharpe ratio** | **1.24** |
+| **Max drawdown** | **-44.26%** |
+| Total taxes | 10.390 € |
+| Total trades | 158 |
+| Rebalances | 28 |
+
+> **These are now real numbers, not synthetic.** Issue #10 closed the migration
+> to real historical prices for all 192 stocks in the universe (157 US + 35
+> IBEX), sourced from `data/monthly-historic-prices.csv`. The backtest also
+> uses real historical EUR/USD rates from `data/eurusd.rates.csv` per
+> rebalance day. See `backtests/backtest-results.md` for the full breakdown
+> and per-trade detail.
 
 **Note**: the backtest excludes commissions (they vary by IBKR tier/volume/account size and can't be modeled accurately upfront). In real execution you record actual commissions per trade in `data/history.json`. Expect commissions to subtract roughly 0.1-0.3% per year of CAGR.
 
@@ -264,7 +287,7 @@ If you want to fork this repo and connect it to a real (non-demo) IBKR account, 
 ### Running the historical backtest
 
 ```bash
-# Run the simulation (writes JSON/CSV outputs to backtests/)
+# Run the simulation (reads from data/monthly-historic-prices.csv)
 python src/backtest.py
 
 # Generate the human-readable .md report
@@ -275,6 +298,21 @@ python scripts/build_backtest_dashboard.py
 ```
 
 This reproduces the 2019-2025 simulation with synthetic price data calibrated to known historical annual returns.
+
+## How to expand the universe
+
+The universe is now data-driven. To add a new stock:
+
+1. **Add its daily prices** to `data/monthly-historic-prices.csv` in the existing
+   format: `Date,Ticker,Close,Company` with dates in English month-name format
+   (e.g., `"January 2, 2014"`).
+2. **Add the ticker to `src/universe.py`** in the appropriate sector section
+   of `US_LARGE_CAP` (or `IBEX_35` for Spanish stocks).
+
+Both `backtest.py` and `rebalance.py` will pick it up automatically.
+
+The same applies for removing a stock: delete it from `universe.py`. Its
+prices can stay in the CSV; they will simply be ignored.
 
 ## Repository structure
 
@@ -296,10 +334,11 @@ momentum-strategy-lab/
 │   ├── build_backtest_report.py      # Generates backtest-results.md
 │   └── commit-rebalance.ps1          # PowerShell script for quarterly commits
 ├── data/
-│   ├── portfolio.example.json   # Field documentation reference
-│   ├── portfolio.json           # Live state of the DEMO account
-│   ├── history.json             # Append-only rebalance history
-│   └── eurusd_rates.csv         # Historical EUR/USD daily rates
+│   ├── portfolio.example.json        # Field documentation reference
+│   ├── portfolio.json                # Live state of the DEMO account
+│   ├── history.json                  # Append-only rebalance history
+│   ├── eurusd.rates.csv              # Daily EUR/USD rates 2000-today
+│   └── monthly-historic-prices.csv   # Daily prices for all 192 universe stocks
 ├── backtests/                   # All backtest outputs (re-generable)
 │   ├── backtest-portfolio.json  # Final portfolio state (same schema as data/portfolio.json)
 │   ├── backtest-history.json    # Rebalance log (same schema as data/history.json)

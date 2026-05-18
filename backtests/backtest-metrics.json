@@ -1,77 +1,80 @@
 {
+  "data_source": "real",
   "initial_capital_eur": 2000.0,
-  "final_capital_eur": 22926.11,
-  "total_return": 10.4631,
-  "cagr": 0.4169,
-  "volatility": 0.2438,
-  "sharpe": 1.5674,
-  "max_drawdown": -0.228,
-  "total_taxes_eur": 7817.15,
+  "final_capital_eur": 46915.68,
+  "total_return": 22.4578,
+  "cagr": 0.5695,
+  "volatility": 0.4441,
+  "sharpe": 1.2437,
+  "max_drawdown": -0.4426,
+  "total_taxes_eur": 10389.81,
   "n_rebalances": 28,
-  "n_trades": 108,
+  "n_trades": 158,
+  "us_universe_size": 157,
+  "ibex_universe_size": 35,
   "yearly_summary": [
     {
       "year": 2019,
       "start": 2000.0,
-      "end_gross": 2657.9514,
-      "end_net": 2623.5797,
-      "return_net": 0.3118,
-      "tax": 34.3717,
-      "realized_gain": 180.9036
+      "end_gross": 3985.3472,
+      "end_net": 3985.3472,
+      "return_net": 0.9927,
+      "tax": 0.0,
+      "realized_gain": -38.0862
     },
     {
       "year": 2020,
-      "start": 2657.9514,
-      "end_gross": 6633.4987,
-      "end_net": 6491.6594,
-      "return_net": 1.4424,
-      "tax": 141.8393,
-      "realized_gain": 746.5225
+      "start": 3985.3472,
+      "end_gross": 10715.3812,
+      "end_net": 10038.1765,
+      "return_net": 1.5188,
+      "tax": 677.2047,
+      "realized_gain": 3564.2353
     },
     {
       "year": 2021,
-      "start": 6633.4987,
-      "end_gross": 7723.5702,
-      "end_net": 7545.0997,
-      "return_net": 0.1374,
-      "tax": 178.4705,
-      "realized_gain": 939.3182
+      "start": 10715.3812,
+      "end_gross": 10550.3941,
+      "end_net": 9692.7247,
+      "return_net": -0.0954,
+      "tax": 857.6694,
+      "realized_gain": 4514.0493
     },
     {
       "year": 2022,
-      "start": 7723.5702,
-      "end_gross": 8681.9657,
-      "end_net": 7879.5142,
-      "return_net": 0.0202,
-      "tax": 802.4515,
-      "realized_gain": 4223.4288
+      "start": 10550.3941,
+      "end_gross": 8015.9094,
+      "end_net": 8015.9094,
+      "return_net": -0.2402,
+      "tax": 0.0,
+      "realized_gain": -783.6395
     },
     {
       "year": 2023,
-      "start": 8681.9657,
-      "end_gross": 10916.2793,
-      "end_net": 10692.017,
-      "return_net": 0.2315,
-      "tax": 224.2623,
-      "realized_gain": 1180.3279
+      "start": 8015.9094,
+      "end_gross": 16542.9893,
+      "end_net": 16067.489,
+      "return_net": 1.0044,
+      "tax": 475.5003,
+      "realized_gain": 2502.6329
     },
     {
       "year": 2024,
-      "start": 10916.2793,
-      "end_gross": 24359.4626,
-      "end_net": 23456.4999,
-      "return_net": 1.1488,
-      "tax": 902.9627,
-      "realized_gain": 4752.4354
+      "start": 16542.9893,
+      "end_gross": 26566.3151,
+      "end_net": 24111.9034,
+      "return_net": 0.4575,
+      "tax": 2454.4118,
+      "realized_gain": 12259.1036
     },
     {
       "year": 2025,
-      "start": 24359.4626,
-      "end_gross": 25692.5003,
-      "end_net": 22926.1066,
-      "return_net": -0.0588,
-      "tax": 2766.3937,
-      "realized_gain": 13744.7318
+      "start": 26566.3151,
+      "end_gross": 49878.1876,
+      "end_net": 46915.6779,
+      "return_net": 0.766,
+      "tax": 2962.5097,
+      "realized_gain": 14678.6176
     }
   ]
 }

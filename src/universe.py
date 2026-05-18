@@ -5,10 +5,13 @@ The strategy operates on TWO COMPLETE universes that are scanned dynamically
 each quarter to find the stocks with the strongest momentum:
 
   1. IBEX_35: all 35 components of the Spanish IBEX 35 index
-  2. US_LARGE_CAP: ~120 largest US stocks across NYSE and NASDAQ
+  2. US_LARGE_CAP: ~155 large/mid cap US stocks across NYSE and NASDAQ
      - Includes S&P 500 large caps
-     - PLUS large NYSE/NASDAQ companies that are NOT in the S&P 500
-       (e.g., Sandisk, Bloom Energy, Cerebras, Lumentum, NU, ARM, etc.)
+     - Plus large NYSE/NASDAQ companies that are NOT in the S&P 500
+       (e.g., Sandisk, Bloom Energy, Lumentum, NU, ARM, etc.)
+     - Plus mid caps that have shown strong momentum recently
+       (e.g., Astera Labs, Argan, IES Holdings, Vertiv, Sterling Construction,
+        Powell, MP Materials, Rocket Lab, etc.)
 
 There is NO static pre-selection of "best stocks". Each rebalance computes
 12-1 momentum on every stock in these universes and picks the top performers.
@@ -18,17 +21,18 @@ The S&P 500 imposes strict inclusion criteria (US-domiciled, profitable for the
 last four quarters, market cap thresholds, etc.). Many high-quality US stocks
 listed on NYSE or NASDAQ are NOT in the S&P 500 because of those rules:
   - Foreign-domiciled (e.g., NU - Brazilian fintech, ARM - UK chip design)
-  - Recently IPO'd and not yet profitable for four quarters (e.g., CBRS, ARM)
+  - Recently IPO'd and not yet profitable for four quarters
   - Below the index's stringent market cap criteria but still genuinely large
-  - Small-mid caps with explosive momentum signals (e.g., SNDK, BE, LITE, AAOI)
+  - Small-mid caps with explosive momentum signals (e.g., AAOI, IESC, VRT)
 
 By widening the US universe beyond the S&P 500 we capture good US stocks the
 S&P inclusion committee hasn't accepted yet — which is often where the
 strongest momentum lives in the early-growth phase of a sector cycle.
 
 SIZE OF THE US UNIVERSE
-~120 stocks: still computationally cheap (data download stays under 1 second
-on Yahoo Finance) but broad enough to catch sector rotations and IPOs.
+~155 stocks: still computationally cheap (data download stays under 1 second
+on Yahoo Finance for live `rebalance.py`, and the backtest now reads from a
+local CSV `data/monthly-historic-prices.csv`).
 
 These lists should be reviewed periodically:
   - IBEX 35: index composition is reviewed twice a year (June, December) by BME.
@@ -38,8 +42,8 @@ These lists should be reviewed periodically:
 
 LAST UPDATED: May 2026
   - IBEX 35: based on BME composition effective from September 2024
-  - US_LARGE_CAP: based on market cap rankings as of Q1 2026, plus selected
-    large non-S&P 500 stocks on NYSE/NASDAQ
+  - US_LARGE_CAP: based on market cap and momentum rankings as of Q2 2026,
+    plus selected non-S&P 500 stocks on NYSE/NASDAQ
 
 Yahoo Finance ticker conventions:
   - IBEX stocks: suffix ".MC" (Madrid)
@@ -49,7 +53,7 @@ Yahoo Finance ticker conventions:
 
 # ============================================================================
 # IBEX 35 — All 35 components (official BME composition)
-# Source: BME, last review May 2026 - https://www.bolsasymercados.es/es/bme-exchange/mercados-y-cotizaciones/acciones/ibex-35-es0si0000005.html and https://es.investing.com/indices/spain-35-components
+# Source: BME, last review September 2024
 # ============================================================================
 IBEX_35 = {
     "ACS":  "ACS.MC",    # ACS - Construction
@@ -91,12 +95,11 @@ IBEX_35 = {
 
 # ============================================================================
 # US LARGE CAP — Broad US universe (NYSE + NASDAQ)
-# Includes S&P 500 large caps PLUS large non-S&P 500 listings
-# Source: market cap rankings as of Q1 2026
-# Sectorially diversified
+# Includes S&P 500 large caps PLUS large non-S&P 500 listings PLUS recent
+# momentum mid-caps. Source: market cap and momentum rankings as of Q2 2026.
 # ============================================================================
 US_LARGE_CAP = {
-    # ----- Technology (S&P 500) -----
+    # ----- Technology - mega caps -----
     "NVDA":  "NVDA",     # NVIDIA
     "AAPL":  "AAPL",     # Apple
     "MSFT":  "MSFT",     # Microsoft
@@ -119,17 +122,41 @@ US_LARGE_CAP = {
     "KLAC":  "KLAC",     # KLA Corp
     "LRCX":  "LRCX",     # Lam Research
     "APH":   "APH",      # Amphenol
+    "INTC":  "INTC",     # Intel
+    "AMAT":  "AMAT",     # Applied Materials
+    "MRVL":  "MRVL",     # Marvell Technology
 
-    # ----- Technology (NOT in S&P 500, but large NYSE/NASDAQ) -----
+    # ----- Technology - non-S&P 500 / foreign / newer -----
     "ARM":   "ARM",      # Arm Holdings (UK-domiciled, NASDAQ)
     "SNDK":  "SNDK",     # Sandisk Corporation (re-listed NASDAQ, not in S&P)
     "LITE":  "LITE",     # Lumentum Holdings (optical components, NASDAQ)
     "AAOI":  "AAOI",     # Applied Optoelectronics (NASDAQ)
-    "CBRS":  "CBRS",     # Cerebras Systems (AI chips, recent IPO, NASDAQ)
     "ASML":  "ASML",     # ASML (Dutch, NASDAQ ADR — not in S&P 500)
     "TSM":   "TSM",      # Taiwan Semiconductor (Taiwanese ADR, not in S&P 500)
+    "ALAB":  "ALAB",     # Astera Labs (recent IPO 2024)
 
-    # ----- Communications (S&P 500) -----
+    # ----- Technology - momentum mid caps -----
+    "AEIS":  "AEIS",     # Advanced Energy Industries
+    "AMKR":  "AMKR",     # Amkor Technology
+    "CIEN":  "CIEN",     # Ciena Corp
+    "COHR":  "COHR",     # Coherent
+    "FLEX":  "FLEX",     # Flex
+    "GLW":   "GLW",      # Corning
+    "MKSI":  "MKSI",     # MKS Instruments
+    "MTSI":  "MTSI",     # MACOM Technology
+    "ON":    "ON",       # ON Semiconductor
+    "ONTO":  "ONTO",     # Onto Innovation
+    "SANM":  "SANM",     # Sanmina
+    "SITM":  "SITM",     # Sitime
+    "SMTC":  "SMTC",     # Semtech
+    "TER":   "TER",      # Teradyne
+    "TTMI":  "TTMI",     # TTM Technologies
+    "VIAV":  "VIAV",     # Viavi Solutions
+    "VICR":  "VICR",     # Vicor
+    "VRT":   "VRT",      # Vertiv Holdings (AI infrastructure)
+    "WDC":   "WDC",      # Western Digital
+
+    # ----- Communications & Media -----
     "GOOGL": "GOOGL",    # Alphabet Class A
     "META":  "META",     # Meta
     "NFLX":  "NFLX",     # Netflix
@@ -138,8 +165,11 @@ US_LARGE_CAP = {
     "CMCSA": "CMCSA",    # Comcast
     "VZ":    "VZ",       # Verizon
     "T":     "T",        # AT&T
+    "GSAT":  "GSAT",     # Globalstar (satellite communications)
+    "SATS":  "SATS",     # EchoStar
+    "ASTS":  "ASTS",     # AST SpaceMobile
 
-    # ----- Consumer Discretionary (S&P 500) -----
+    # ----- Consumer Discretionary -----
     "AMZN":  "AMZN",     # Amazon
     "TSLA":  "TSLA",     # Tesla
     "HD":    "HD",       # Home Depot
@@ -149,13 +179,11 @@ US_LARGE_CAP = {
     "SBUX":  "SBUX",     # Starbucks
     "TJX":   "TJX",      # TJX
     "BKNG":  "BKNG",     # Booking Holdings
+    "MELI":  "MELI",     # MercadoLibre (Argentinian, NASDAQ)
+    "PDD":   "PDD",      # PDD Holdings / Temu (Chinese ADR)
+    "BABA":  "BABA",     # Alibaba (Chinese ADR)
 
-    # ----- Consumer Discretionary (NOT in S&P 500) -----
-    "MELI":  "MELI",     # MercadoLibre (Argentinian, NASDAQ — not in S&P 500)
-    "PDD":   "PDD",      # PDD Holdings / Temu (Chinese ADR, NASDAQ)
-    "BABA":  "BABA",     # Alibaba (Chinese ADR, NYSE)
-
-    # ----- Consumer Staples (S&P 500) -----
+    # ----- Consumer Staples -----
     "WMT":   "WMT",      # Walmart
     "PG":    "PG",       # Procter & Gamble
     "KO":    "KO",       # Coca-Cola
@@ -165,7 +193,7 @@ US_LARGE_CAP = {
     "CL":    "CL",       # Colgate-Palmolive
     "PM":    "PM",       # Philip Morris
 
-    # ----- Healthcare (S&P 500) -----
+    # ----- Healthcare -----
     "LLY":   "LLY",      # Eli Lilly
     "JNJ":   "JNJ",      # Johnson & Johnson
     "UNH":   "UNH",      # UnitedHealth
@@ -178,12 +206,13 @@ US_LARGE_CAP = {
     "AMGN":  "AMGN",     # Amgen
     "BMY":   "BMY",      # Bristol-Myers
     "ISRG":  "ISRG",     # Intuitive Surgical
+    "NVO":   "NVO",      # Novo Nordisk (Danish ADR)
+    "AZN":   "AZN",      # AstraZeneca (UK ADR)
+    "ARWR":  "ARWR",     # Arrowhead Pharma (RNA therapeutics)
+    "CYTK":  "CYTK",     # Cytokinetics
+    "RVMD":  "RVMD",     # Revolution Medicines
 
-    # ----- Healthcare (NOT in S&P 500) -----
-    "NVO":   "NVO",      # Novo Nordisk (Danish ADR, NYSE)
-    "AZN":   "AZN",      # AstraZeneca (UK ADR, NASDAQ)
-
-    # ----- Financials (S&P 500) -----
+    # ----- Financials -----
     "BRK-B": "BRK-B",    # Berkshire Hathaway
     "JPM":   "JPM",      # JPMorgan
     "V":     "V",        # Visa
@@ -197,27 +226,24 @@ US_LARGE_CAP = {
     "BLK":   "BLK",      # BlackRock
     "SCHW":  "SCHW",     # Schwab
     "SPGI":  "SPGI",     # S&P Global
+    "NU":    "NU",       # Nu Holdings (Brazilian fintech)
+    "HOOD":  "HOOD",     # Robinhood
+    "DOCN":  "DOCN",     # DigitalOcean (cloud)
 
-    # ----- Financials (NOT in S&P 500) -----
-    "NU":    "NU",       # Nu Holdings (Brazilian fintech, NYSE)
-    "HOOD":  "HOOD",     # Robinhood (recent S&P entrant in some periods)
-
-    # ----- Energy (S&P 500) -----
+    # ----- Energy -----
     "XOM":   "XOM",      # Exxon Mobil
     "CVX":   "CVX",      # Chevron
     "COP":   "COP",      # ConocoPhillips
     "EOG":   "EOG",      # EOG Resources
     "SLB":   "SLB",      # Schlumberger
+    "BE":    "BE",       # Bloom Energy (fuel cells)
+    "ENPH":  "ENPH",     # Enphase Energy (solar)
 
-    # ----- Energy (NOT in S&P 500) -----
-    "BE":    "BE",       # Bloom Energy (fuel cells, NYSE)
-    "ENPH":  "ENPH",     # Enphase Energy (solar, removed from S&P in some periods)
-
-    # ----- Industrials (S&P 500) -----
-    "GE":    "GE",       # GE
+    # ----- Industrials -----
+    "GE":    "GE",       # GE Aerospace
     "CAT":   "CAT",      # Caterpillar
     "BA":    "BA",       # Boeing
-    "RTX":   "RTX",      # RTX
+    "RTX":   "RTX",      # RTX Corp
     "UNP":   "UNP",      # Union Pacific
     "HON":   "HON",      # Honeywell
     "DE":    "DE",       # Deere
@@ -225,19 +251,30 @@ US_LARGE_CAP = {
     "UPS":   "UPS",      # UPS
     "FDX":   "FDX",      # FedEx
     "ETN":   "ETN",      # Eaton
+    "AGX":   "AGX",      # Argan (power infrastructure)
+    "FIX":   "FIX",      # Comfort Systems USA (HVAC)
+    "IESC":  "IESC",     # IES Holdings (infrastructure)
+    "MOD":   "MOD",      # Modine Manufacturing (thermal management)
+    "MTZ":   "MTZ",      # MasTec (infrastructure)
+    "POWL":  "POWL",     # Powell Industries (electrical)
+    "STRL":  "STRL",     # Sterling Construction (infrastructure)
+    "RKLB":  "RKLB",     # Rocket Lab (space)
+    "HUT":   "HUT",      # Hut 8 (bitcoin mining)
 
-    # ----- Materials (S&P 500) -----
+    # ----- Materials -----
     "LIN":   "LIN",      # Linde
     "FCX":   "FCX",      # Freeport-McMoRan
     "NEM":   "NEM",      # Newmont
     "SHW":   "SHW",      # Sherwin-Williams
+    "ALB":   "ALB",      # Albemarle (lithium)
+    "MP":    "MP",       # MP Materials (rare earths)
 
-    # ----- Real Estate (S&P 500) -----
+    # ----- Real Estate -----
     "PLD":   "PLD",      # Prologis
     "AMT":   "AMT",      # American Tower
     "EQIX":  "EQIX",     # Equinix
 
-    # ----- Utilities (S&P 500) -----
+    # ----- Utilities -----
     "NEE":   "NEE",      # NextEra
     "DUK":   "DUK",      # Duke Energy
     "SO":    "SO",       # Southern Company
@@ -250,7 +287,7 @@ US_LARGE_CAP = {
 
 # Backwards compatibility alias.
 # Older code (and the backtest module) may still reference SP500_LARGE_CAP.
-# Keep the alias so nothing breaks, but new code should use US_LARGE_CAP.
+# New code should use US_LARGE_CAP.
 SP500_LARGE_CAP = US_LARGE_CAP
 
 # ============================================================================
@@ -261,7 +298,7 @@ CONFIG = {
     "N_SP500_POSITIONS": 4,         # Number of US stocks to hold (legacy name)
     "N_IBEX_POSITIONS": 2,          # Number of IBEX stocks to hold
 
-    # Capital weights (must sum to 1.0)
+    # Capital weights (must sum to at most 1.0; remainder is cash reserve)
     "WEIGHT_SP500": 0.65,           # 65% of capital in US stocks
     "WEIGHT_IBEX": 0.30,            # 30% of capital in Spanish stocks
     "CASH_RESERVE": 0.05,           # 5% cash reserve for flexibility and commissions
@@ -275,8 +312,6 @@ CONFIG = {
     # With small capital (e.g. 2,000 EUR split into 6 positions ~ 333 EUR each),
     # fractional shares are essential because expensive stocks like BKNG (~5,000 USD)
     # or AVGO (~2,000 USD) would not fit in a single whole share.
-    # Set this to False to force whole-share orders (useful for brokers that don't
-    # support fractions or for stocks where fractions aren't allowed).
     "ALLOW_FRACTIONAL_SHARES": True,
 
     # Currency

@@ -1,7 +1,5 @@
 """
-Generates backtests/backtest-results.md with a detailed summary table:
-  - Year, quarter, stock sold/bought, qty, amount, return%
-  - Yearly totals
+Generates backtests/backtest-results.md with a detailed summary table.
 
 USAGE:
     python scripts/build_backtest_report.py
@@ -29,20 +27,28 @@ def build_report():
         m = json.load(f)
     trades = pd.read_csv(BACKTESTS_DIR / "backtest-trades.csv")
 
+    data_source = m.get("data_source", "synthetic")
+    is_real = data_source == "real"
+
     lines = []
     lines.append("# Backtest results (2019-2025)")
     lines.append("")
-    lines.append(
-        "Reproducible run of `src/backtest.py` against synthetic price data "
-        "calibrated to known historical annual returns, using **real historical "
-        "EUR/USD exchange rates** from `data/eurusd_rates.csv`."
-    )
+    if is_real:
+        lines.append(
+            "Reproducible run of `src/backtest.py` against **REAL historical price data** "
+            "from `data/monthly-historic-prices.csv` and **REAL historical EUR/USD rates** "
+            "from `data/eurusd.rates.csv`."
+        )
+    else:
+        lines.append(
+            "Reproducible run of `src/backtest.py` against synthetic prices "
+            "calibrated to known annual returns, with real historical EUR/USD rates."
+        )
     lines.append("")
-    lines.append("> Re-running `python src/backtest.py` regenerates "
-                 "`backtest-portfolio.json`, `backtest-history.json`, "
-                 "`backtest-trades.csv`, `backtest-metrics.json` and this file. "
-                 "Re-running `python scripts/build_backtest_dashboard.py` "
-                 "regenerates `backtest-dashboard.png`.")
+    lines.append("> Re-running `python src/backtest.py` regenerates the JSON/CSV outputs. "
+                 "Then run `python scripts/build_backtest_dashboard.py` and "
+                 "`python scripts/build_backtest_report.py` to regenerate the dashboard "
+                 "image and this markdown report.")
     lines.append("")
 
     # ----- Strategy parameters -----
@@ -54,7 +60,16 @@ def build_report():
     lines.append("- Selection: **dynamic each quarter** (no static pre-selection)")
     lines.append("- Fractional shares: enabled")
     lines.append("- Initial capital: **2,000 EUR**")
-    lines.append("- EUR/USD: **real historical rates per rebalance day** (from `data/eurusd_rates.csv`)")
+    lines.append(f"- US universe: **{m.get('us_universe_size', '?')}** stocks (NYSE + NASDAQ, "
+                 f"includes S&P 500 large caps + non-S&P 500 + recent momentum mid-caps)")
+    lines.append(f"- IBEX universe: **{m.get('ibex_universe_size', '?')}** stocks (complete IBEX 35)")
+    if is_real:
+        lines.append("- Price data: **real historical daily prices** from "
+                     "`data/monthly-historic-prices.csv`, resampled to month-end closes")
+    else:
+        lines.append("- Price data: synthetic, calibrated to known annual returns")
+    lines.append("- EUR/USD: **real historical rates per rebalance day** "
+                 "(from `data/eurusd.rates.csv`)")
     lines.append("- Commissions: not modeled (recorded manually in real execution)")
     lines.append("- Tax framework: Spanish IRPF \"base del ahorro\"")
     lines.append("")
@@ -98,6 +113,28 @@ def build_report():
         )
     lines.append("")
 
+    # ----- Most-selected stocks -----
+    buys = trades[trades["action"] == "BUY"]
+    us_freq = buys[buys["market"] == "SP"]["ticker"].value_counts().head(15)
+    ibex_freq = buys[buys["market"] == "IBEX"]["ticker"].value_counts().head(10)
+
+    lines.append("## Most-selected stocks")
+    lines.append("")
+    lines.append("### US universe (top 15)")
+    lines.append("")
+    lines.append("| Ticker | Times selected |")
+    lines.append("|---|---:|")
+    for ticker, count in us_freq.items():
+        lines.append(f"| {ticker} | {count} |")
+    lines.append("")
+    lines.append("### IBEX 35 (top 10)")
+    lines.append("")
+    lines.append("| Ticker | Times selected |")
+    lines.append("|---|---:|")
+    for ticker, count in ibex_freq.items():
+        lines.append(f"| {ticker} | {count} |")
+    lines.append("")
+
     # ----- Detailed quarterly trade table -----
     lines.append("## Detailed quarterly trades")
     lines.append("")
@@ -105,7 +142,6 @@ def build_report():
                  "buys leave the return column empty (the return crystallizes when sold).")
     lines.append("")
 
-    # Group trades by year and build per-year sub-tables
     trades["date"] = pd.to_datetime(trades["date"])
     trades["year"] = trades["date"].dt.year
 
@@ -113,13 +149,10 @@ def build_report():
         year_trades = trades[trades["year"] == year].copy()
         year_trades = year_trades.sort_values(["date", "action", "ticker"])
 
-        # Yearly summary numbers
         year_sells = year_trades[year_trades["action"] == "SELL"]
         n_buys = len(year_trades[year_trades["action"] == "BUY"])
         n_sells = len(year_sells)
         total_amount_eur = year_trades["amount_eur"].sum()
-
-        # Find the matching year-end metric
         year_metric = next((s for s in m["yearly_summary"] if s["year"] == year), None)
         net_return_str = (f" — net annual return **{fmt_pct(year_metric['return_net']*100)}**"
                           if year_metric else "")
@@ -161,21 +194,24 @@ def build_report():
     # ----- Notes -----
     lines.append("## Important notes")
     lines.append("")
+    if is_real:
+        lines.append("- **Real prices**: daily closes from `data/monthly-historic-prices.csv`, "
+                     "resampled to month-end. Covers all IBEX 35 plus the full US large/mid-cap "
+                     "universe defined in `src/universe.py`.")
     lines.append("- **Real EUR/USD historical rates** are used per rebalance day. "
                  "The rate moved from ~1.15 in 2019 to parity (~1.00) in 2022 and back "
-                 "to ~1.15 in 2025. This adds realistic currency risk to the backtest.")
+                 "to ~1.15 in 2025.")
     lines.append("- **No commissions are modeled** in the backtest. Real execution "
                  "will subtract 0.1-0.3% per year of CAGR depending on broker tier.")
-    lines.append("- **Synthetic prices** are calibrated to public annual returns 2014-2025. "
-                 "They are NOT real daily ticks. For institutional-grade backtests use real "
-                 "historical prices from a data provider.")
-    lines.append("- **Survivorship bias**: the universe contains stocks that survived to 2025. "
+    lines.append("- **Survivorship bias**: the universe contains stocks that exist today. "
                  "Stocks that delisted are not represented.")
+    lines.append("- **Composition timing bias**: some stocks IPO'd within the backtest window "
+                 "(PLTR 2020, NU 2021, ARM 2023, SNDK relisted 2025). They enter the universe "
+                 "as their data becomes available.")
     lines.append("")
     lines.append("A real-money implementation should expect **5-15 percentage points lower CAGR** "
-                 "than the backtest result, due to these factors plus execution timing differences.")
-    lines.append("")
-    lines.append("Even with that adjustment, a **25-30% net CAGR would still be exceptional**.")
+                 "than this backtest, due to commissions, execution timing, slippage, and the "
+                 "fact that the future regime will not be 2019-2025.")
     lines.append("")
 
     OUTPUT_FILE.write_text("\n".join(lines), encoding="utf-8")

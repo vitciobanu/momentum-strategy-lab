@@ -17,7 +17,7 @@ ROOT = Path(__file__).parent.parent
 BACKTESTS_DIR = ROOT / "backtests"
 DASHBOARD_FILE = BACKTESTS_DIR / "backtest-dashboard.png"
 
-# Brand palette (matches the project's "Midnight Executive" theme)
+# Brand palette
 NAVY = "#1E2761"
 NAVY_DARK = "#121838"
 ICE = "#CADCFC"
@@ -43,14 +43,18 @@ def build_dashboard():
 
     fig = plt.figure(figsize=(16, 10), facecolor=WHITE)
     fig.suptitle(
-        "Momentum 12-1 Strategy - Backtest Dashboard",
+        "Momentum 12-1 Strategy — Backtest Dashboard",
         fontsize=20, fontweight="bold", color=NAVY_DARK, y=0.97,
     )
-    fig.text(
-        0.5, 0.935,
-        "2019-2025  ·  4 US + 2 IBEX  ·  65/30/5  ·  Real historical EUR/USD",
-        ha="center", fontsize=11, color=GREY_TEXT, style="italic",
+
+    data_source = metrics.get("data_source", "synthetic")
+    subtitle = (
+        f"2019-2025  ·  4 US + 2 IBEX  ·  65/30/5  ·  "
+        f"{'Real historical prices' if data_source == 'real' else 'Synthetic prices'}"
+        f"  ·  Real historical EUR/USD"
     )
+    fig.text(0.5, 0.935, subtitle, ha="center", fontsize=11,
+             color=GREY_TEXT, style="italic")
 
     gs = fig.add_gridspec(
         nrows=3, ncols=4,
@@ -70,7 +74,6 @@ def build_dashboard():
         ax = fig.add_subplot(gs[0, i])
         ax.set_facecolor(WHITE)
         ax.axis("off")
-        # Background rectangle
         rect = mpatches.FancyBboxPatch(
             (0.02, 0.05), 0.96, 0.9,
             boxstyle="round,pad=0.02,rounding_size=0.02",
@@ -78,7 +81,6 @@ def build_dashboard():
             facecolor=GREY_LIGHT, edgecolor="none",
         )
         ax.add_patch(rect)
-        # Color stripe on left
         stripe = mpatches.Rectangle(
             (0.02, 0.05), 0.04, 0.9,
             transform=ax.transAxes,
@@ -97,7 +99,6 @@ def build_dashboard():
     yearly = metrics["yearly_summary"]
     years = [s["year"] for s in yearly]
     end_net = [s["end_net"] for s in yearly]
-    # Prepend initial
     plot_x = ["Start"] + [str(y) for y in years]
     plot_y = [metrics["initial_capital_eur"]] + end_net
 
@@ -129,7 +130,7 @@ def build_dashboard():
     for bar, r in zip(bars, returns):
         ax2.text(
             bar.get_x() + bar.get_width()/2,
-            r + (2.5 if r >= 0 else -5),
+            r + (3 if r >= 0 else -7),
             f"{r:+.1f}%",
             ha="center", fontsize=9, color=NAVY_DARK, fontweight="bold",
         )
@@ -144,20 +145,20 @@ def build_dashboard():
     ax2.tick_params(colors=GREY_TEXT, labelsize=9)
     ax2.grid(axis="y", color=ICE, linewidth=0.6)
     ax2.set_axisbelow(True)
-    ax2.set_ylim(min(returns) - 15, max(returns) + 25)
+    ymin = min(returns) - 20
+    ymax = max(returns) + 25
+    ax2.set_ylim(ymin, ymax)
 
     # ---- Row 3 left: EUR/USD rate trajectory ----
     ax3 = fig.add_subplot(gs[2, :2])
     rates = [(h["date"], h["eur_usd_rate"]) for h in history]
     dates = [r[0] for r in rates]
     rate_values = [r[1] for r in rates]
-
     ax3.plot(dates, rate_values, color=NAVY, linewidth=2.0)
-    ax3.fill_between(range(len(dates)), rate_values, min(rate_values)-0.02,
+    ax3.fill_between(range(len(dates)), rate_values, min(rate_values) - 0.02,
                      color=NAVY, alpha=0.10)
     ax3.axhline(1.0, color=GREY_TEXT, linestyle="--", linewidth=0.7, alpha=0.6)
-    ax3.text(len(dates)-1, 1.0, "  parity (1.0)", fontsize=8, color=GREY_TEXT,
-             va="center")
+    ax3.text(len(dates) - 1, 1.0, "  parity (1.0)", fontsize=8, color=GREY_TEXT, va="center")
     ax3.set_title("EUR/USD at each rebalance (real historical data)",
                   fontsize=12, fontweight="bold", color=NAVY_DARK, pad=14)
     ax3.set_facecolor(WHITE)
@@ -166,22 +167,23 @@ def build_dashboard():
     ax3.spines["left"].set_color(GREY_TEXT)
     ax3.spines["bottom"].set_color(GREY_TEXT)
     ax3.tick_params(colors=GREY_TEXT, labelsize=8)
-    # Show only year-Q1 labels for readability
-    ax3.set_xticks([i for i, d in enumerate(dates) if d.endswith("-01-31") or d.endswith("-01-30")])
-    ax3.set_xticklabels([d[:4] for d in dates if d.endswith("-01-31") or d.endswith("-01-30")])
+    # Show only year-Q1 labels
+    year_label_indices = [i for i, d in enumerate(dates) if d.endswith("-01-31") or d.endswith("-01-30")]
+    ax3.set_xticks(year_label_indices)
+    ax3.set_xticklabels([dates[i][:4] for i in year_label_indices])
     ax3.grid(axis="y", color=ICE, linewidth=0.6)
     ax3.set_axisbelow(True)
 
     # ---- Row 3 right: Top stocks by selection frequency ----
     ax4 = fig.add_subplot(gs[2, 2:])
     buys = trades[trades["action"] == "BUY"]
-    top_picks = buys["ticker"].value_counts().head(8)
+    top_picks = buys["ticker"].value_counts().head(12)
     ax4.barh(top_picks.index[::-1], top_picks.values[::-1],
              color=NAVY, edgecolor="none", height=0.7)
     for i, (ticker, count) in enumerate(zip(top_picks.index[::-1], top_picks.values[::-1])):
-        ax4.text(count + 0.15, i, str(count), va="center",
+        ax4.text(count + 0.05, i, str(count), va="center",
                  fontsize=9, color=NAVY_DARK, fontweight="bold")
-    ax4.set_title("Most-selected stocks (across 28 rebalances)",
+    ax4.set_title(f"Most-selected stocks (across {metrics['n_rebalances']} rebalances)",
                   fontsize=12, fontweight="bold", color=NAVY_DARK, pad=14)
     ax4.set_facecolor(WHITE)
     ax4.spines["top"].set_visible(False)
@@ -191,14 +193,15 @@ def build_dashboard():
     ax4.tick_params(colors=GREY_TEXT, labelsize=9)
     ax4.grid(axis="x", color=ICE, linewidth=0.6)
     ax4.set_axisbelow(True)
-    ax4.set_xlim(0, max(top_picks.values) * 1.15)
+    ax4.set_xlim(0, max(top_picks.values) * 1.18)
 
     # Footer
     fig.text(
         0.5, 0.02,
         f"Backtest scope: {metrics['n_rebalances']} quarterly rebalances  ·  "
         f"{metrics['n_trades']} total trades  ·  "
-        f"Synthetic prices calibrated to annual returns, real historical EUR/USD",
+        f"Universe: {metrics.get('us_universe_size', '?')} US + "
+        f"{metrics.get('ibex_universe_size', '?')} IBEX stocks",
         ha="center", fontsize=8.5, color=GREY_TEXT, style="italic",
     )
 
