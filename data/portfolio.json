@@ -4,44 +4,7 @@
   "_how_to_change_initial_capital": "Edit `initial_capital_eur` AND `net_capital_contributed_eur` BEFORE the first run (both should be the same value). After the first rebalance has happened, modify `net_capital_contributed_eur` when adding or withdrawing capital — see README section 'Adding or withdrawing capital later'.",
   "initial_capital_eur": 2000.0,
   "net_capital_contributed_eur": 2000.0,
-  "cash_eur": 102,
-  "positions": {
-    "SNDK": {
-      "shares": 0.271,
-      "avg_price": 1383.42,
-      "market": "US",
-      "buy_date": "2026-05-18"
-    },
-    "BE": {
-      "shares": 1.4276,
-      "avg_price_eur": 262.665,
-      "market": "US",
-      "buy_date": "2026-05-18"
-    },
-    "LITE": {
-      "shares": 0.4144,
-      "avg_price_eur": 904.77,
-      "market": "US",
-      "buy_date": "2026-05-18"
-    },
-    "AAOI": {
-      "shares": 2.1277,
-      "avg_price_eur": 176.238,
-      "market": "US",
-      "buy_date": "2026-05-18"
-    },
-    "SLR": {
-      "shares": 12.7496,
-      "avg_price_eur": 23.53,
-      "market": "IBEX",
-      "buy_date": "2026-05-18"
-    },
-    "ACS": {
-      "shares": 2.2848,
-      "avg_price_eur": 131.3,
-      "market": "IBEX",
-      "buy_date": "2026-05-18"
-    }
-  },
-  "last_rebalance": "2026-05-18"
+  "cash_eur": 0,
+  "positions": {},
+  "last_rebalance": null
 }
