@@ -1,10 +1,61 @@
 {
   "_account_type": "IBKR DEMO (Paper Trading)",
-  "_purpose": "This file tracks the live state of the strategy on an IBKR paper trading account. It is committed to the public repo for transparency. See data/portfolio.example.json for full field documentation.",
-  "_how_to_change_initial_capital": "Edit `initial_capital_eur` AND `net_capital_contributed_eur` BEFORE the first run (both should be the same value). After the first rebalance has happened, modify `net_capital_contributed_eur` when adding or withdrawing capital — see README section 'Adding or withdrawing capital later'.",
+  "_purpose": "Live state of the DEMO account. Updated after every quarterly rebalance via scripts/append-rebalance.py.",
   "initial_capital_eur": 2000.0,
   "net_capital_contributed_eur": 2000.0,
-  "cash_eur": 0,
-  "positions": {},
-  "last_rebalance": null
+  "inception_date": "2026-05-18",
+  "cash_eur": 102.19,
+  "positions": {
+    "SNDK": {
+      "shares": 0.271,
+      "avg_price_usd": 1383.42,
+      "avg_price_eur": 1188.5154,
+      "exec_eur_usd_rate": 1.16399,
+      "market": "US",
+      "buy_date": "2026-05-18",
+      "commission_paid_eur": 0.86
+    },
+    "BE": {
+      "shares": 1.4276,
+      "avg_price_usd": 262.665,
+      "avg_price_eur": 225.6592,
+      "exec_eur_usd_rate": 1.16399,
+      "market": "US",
+      "buy_date": "2026-05-18",
+      "commission_paid_eur": 0.86
+    },
+    "LITE": {
+      "shares": 0.4144,
+      "avg_price_usd": 904.77,
+      "avg_price_eur": 777.2337,
+      "exec_eur_usd_rate": 1.16409,
+      "market": "US",
+      "buy_date": "2026-05-18",
+      "commission_paid_eur": 0.86
+    },
+    "AAOI": {
+      "shares": 2.1277,
+      "avg_price_usd": 176.238,
+      "avg_price_eur": 151.363,
+      "exec_eur_usd_rate": 1.16434,
+      "market": "US",
+      "buy_date": "2026-05-18",
+      "commission_paid_eur": 0.86
+    },
+    "ACS": {
+      "shares": 2.2848,
+      "avg_price_eur": 131.3,
+      "market": "IBEX",
+      "buy_date": "2026-05-18",
+      "commission_paid_eur": 3.0
+    },
+    "SLR": {
+      "shares": 12.7496,
+      "avg_price_eur": 23.53,
+      "market": "IBEX",
+      "buy_date": "2026-05-18",
+      "commission_paid_eur": 3.0
+    }
+  },
+  "last_rebalance": "2026-05-18"
 }
