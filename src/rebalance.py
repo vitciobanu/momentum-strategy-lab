@@ -293,7 +293,7 @@ def compute_rebalance(portfolio, mom_sp, mom_ibex,
             value_usd = n_shares * price_usd
             value_eur = value_usd / eur_usd
             to_buy.append({
-                "ticker": ticker, "market": "SP",
+                "ticker": ticker, "market": "US",
                 "shares": n_shares, "price_usd": price_usd,
                 "value_usd": value_usd, "value_eur": value_eur,
                 "momentum": mom_sp[ticker] * 100, "currency": "USD",

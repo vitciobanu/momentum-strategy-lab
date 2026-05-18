@@ -359,13 +359,13 @@ def main():
                     holdings[t] = {
                         "shares": shares,
                         "avg_price_eur": avg_price_eur,
-                        "market": "SP",
+                        "market": "US",
                         "buy_date": date.strftime("%Y-%m-%d"),
                     }
                     cash_eur -= invest_eur
                     orders_to_buy.append({
                         "ticker": t,
-                        "market": "SP",
+                        "market": "US",
                         "shares": round(shares, 4),
                         "ref_price": round(float(price_usd), 4),
                         "currency": "USD",
@@ -377,7 +377,7 @@ def main():
                         "quarter": f"Q{(date.month - 1) // 3 + 1} {year}",
                         "action": "BUY",
                         "ticker": t,
-                        "market": "SP",
+                        "market": "US",
                         "shares": round(shares, 4),
                         "price_local": round(float(price_usd), 4),
                         "currency": "USD",
