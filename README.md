@@ -11,11 +11,11 @@ Personal lab for testing the **"buy past winners, sell past losers"** momentum s
 ## What this is
 
 A backtested implementation of the classic **momentum 12-1** strategy applied quarterly to a mixed portfolio of:
-- **4 stocks from the S&P 500** (65% of capital)
+- **4 stocks from the US universe** (65% of capital)
 - **2 stocks from the IBEX 35** (30% of capital)
 - **5% of cash reserve** left for flexibility and commissions
 
-Selection of stocks happens dynamically each quarter based on their 12-month price momentum (excluding the most recent month, a common technique to avoid short-term reversal noise). **Every quarter the script scans the entire universe** — all 35 IBEX components plus the top ~100 S&P 500 stocks by market cap — and picks the 6 stocks with the strongest momentum signal at that exact moment. No static "favorites list" is used.
+Selection of stocks happens dynamically each quarter based on their 12-month price momentum (excluding the most recent month, a common technique to avoid short-term reversal noise). **Every quarter the script scans the entire universe** — all 35 IBEX components plus 157 US stocks across NYSE and NASDAQ — and picks the 6 stocks with the strongest momentum signal at that exact moment. No static "favorites list" is used.
 
 ## Strategy summary
 
@@ -26,342 +26,265 @@ Selection of stocks happens dynamically each quarter based on their 12-month pri
 | Rebalancing frequency | Quarterly (every 3 months) |
 | Number of positions | 6 (4 US + 2 ES) |
 | Position weights | Fixed 65% US / 30% ES (equal-weighted within each region) |
-| Stock universe | IBEX 35 (35 stocks) + 157 stocks across NYSE and NASDAQ |
+| Cash reserve | 5% (for commissions and flexibility) |
+| Stock universe | IBEX 35 (35 stocks) + 157 US stocks across NYSE and NASDAQ |
 | Selection | Dynamic each quarter, no static pre-selection |
-| Initial capital | Configurable via `initial_capital_eur` in `data/portfolio.json` |
-| Fractional shares | Enabled by default (essential for small capital with expensive stocks) |
-| Commissions | Recorded manually per-trade in `data/history.json` (IBKR varies by tier/volume) |
-| Tax framework | Spanish IRPF (Base del Ahorro), W-8BEN active for US dividends |
-| Accounting currency | EUR |
+| Fractional shares | Enabled (essential at small capital sizes) |
 
 ### US Universe
-The US universe has grown to **157 stocks** across NYSE and NASDAQ:
 
-- ~100 S&P 500 large caps (NVDA, AAPL, MSFT, AMZN, etc.)
-- 16 large stocks outside the S&P 500 (Sandisk, Bloom Energy, Lumentum,
-  Applied Optoelectronics, Cerebras, ARM, ASML, TSM, MercadoLibre, PDD,
-  BABA, Novo Nordisk, AstraZeneca, NU, HOOD, Enphase)
-- 41 momentum mid-caps that have shown strong recent performance
-  (Astera Labs, Argan, Vertiv, MP Materials, Rocket Lab, IES Holdings,
-  Sterling Construction, Powell Industries, Modine, and more)
+The US universe (~157 stocks) includes S&P 500 large caps plus:
 
-The IBEX universe is the full 35 stocks of the index, refreshed periodically
-when BME publishes a composition change.
+- **Large non-S&P 500 listings** (foreign-domiciled ADRs, recent IPOs, etc.) such as Sandisk, Bloom Energy, Lumentum, Applied Optoelectronics, Cerebras, ARM, ASML, TSM, MercadoLibre, PDD, Alibaba, Novo Nordisk, AstraZeneca, NU, HOOD, Enphase.
+- **Momentum mid-caps** that have shown explosive recent performance: Astera Labs, Argan, Vertiv, MP Materials, Rocket Lab, IES Holdings, Sterling Construction, Powell Industries, Modine, Marvell, Coherent, MACOM, Ciena, Western Digital, and others. One way to identify these stocks is by using https://stockanalysis.com/stocks/screener/ and adding "Change 1Y" column and then sort by it in descending order to see the stocks with the highest change in the last 12 months.
+
+Why widen beyond the S&P 500? Many high-momentum stocks live OUTSIDE the index, especially in their early-growth phase. The S&P 500's inclusion committee imposes strict rules (profitability, market cap, US domicile) that exclude exactly the kind of stocks that often top the momentum ranking. Capturing them requires a wider net. See `src/universe.py` for the full list and rationale.
 
 ## Historical backtest results (2019-2025)
 
-These results assume the strategy was followed without intervention for 7 full years:
+Run on **real historical daily prices** for all 192 universe stocks (157 US + 35 IBEX) from `data/monthly-historic-prices.csv`, with **real historical EUR/USD rates** from `data/eurusd.rates.csv` applied per rebalance day.
 
 | Metric | Value |
 |---|---|
 | Initial capital | 2.000 € |
 | Final capital | **46.916 €** |
-| Total return | +2245.78% |
-| **CAGR (net of taxes)** | **+56.95%** |
-| Annualized volatility | 44.41% |
-| **Sharpe ratio** | **1.24** |
-| **Max drawdown** | **-44.26%** |
-| Total taxes | 10.390 € |
+| Total return | +2.245,78% |
+| **CAGR (net of taxes)** | **+56,95%** |
+| Annualized volatility | 44,41% |
+| **Sharpe ratio** | **1,24** |
+| **Max drawdown** | **-44,26%** |
+| Total taxes (Spanish IRPF) | 10.390 € |
 | Total trades | 158 |
 | Rebalances | 28 |
 
-> **These are now real numbers, not synthetic.** Issue #10 closed the migration
-> to real historical prices for all 192 stocks in the universe (157 US + 35
-> IBEX), sourced from `data/monthly-historic-prices.csv`. The backtest also
-> uses real historical EUR/USD rates from `data/eurusd.rates.csv` per
-> rebalance day. See `backtests/backtest-results.md` for the full breakdown
-> and per-trade detail.
+These numbers reflect real prices — not synthetic calibrations. They are very strong but also more volatile than naive simulations suggest. The −44% max drawdown in 2022 is real and important: the strategy hurts hard during regime changes (rate-hike shocks, momentum crashes).
 
-**Note**: the backtest excludes commissions (they vary by IBKR tier/volume/account size and can't be modeled accurately upfront). In real execution you record actual commissions per trade in `data/history.json`. Expect commissions to subtract roughly 0.1-0.3% per year of CAGR.
-
-For comparison, the S&P 500 buy-and-hold over the same period returned ~14% CAGR. The strategy outperforms thanks to the dynamic rotation, but with concentration risk.
-
-See [backtests/backtest-results.md](backtests/backtest-results.md) for full year-by-year breakdown and per-quarter trade detail. See [backtests/backtest-dashboard.png](backtests/backtest-dashboard.png)
-for the executive summary image.
+See [backtests/backtest-results.md](backtests/backtest-results.md) for the full year-by-year breakdown and per-trade detail, and [backtests/backtest-dashboard.png](backtests/backtest-dashboard.png) for the executive summary image.
 
 ## Why this works (in theory)
 
-Momentum is one of the most replicated anomalies in finance. Studies show that stocks with strong recent price performance tend to continue outperforming for 3-12 months. The reasons cited in the literature include:
+1. **Behavioral bias.** Investors react slowly to good news, so prices drift upward over weeks-months rather than jumping in one day.
+2. **Institutional inertia.** Large funds need weeks-months to change positions due to regulatory and operational constraints, creating persistent trends that nimble investors can ride.
+3. **Risk premium.** Momentum strategies suffer occasionally in major regime changes ("momentum crashes"), and the market pays a premium for assuming that tail risk.
 
-- **Behavioral biases**: investors anchor to past prices and react slowly to news
-- **Risk premium**: momentum captures a compensation for tail risk
-- **Institutional inertia**: large funds rebalance slowly, creating persistent trends
-
-The "skip the last month" detail removes the short-term reversal effect that dominates 1-month returns.
+See [docs/methodology.md](docs/methodology.md) for a deeper discussion.
 
 ## Why this might NOT work going forward
 
-- **Past data is just that**: 2019-2025 was a regime with strong tech tailwinds in the US
-- **Momentum crashes**: when markets reverse sharply (e.g. early 2009, late 2020), momentum portfolios can lose 30-50% in months
-- **Tax drag**: Spanish IRPF on each realized gain reduces compounding significantly
-- **Survivorship bias**: the universe used here only includes stocks that survived to 2025
-- **Currency risk is now in the backtest** (issue #6). EUR/USD moved from 1.15 in 2019 to parity in 2022 and back to 1.15 in 2025. The backtest uses the real historical rate of each rebalance day. Going forward, EUR/USD movements will continue to add noise to results — both positively and negatively.
+- **Period 2019-2025 was extraordinarily favorable** for momentum (post-COVID tech boom + AI boom). The next 7 years are unlikely to resemble it.
+- **Currency risk is real.** EUR/USD moved from 1,15 in 2019 to parity in 2022 and back up. Future moves will continue to add noise both ways.
+- **Survivorship bias.** The universe contains stocks that exist today; companies that delisted are absent, inflating backtest returns.
+- **Commissions are not modeled** in the backtest. Real execution will subtract 0,1-0,3% annually depending on IBKR tier.
+- **Crowded factor.** Momentum is well-known. The more capital chasing the same signal, the smaller the premium.
 
-Read [docs/disclaimer.md](docs/disclaimer.md) before considering applying this with real money.
+A realistic expectation for live performance is **5-15 percentage points lower CAGR** than the backtest. Even with that adjustment a CAGR of 30-40% would be exceptional. Don't bet the farm on it.
+
+---
 
 ## Getting started
 
 ### Requirements
 
 - Python 3.10+
-- An IBKR account (for live execution) — optional, only needed if you actually want to trade
-- Tax residency where capital gains rules are understood (this repo assumes Spanish IRPF)
+- Packages in `requirements.txt`: pandas, numpy, yfinance, matplotlib
+- An IBKR account (DEMO or live)
 
 ### Installation
 
 ```bash
-git clone https://github.com/<yourusername>/momentum-strategy-lab.git
+git clone https://github.com/<your-username>/momentum-strategy-lab.git
 cd momentum-strategy-lab
 pip install -r requirements.txt
 ```
 
-### Running the live rebalance script
-
-The rebalance script tells you what to buy and sell each quarter:
-
-```bash
-python src/rebalance.py
-```
-
-The script will:
-1. Download recent monthly prices for the IBEX 35 and S&P 500 universes
-2. Calculate momentum 12-1 for each stock
-3. Select top 4 from S&P 500 (with weight 65%) and top 2 from IBEX (with weight 30%)
-4. Compare with the current portfolio state in `data/portfolio.json`
-5. Print buy/sell orders to execute in IBKR
-6. Save a record of the decision in `data/history.json`
-
-After executing the trades in your IBKR DEMO account, manually update `data/portfolio.json` with the resulting positions and commit the change.
-
 ### Setting the initial capital
 
-Before the very first run, open `data/portfolio.json` and edit the `initial_capital_eur` field to whatever amount you want to commit to the strategy. The default is 2,000 EUR.
-
-```json
-{
-  "initial_capital_eur": 5000.0,
-  "cash_eur": 0,
-  "positions": {}
-}
-```
-
-When `cash_eur` is 0 and `positions` is empty (i.e. on the first run), the script reads `initial_capital_eur` and uses it to initialize `cash_eur`. After that, the script tracks state via `cash_eur` and `positions`.
-
-### Recording avg_price_eur for US (S&P 500) positions
-
-For Spanish stocks, the trade is already in EUR, so `avg_price_eur` is just the fill price.
-
-For US stocks, the fill price is in USD, and you need to convert it using the EUR/USD exchange rate **at the moment of the trade** (IBKR shows this rate on each trade confirmation).
-
-**Example:** you bought 5 shares of NVDA at 100 USD each. On that day, 1 EUR = 1.1743 USD.
-
-```
-avg_price_eur = avg_price_usd / eur_usd_rate
-              = 100 / 1.1743
-              = 85.16 EUR per share
-```
-
-Total cost in EUR: 5 shares × 85.16 EUR = 425.79 EUR.
-
-This `avg_price_eur` is the cost basis used to calculate P&L in EUR for tax purposes. Once recorded, it doesn't change — even if EUR/USD moves later, the cost basis stays fixed at what you actually paid.
-
-### Adding or withdrawing capital later
-
-Once the strategy is running, you may want to add new capital (e.g., yearly top-ups from savings) or withdraw some (e.g., to cover an expense). The strategy uses a `net_capital_contributed_eur` field in `portfolio.json` to track the cumulative net amount you've put in — this is essential for calculating real return on capital.
-
-**Golden rule for both operations**: always wait for the next quarterly rebalance window (day 5-10 of Jan/Apr/Jul/Oct). Don't add or withdraw mid-quarter — it breaks the weight balance and triggers unnecessary rebalancing complexity.
-
-### Adding extra capital later
-
-If at some point you want to add more capital (e.g., 1,000 EUR a year from now),
-follow these steps. The example assumes you currently have a portfolio worth
-~3,500 EUR (positions + cash) and want to inject 1,000 EUR more.
-
-**Step 1: Wait for the rebalance date**
-
-Don't add money mid-quarter. The strategy is designed for clean quarterly cuts.
-Wait until the next rebalance window (between day 5-10 of Jan/Apr/Jul/Oct).
-
-**Step 2: Transfer the money to your IBKR account**
-
-Do this on the rebalance day, BEFORE running the script. Wire/SEPA transfers
-to IBKR usually clear within 1-2 business days, so plan ahead.
-
-**Step 3: Update `portfolio.json` BEFORE running the rebalance script**
-
-Open `data/portfolio.json` and edit two fields:
-
-- `cash_eur`: add the new money to your existing cash balance
-- `net_capital_contributed_eur`: increase by the same amount
-
-Example, right before the new injection:
+Before the first run, edit `data/portfolio.json` as follows:
 
 ```json
 {
   "initial_capital_eur": 2000.0,
   "net_capital_contributed_eur": 2000.0,
-  "cash_eur": 45.20,
-  "positions": { "...your 6 positions..." },
-  "last_rebalance": "2027-01-08"
-}
-```
-
-After adding 1,000 EUR (and IBKR confirming the deposit):
-
-```json
-{
-  "initial_capital_eur": 2000.0,
-  "net_capital_contributed_eur": 3000.0,
-  "cash_eur": 1045.20,
-  "positions": { "...same positions, unchanged..." },
-  "last_rebalance": "2027-01-08"
-}
-```
-
-**Step 4: Append a capital-injection entry to `history.json`**
-
-Add this entry so the return calculator (`src/cagr.py`) can track the cash
-flow correctly:
-
-```json
-{
-  "date": "2027-04-06",
-  "event": "CAPITAL_INJECTION",
-  "amount_eur": 1000.0,
-  "new_total_contributed_eur": 3000.0,
-  "reason": "Yearly top-up from savings"
-}
-```
-
-**Step 5: Run `python src/rebalance.py`**
-
-The script now sees the new total portfolio value (positions + increased cash)
-and will calculate target weights accordingly. It will issue BUY orders to put
-the fresh cash to work.
-
-**Step 6: See your real annualized return with `src/cagr.py`**
-
-Once you've added capital, the simple formula
-`(current - net_contributed) / net_contributed` shows your *total* return but
-not your *annualized* return — it mixes investments held for different periods.
-
-Run the new return calculator to get the proper numbers:
-
-```bash
-python src/cagr.py
-```
-
-Or, if you want to override the current value (e.g., to check what the return
-would be at a hypothetical valuation):
-
-```bash
-python src/cagr.py 5800
-```
-
-You will see two metrics:
-
-- **Money-weighted CAGR (XIRR)** — the annualized return your money actually
-  experienced, accounting for when each deposit happened. This is the same
-  metric used by professional fund managers and what your broker statement
-  typically shows.
-- **Time-weighted CAGR (TWR)** — the pure strategy performance, independent
-  of when you added or withdrew money. Use this to compare the strategy
-  against benchmarks like the S&P 500.
-
-Both metrics also appear in the output of `python src/rebalance.py` after
-each quarterly rebalance, so you can track them over time.
-
-> The `cagr.py` module has no external dependencies (no `pyxirr`, no Excel
-> needed). It implements XIRR with a Newton-Raphson solver and a bisection
-> fallback. See `tests/test_cagr.py` for the unit tests.
-````
-
-
-## Change 2: Add a note in "Repository structure" about cagr.py and tests
-
-```
-├── src/
-│   ├── rebalance.py
-│   ├── backtest.py
-│   ├── universe.py
-│   └── cagr.py                  # Money-weighted and time-weighted return
-├── tests/
-│   ├── test_momentum.py
-│   └── test_cagr.py             # Tests for src/cagr.py (8 unit tests)
-```
-
-
-## Change 3: Add `inception_date` field to portfolio.example.json (recommended)
-
-Update `data/portfolio.example.json` to include a documented `inception_date`
-field. This lets `cagr.py` compute correct annualized returns even before any
-rebalance is recorded. Suggested update:
-
-```json
-{
-  "_account_type": "IBKR DEMO (Paper Trading)",
-  "_purpose": "Reference. Copy to portfolio.json before first run and edit values.",
-  "initial_capital_eur": 2000.0,
-  "net_capital_contributed_eur": 2000.0,
-  "inception_date": "2026-05-19",
-  "cash_eur": 0,
+  "inception_date": "2026-05-18",
+  "cash_eur": 2000.0,
   "positions": {},
   "last_rebalance": null
 }
 ```
 
-If `inception_date` is omitted, `cagr.py` falls back to the date of the first
-history entry, which is also fine — but having `inception_date` explicit makes
-the data more self-documenting.
+- `initial_capital_eur`: historical reference, never changes
+- `net_capital_contributed_eur`: starts equal to initial; later updated if you add or withdraw capital
+- `inception_date`: the day you actually deposit money in IBKR (used by `src/cagr.py` to compute annualized returns)
+- `cash_eur`: starts equal to initial capital. Updated automatically by `scripts/append-rebalance.py` after each rebalance.
 
-#### Calculating real return after capital changes
+---
 
-Once you've added or withdrawn capital, the simple formula `final_value / initial_capital_eur - 1` is meaningless — it mixes investment returns with new money flows.
+## Quarterly rebalance flow
 
-**Use this instead:**
+Every quarter (Jan/Apr/Jul/Oct, days 5-10) execute the following four steps. The whole thing takes about 15-30 minutes.
 
-```
-Return on net contributions = (current_portfolio_value - net_capital_contributed_eur)
-                              / net_capital_contributed_eur
-```
+### Step 1 — Generate the plan
 
-**Example:** if your portfolio is worth 5,800 EUR after injecting and later withdrawing for a net of 2,500 EUR contributed, your real return is (5,800 - 2,500) / 2,500 = **132%**, NOT (5,800 - 2,000) / 2,000 = 190%.
-
-For a fully accurate CAGR with multiple cash flows (the technically correct metric is "money-weighted return"), use Excel's `XIRR` function or Python's `pyxirr` library. Feed it the list of all cash flows (initial 2,000, +1,000 after 1 year, -500 after 2 years, current value as final positive flow) with their respective dates.
-
-### Forking for real money
-
-If you want to fork this repo and connect it to a real (non-demo) IBKR account, add `data/portfolio.json` to `.gitignore` first to keep your positions private. See `.gitignore` for the line to uncomment.
-
-### Running the historical backtest
+In the morning of the rebalance day:
 
 ```bash
-# Run the simulation (reads from data/monthly-historic-prices.csv)
-python src/backtest.py
-
-# Generate the human-readable .md report
-python scripts/build_backtest_report.py
-
-# Generate the executive dashboard image (.png)
-python scripts/build_backtest_dashboard.py
+python src/rebalance.py
 ```
 
-This reproduces the 2019-2025 simulation with synthetic price data calibrated to known historical annual returns.
+This:
+- Downloads current prices from Yahoo Finance for the full universe
+- Computes the 12-1 momentum of every stock
+- Selects the top 4 US + top 2 IBEX as new targets
+- Compares against your current portfolio and proposes BUYs / SELLs
+- **Appends a PLAN entry to `data/history.json`** with the momentum values and the proposed orders
+
+The script does NOT execute anything in your broker. It only writes a plan that says "these are the trades I would do if I were executing now".
+
+### Step 2 — Execute the orders in IBKR manually
+
+Open the IBKR Web/TWS interface and manually place each order from the plan (BUY for new picks, SELL for positions that fell out of the top). Use MARKET orders during market hours for simplicity.
+
+IBKR will give you the actual execution price, the actual EUR/USD rate it applied (visible in the "EUR.USD SLD" lines of the trade log for US orders), and the commission charged.
+
+### Step 3 — Record the executed trades
+
+Once all orders are filled:
+
+```bash
+python scripts/append-rebalance.py
+```
+
+This is an interactive script that asks for the native IBKR numbers of each trade (shares, price, commission, and for US trades the EUR/USD rate IBKR applied). It then:
+
+- Computes all EUR-equivalent values automatically (no manual math)
+- Backs up the JSON files (`.bak`) before overwriting
+- **Appends an EXECUTION entry to `data/history.json`** with the real execution data
+- Updates `data/portfolio.json` with the new positions and remaining cash
+- Validates that the cash math balances (refuses to save if `cash_after != cash_before + sells − buys` within 0,50 EUR)
+
+For testing without writing files, add `--dry-run`:
+
+```bash
+python scripts/append-rebalance.py --dry-run
+```
+
+### Step 4 — Commit and push
+
+```powershell
+.\scripts\commit-rebalance.ps1 -Quarter "2026 Q2" `
+    -Sold "" `
+    -Bought "SNDK,BE,LITE,AAOI,SLR,ACS" `
+    -ValueBefore 2000.00 -ValueAfter 1990.56 `
+    -CashRemaining 102.19 -EurUsd 1.1641
+```
+
+The `append-rebalance.py` output prints this exact command for copy-paste.
+
+---
+
+## history.json: two entries per rebalance
+
+`data/history.json` records two entries per rebalance, distinguished by a top-level `type` field:
+
+- **`"type": "PLAN"`** — written by `src/rebalance.py` in the morning. Records what the algorithm decided: selected tickers, momentum 12-1 values (as percentages under `momentum_us_top_pct` and `momentum_ibex_top_pct`), reference prices, proposed orders. The reference EUR/USD rate in this entry is what the script saw when it ran.
+- **`"type": "EXECUTION"`** — written by `scripts/append-rebalance.py` after orders are filled. Records what actually happened in the market: fill prices, actual EUR/USD rates IBKR applied to each order, real commissions, realized P&L on sells.
+
+Both entries share the same `date`. PLAN tells you "why" the strategy chose what it chose. EXECUTION tells you "what really happened" when you placed the orders. Useful months later when you want to audit a past decision.
+
+Quick example after two quarters:
+
+```json
+[
+  { "type": "PLAN",      "date": "2026-05-18", "momentum_us_top_pct": { ... }, ... },
+  { "type": "EXECUTION", "date": "2026-05-18", "orders_to_buy": [ ... ],       ... },
+  { "type": "PLAN",      "date": "2026-07-06", ... },
+  { "type": "EXECUTION", "date": "2026-07-06", ... }
+]
+```
+
+Over 10 years that's 80 entries (40 PLAN + 40 EXECUTION). Plenty of audit trail, no scaling issue.
+
+---
+
+## Adding or withdrawing capital later
+
+If at some point you want to add (or withdraw) capital — for example a 1.000 EUR top-up a year after you started — follow these steps:
+
+1. **Wait for the next rebalance day.** Don't add money mid-quarter; the strategy is designed for clean quarterly cuts.
+2. **Transfer the money to IBKR before that day** (wires take 1-2 business days to clear).
+3. **Before running `src/rebalance.py` that morning**, edit `data/portfolio.json`:
+   - Add the new amount to `cash_eur`
+   - Add the new amount to `net_capital_contributed_eur`
+4. **Append a capital-flow event to `data/history.json`**:
+   ```json
+   {
+     "type": "CAPITAL_INJECTION",
+     "date": "2027-04-06",
+     "amount_eur": 1000.0,
+     "new_total_contributed_eur": 3000.0,
+     "reason": "Yearly top-up from savings"
+   }
+   ```
+   For withdrawals, use `"type": "CAPITAL_WITHDRAWAL"` with `amount_eur` as a positive number
+(the amount withdrawn), and DECREASE `new_total_contributed_eur` by that amount.
+Also decrease `cash_eur` in portfolio.json by the same amount.
+5. **Run `python src/rebalance.py`** as usual. The script will see the new cash and rebalance with the updated total.
+
+### Why this matters: real annualized return with capital flows
+
+Once you have added or withdrawn capital, the naive formula `(current − contributed) / contributed` is no longer your real annualized return — it mixes investments held for different periods.
+
+`src/cagr.py` computes the proper metrics:
+
+```bash
+python src/cagr.py                # uses last known portfolio value
+python src/cagr.py 5800.00        # override with a specific current value, as a test
+```
+
+You get two numbers:
+- **Money-weighted CAGR (XIRR)**: the annualized return your money actually experienced, accounting for when each deposit happened. Same metric professional fund managers report.
+- **Time-weighted CAGR (TWR)**: pure strategy performance, independent of when you added or withdrew money. Use this to compare against benchmarks like the S&P 500.
+
+Both numbers also appear in `rebalance.py`'s output after each quarterly rebalance.
+
+---
 
 ## How to expand the universe
 
-The universe is now data-driven. To add a new stock:
+The universe is data-driven. To add a new stock:
 
-1. **Add its daily prices** to `data/monthly-historic-prices.csv` in the existing
-   format: `Date,Ticker,Close,Company` with dates in English month-name format
-   (e.g., `"January 2, 2014"`).
-2. **Add the ticker to `src/universe.py`** in the appropriate sector section
-   of `US_LARGE_CAP` (or `IBEX_35` for Spanish stocks).
+1. **Add its daily prices** to `data/monthly-historic-prices.csv` in the existing format: `Date,Ticker,Close,Company` with dates in English month-name format (e.g. `"January 2, 2014"`).
+2. **Add the ticker to `src/universe.py`** in the appropriate sector section of `US_LARGE_CAP` (or `IBEX_35` for Spanish stocks).
 
-Both `backtest.py` and `rebalance.py` will pick it up automatically.
+Both `backtest.py` and `rebalance.py` will pick it up automatically. That´s it, there is no other place to update.
 
-The same applies for removing a stock: delete it from `universe.py`. Its
-prices can stay in the CSV; they will simply be ignored.
+The same applies for removing a stock: delete it from `universe.py`. Its prices can stay in the CSV — they will simply be ignored.
+
+---
+
+## Running the historical backtest
+
+```bash
+python src/backtest.py                            # runs the simulation
+python scripts/build_backtest_report.py           # generates backtest-results.md
+python scripts/build_backtest_dashboard.py        # generates backtest-dashboard.png
+```
+
+Outputs go to `backtests/`. Re-running these scripts at any time regenerates everything from the source data.
+
+---
+
+## Forking for real money
+
+If you want to use this as a starting point for a real-money implementation, **read [docs/disclaimer.md](docs/disclaimer.md) first** and consider:
+
+- The backtest is on past data; the future may differ substantially
+- IBKR commissions and bid-ask spreads will reduce returns
+- The strategy can lose 40-50% in bad years (and recover, but you need the stomach for it)
+- Spanish IRPF rules change; verify yours
+- Test with a DEMO account for at least 2-4 quarters before risking real capital
+
+---
 
 ## Repository structure
 
@@ -369,34 +292,38 @@ prices can stay in the CSV; they will simply be ignored.
 momentum-strategy-lab/
 ├── README.md                    # This file
 ├── LICENSE                      # MIT
+├── CHANGELOG.md                 # Release notes
 ├── .gitignore                   # See note: portfolio.json is public for DEMO account
 ├── requirements.txt             # Python dependencies
 ├── docs/
 │   ├── methodology.md           # Detailed strategy explanation
 │   └── disclaimer.md            # Legal disclaimer
 ├── src/
-│   ├── rebalance.py             # Quarterly rebalance script (production)
-│   ├── backtest.py              # Historical backtest 2019-2025
-│   └── universe.py              # Universe definitions (IBEX 35 + US Large Cap)
+│   ├── rebalance.py             # Quarterly rebalance: writes PLAN entries
+│   ├── backtest.py              # Historical backtest on real data 2019-2025
+│   ├── universe.py              # Universe definitions (IBEX 35 + US Large Cap)
+│   └── cagr.py                  # Money-weighted (XIRR) and time-weighted (TWR) returns
 ├── scripts/
-│   ├── build_backtest_dashboard.py   # Generates the executive dashboard image
-│   ├── build_backtest_report.py      # Generates backtest-results.md
-│   └── commit-rebalance.ps1          # PowerShell script for quarterly commits
+│   ├── append-rebalance.py            # Records executed trades into JSONs
+│   ├── build_backtest_dashboard.py    # Generates the executive dashboard image
+│   ├── build_backtest_report.py       # Generates backtest-results.md
+│   └── commit-rebalance.ps1           # PowerShell helper for quarterly commits
 ├── data/
-│   ├── portfolio.example.json        # Field documentation reference
-│   ├── portfolio.json                # Live state of the DEMO account
-│   ├── history.json                  # Append-only rebalance history
-│   ├── eurusd.rates.csv              # Daily EUR/USD rates 2000-today
-│   └── monthly-historic-prices.csv   # Daily prices for all 192 universe stocks
+│   ├── portfolio.example.json         # Field documentation reference
+│   ├── portfolio.json                 # Live state of the DEMO account
+│   ├── history.json                   # Append-only history (PLAN + EXECUTION entries)
+│   ├── eurusd.rates.csv               # Daily EUR/USD rates 2000-today
+│   └── monthly-historic-prices.csv    # Daily prices for all 192 universe stocks
 ├── backtests/                   # All backtest outputs (re-generable)
-│   ├── backtest-portfolio.json  # Final portfolio state (same schema as data/portfolio.json)
-│   ├── backtest-history.json    # Rebalance log (same schema as data/history.json)
-│   ├── backtest-trades.csv      # One row per buy/sell trade
-│   ├── backtest-metrics.json    # Numeric summary
+│   ├── backtest-portfolio.json
+│   ├── backtest-history.json
+│   ├── backtest-trades.csv
+│   ├── backtest-metrics.json
 │   ├── backtest-results.md      # Human-readable report (auto-generated)
-│   └── backtest-dashboard.png   # Executive dashboard image (auto-generated)
+│   └── backtest-dashboard.png   # Executive dashboard (auto-generated)
 └── tests/
-    └── test_momentum.py         # Unit tests
+    ├── test_momentum.py         # Unit tests for the strategy core
+    └── test_cagr.py             # Unit tests for the XIRR/TWR module
 ```
 
 ## Operational calendar
@@ -408,6 +335,7 @@ Rebalances should happen between the 5th and 10th of:
 - October (Q4)
 
 Tuesdays and Wednesdays are recommended for best liquidity.
+Also avoid first and last trading hours due to high volatility.
 
 ## License
 

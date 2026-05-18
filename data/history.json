@@ -15,16 +15,6 @@
       "SLR",
       "ACS"
     ],
-    "momentum_us_top": {
-      "SNDK": 28.09286414748193,
-      "BE": 14.341634861170935,
-      "LITE": 11.483674910944655,
-      "AAOI": 9.658884552343917
-    },
-    "momentum_ibex_top": {
-      "SLR": 2.1970014693908677,
-      "ACS": 1.1874417174711427
-    },
     "planned_orders_to_sell": [],
     "planned_orders_to_buy": [
       {
@@ -76,7 +66,17 @@
         "value_eur": 300.0
       }
     ],
-    "_note": "PLAN only. After executing orders in IBKR, run scripts/append-rebalance.py to add the EXECUTION entry."
+    "_note": "PLAN only. After executing orders in IBKR, run scripts/append-rebalance.py to add the EXECUTION entry.",
+    "momentum_us_top_pct": {
+      "SNDK": 2809.29,
+      "BE": 1434.16,
+      "LITE": 1148.37,
+      "AAOI": 965.89
+    },
+    "momentum_ibex_top_pct": {
+      "SLR": 219.7,
+      "ACS": 118.74
+    }
   },
   {
     "type": "EXECUTION",

@@ -1,0 +1,81 @@
+[
+  {
+    "type": "PLAN",
+    "date": "2026-05-18",
+    "eur_usd_rate_ref": 1.163602590560913,
+    "portfolio_value_eur_before": 2000.0,
+    "cash_before_eur": 2000.0,
+    "selected_us": [
+      "SNDK",
+      "BE",
+      "LITE",
+      "AAOI"
+    ],
+    "selected_ibex": [
+      "SLR",
+      "ACS"
+    ],
+    "momentum_us_top": {
+      "SNDK": 28.09286414748193,
+      "BE": 14.341634861170935,
+      "LITE": 11.483674910944655,
+      "AAOI": 9.658884552343917
+    },
+    "momentum_ibex_top": {
+      "SLR": 2.1970014693908677,
+      "ACS": 1.1874417174711427
+    },
+    "planned_orders_to_sell": [],
+    "planned_orders_to_buy": [
+      {
+        "ticker": "SNDK",
+        "market": "US",
+        "shares": 0.271,
+        "ref_price": 1383.42,
+        "currency": "USD",
+        "value_eur": 322.18
+      },
+      {
+        "ticker": "BE",
+        "market": "US",
+        "shares": 1.4276,
+        "ref_price": 262.665,
+        "currency": "USD",
+        "value_eur": 322.18
+      },
+      {
+        "ticker": "LITE",
+        "market": "US",
+        "shares": 0.4144,
+        "ref_price": 904.77,
+        "currency": "USD",
+        "value_eur": 322.18
+      },
+      {
+        "ticker": "AAOI",
+        "market": "US",
+        "shares": 2.1277,
+        "ref_price": 176.709,
+        "currency": "USD",
+        "value_eur": 322.18
+      },
+      {
+        "ticker": "SLR",
+        "market": "IBEX",
+        "shares": 12.7496,
+        "ref_price": 23.53,
+        "currency": "EUR",
+        "value_eur": 300.0
+      },
+      {
+        "ticker": "ACS",
+        "market": "IBEX",
+        "shares": 2.2848,
+        "ref_price": 131.3,
+        "currency": "EUR",
+        "value_eur": 300.0
+      }
+    ],
+    "_note": "PLAN only. After executing orders in IBKR, run scripts/append-rebalance.py to add the EXECUTION entry."
+  }
+]

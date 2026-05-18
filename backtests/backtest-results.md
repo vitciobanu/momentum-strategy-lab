@@ -12,7 +12,7 @@ Reproducible run of `src/backtest.py` against **REAL historical price data** fro
 - Selection: **dynamic each quarter** (no static pre-selection)
 - Fractional shares: enabled
 - Initial capital: **2,000 EUR**
-- US universe: **157** stocks (NYSE + NASDAQ, includes S&P 500 large caps + non-S&P 500 + recent momentum mid-caps taken from https://stockanalysis.com/stocks/screener/ with 'Change 1Y' column added)
+- US universe: **157** stocks (NYSE + NASDAQ, includes S&P 500 large caps + non-S&P 500 + recent momentum mid-caps)
 - IBEX universe: **35** stocks (complete IBEX 35)
 - Price data: **real historical daily prices** from `data/monthly-historic-prices.csv`, resampled to month-end closes
 - EUR/USD: **real historical rates per rebalance day** (from `data/eurusd.rates.csv`)

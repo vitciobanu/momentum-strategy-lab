@@ -579,18 +579,31 @@ def main():
     print_report(plan, portfolio, mom_sp, mom_ibex,
                  prices_sp_now, prices_ibex_now, eur_usd)
 
-    # 7. Save to history (append-only)
+    # 7. Append a PLAN entry to history.json
+    #
+    # history.json contains TWO kinds of entries:
+    #   - "type": "PLAN"       — written by THIS script when you generate the
+    #                            quarterly plan. Includes the
+    #                            momentum values that drove the selection.
+    #   - "type": "EXECUTION"  — written by scripts/append-rebalance.py after
+    #                            you have placed the actual orders in IBKR.
+    #                            Includes the real EUR/USD rates IBKR applied
+    #                            and the real commissions.
+    # Both entries for the same rebalance share the same date, but they record
+    # different things: PLAN = "what the algorithm decided", EXECUTION = "what
+    # actually happened in the market".
     history = load_history()
     history.append({
+        "type": "PLAN",
         "date": datetime.today().strftime("%Y-%m-%d"),
-        "eur_usd_rate": float(eur_usd),
+        "eur_usd_rate_ref": float(eur_usd),
         "portfolio_value_eur_before": float(plan["total_value"]),
         "cash_before_eur": float(portfolio["cash_eur"]),
-        "selected_sp500": plan["new_top_sp"],
+        "selected_us": plan["new_top_sp"],
         "selected_ibex": plan["new_top_ibex"],
-        "momentum_sp500_top": {t: float(mom_sp[t]) for t in plan["new_top_sp"]},
-        "momentum_ibex_top": {t: float(mom_ibex[t]) for t in plan["new_top_ibex"]},
-        "orders_to_sell": [
+        "momentum_us_top_pct": {t: round(float(mom_sp[t]) * 100, 2) for t in plan["new_top_sp"]},
+        "momentum_ibex_top_pct": {t: round(float(mom_ibex[t]) * 100, 2) for t in plan["new_top_ibex"]},
+        "planned_orders_to_sell": [
             {
                 "ticker": s["ticker"], "market": s["market"],
                 "shares": float(s["shares"]),
@@ -600,7 +613,7 @@ def main():
             }
             for s in plan["to_sell"]
         ],
-        "orders_to_buy": [
+        "planned_orders_to_buy": [
             {
                 "ticker": b["ticker"], "market": b["market"],
                 "shares": float(b["shares"]),
@@ -610,13 +623,15 @@ def main():
             }
             for b in plan["to_buy"]
         ],
-        "_note": "Update this entry after execution with actual_commissions_eur "
-                 "and actual_fill_prices if you want a complete record.",
+        "_note": "PLAN only. After executing orders in IBKR, run "
+                 "scripts/append-rebalance.py to add the EXECUTION entry.",
     })
     save_history(history)
-    print(f"[i] History saved to {HISTORY_FILE.relative_to(ROOT)}")
-    print(f"[i] Remember to update {PORTFOLIO_FILE.relative_to(ROOT)} "
-          f"after executing trades.\n")
+    print(f"[i] PLAN entry appended to {HISTORY_FILE.relative_to(ROOT)}")
+    print(f"[i] After executing the orders in IBKR, run:")
+    print(f"      python scripts/append-rebalance.py")
+    print(f"    to record the executed trades and update "
+          f"{PORTFOLIO_FILE.relative_to(ROOT)}.\n")
 
 if __name__ == "__main__":
     main()

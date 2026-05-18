@@ -1,0 +1,10 @@
+{
+  "_account_type": "IBKR DEMO (Paper Trading)",
+  "_purpose": "Live state of the DEMO account. Updated after every quarterly rebalance via scripts/append-rebalance.py.",
+  "initial_capital_eur": 2000.0,
+  "net_capital_contributed_eur": 2000.0,
+  "inception_date": "2026-05-18",
+  "cash_eur": 2000.0,
+  "positions": {},
+  "last_rebalance": null
+}
