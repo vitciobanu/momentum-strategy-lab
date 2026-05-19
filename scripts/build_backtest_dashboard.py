@@ -5,12 +5,19 @@ USAGE:
     python scripts/build_backtest_dashboard.py
 
 Reads from backtests/ and writes backtests/backtest-dashboard.png.
+
+Layout (v1.4.0):
+    Row 1: 4 KPI cards (Capital final, CAGR, Sharpe, Max DD)
+    Row 2: Monthly equity curve (full width)
+    Row 3: Drawdown chart (full width, half height)
+    Row 4: Yearly return bars | Top stocks selected
 """
 
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.dates as mdates
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
@@ -24,6 +31,7 @@ ICE = "#CADCFC"
 WHITE = "#FFFFFF"
 GOLD = "#F2C94C"
 RED = "#EB5757"
+RED_DARK = "#C84141"
 GREEN = "#27AE60"
 GREY_LIGHT = "#F5F7FA"
 GREY_TEXT = "#5A6478"
@@ -32,41 +40,49 @@ GREY_TEXT = "#5A6478"
 def load_data():
     with open(BACKTESTS_DIR / "backtest-metrics.json") as f:
         metrics = json.load(f)
-    with open(BACKTESTS_DIR / "backtest-history.json") as f:
-        history = json.load(f)
     trades = pd.read_csv(BACKTESTS_DIR / "backtest-trades.csv")
-    return metrics, history, trades
+    return metrics, trades
 
 
 def build_dashboard():
-    metrics, history, trades = load_data()
+    metrics, trades = load_data()
+    monthly_log = metrics.get("monthly_log", [])
 
-    fig = plt.figure(figsize=(16, 10), facecolor=WHITE)
+    if not monthly_log:
+        raise RuntimeError(
+            "backtest-metrics.json has no 'monthly_log'. Re-run src/backtest.py "
+            "to regenerate the metrics file."
+        )
+
+    # Convert monthly log to pandas for plotting
+    df_monthly = pd.DataFrame(monthly_log)
+    df_monthly["date"] = pd.to_datetime(df_monthly["date"])
+    df_monthly = df_monthly.sort_values("date").reset_index(drop=True)
+
+    fig = plt.figure(figsize=(16, 12), facecolor=WHITE)
     fig.suptitle(
         "Momentum 12-1 Strategy — Backtest Dashboard",
-        fontsize=20, fontweight="bold", color=NAVY_DARK, y=0.97,
+        fontsize=20, fontweight="bold", color=NAVY_DARK, y=0.975,
     )
 
-    data_source = metrics.get("data_source", "synthetic")
     subtitle = (
         f"2019-2025  ·  4 US + 2 IBEX  ·  65/30/5  ·  "
-        f"{'Real historical prices' if data_source == 'real' else 'Synthetic prices'}"
-        f"  ·  Real historical EUR/USD"
+        f"Real historical prices  ·  Real historical EUR/USD"
     )
-    fig.text(0.5, 0.935, subtitle, ha="center", fontsize=11,
+    fig.text(0.5, 0.939, subtitle, ha="center", fontsize=11,
              color=GREY_TEXT, style="italic")
 
     gs = fig.add_gridspec(
-        nrows=3, ncols=4,
-        height_ratios=[1, 2, 2],
-        hspace=0.55, wspace=0.35,
-        left=0.05, right=0.97, top=0.88, bottom=0.06,
+        nrows=4, ncols=4,
+        height_ratios=[1, 2.2, 1.3, 1.7],
+        hspace=0.7, wspace=0.35,
+        left=0.05, right=0.97, top=0.91, bottom=0.05,
     )
 
     # ---- Row 1: KPI cards ----
     kpi_data = [
-        ("CAPITAL FINAL", f"{metrics['final_capital_eur']:,.0f} €", GOLD),
-        ("CAGR NETO",     f"{metrics['cagr']*100:+.2f}%",          GREEN),
+        ("FINAL CAPITAL", f"{metrics['final_capital_eur']:,.0f} €", GOLD),
+        ("NET CAGR",     f"{metrics['cagr']*100:+.2f}%",          GREEN),
         ("SHARPE",        f"{metrics['sharpe']:.2f}",              NAVY),
         ("MAX DRAWDOWN",  f"{metrics['max_drawdown']*100:.2f}%",   RED),
     ]
@@ -94,88 +110,121 @@ def build_dashboard():
                 fontweight="bold", transform=ax.transAxes,
                 family="serif")
 
-    # ---- Row 2 left: Equity curve ----
-    ax1 = fig.add_subplot(gs[1, :2])
+    # ---- Row 2: Monthly equity curve (full width) ----
+    ax_eq = fig.add_subplot(gs[1, :])
+    ax_eq.plot(df_monthly["date"], df_monthly["value_eur"],
+               linewidth=2.2, color=NAVY)
+    ax_eq.fill_between(df_monthly["date"], df_monthly["value_eur"], 0,
+                       color=NAVY, alpha=0.08)
+
+    # Mark peak before max DD and the trough
+    peak_idx = df_monthly["value_eur"].idxmax()
+    peak_date = df_monthly["date"].iloc[peak_idx]
+    peak_value = df_monthly["value_eur"].iloc[peak_idx]
+
+    # The "max DD peak" is the highest point before the worst drawdown
+    worst_dd_idx = df_monthly["drawdown_pct"].idxmin()
+    pre_dd = df_monthly.iloc[:worst_dd_idx + 1]
+    dd_peak_idx = pre_dd["value_eur"].idxmax()
+    dd_peak_date = df_monthly["date"].iloc[dd_peak_idx]
+    dd_peak_value = df_monthly["value_eur"].iloc[dd_peak_idx]
+
+    worst_dd_date = df_monthly["date"].iloc[worst_dd_idx]
+    worst_dd_value = df_monthly["value_eur"].iloc[worst_dd_idx]
+
+    # Annotate the crash
+    ax_eq.plot([dd_peak_date, worst_dd_date], [dd_peak_value, worst_dd_value],
+               "o", markersize=8, color=RED, markeredgecolor=WHITE,
+               markeredgewidth=1.5, zorder=5)
+    ax_eq.annotate(
+        f"Pre-crash peak\n{dd_peak_date.strftime('%b %Y')}\n{dd_peak_value:,.0f} €",
+        xy=(dd_peak_date, dd_peak_value),
+        xytext=(dd_peak_date, dd_peak_value + 8000),
+        fontsize=8.5, color=RED_DARK, fontweight="bold",
+        ha="center", va="bottom",
+        arrowprops=dict(arrowstyle="->", color=RED, lw=1),
+    )
+    ax_eq.annotate(
+        f"Crash trough\n{worst_dd_date.strftime('%b %Y')}\n{worst_dd_value:,.0f} €",
+        xy=(worst_dd_date, worst_dd_value),
+        xytext=(worst_dd_date, worst_dd_value - 7500),
+        fontsize=8.5, color=RED_DARK, fontweight="bold",
+        ha="center", va="top",
+        arrowprops=dict(arrowstyle="->", color=RED, lw=1),
+    )
+
+    ax_eq.set_title("Monthly portfolio trajectory (84 points, net of taxes)",
+                    fontsize=12, fontweight="bold", color=NAVY_DARK, pad=10)
+    ax_eq.set_ylabel("EUR", fontsize=10, color=GREY_TEXT)
+    ax_eq.set_facecolor(WHITE)
+    ax_eq.spines["top"].set_visible(False)
+    ax_eq.spines["right"].set_visible(False)
+    ax_eq.spines["left"].set_color(GREY_TEXT)
+    ax_eq.spines["bottom"].set_color(GREY_TEXT)
+    ax_eq.tick_params(colors=GREY_TEXT, labelsize=9)
+    ax_eq.grid(axis="y", color=ICE, linewidth=0.6)
+    ax_eq.set_axisbelow(True)
+    ax_eq.xaxis.set_major_locator(mdates.YearLocator())
+    ax_eq.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+    ax_eq.set_ylim(0, df_monthly["value_eur"].max() * 1.15)
+
+    # ---- Row 3: Drawdown chart (full width, smaller) ----
+    ax_dd = fig.add_subplot(gs[2, :])
+    ax_dd.fill_between(df_monthly["date"], df_monthly["drawdown_pct"], 0,
+                       color=RED, alpha=0.25)
+    ax_dd.plot(df_monthly["date"], df_monthly["drawdown_pct"],
+               linewidth=1.5, color=RED_DARK)
+    ax_dd.axhline(0, color=GREY_TEXT, linewidth=0.6, alpha=0.5)
+    ax_dd.axhline(metrics["max_drawdown"] * 100, color=RED_DARK,
+                  linewidth=0.6, linestyle="--", alpha=0.5)
+    ax_dd.text(df_monthly["date"].iloc[-1], metrics["max_drawdown"] * 100,
+               f"  Max DD: {metrics['max_drawdown']*100:.2f}%",
+               fontsize=8.5, color=RED_DARK, va="center", fontweight="bold")
+
+    ax_dd.set_title("Drawdown: how far the portfolio is below its all-time peak",
+                    fontsize=11, fontweight="bold", color=NAVY_DARK, pad=10)
+    ax_dd.set_ylabel("Drawdown (%)", fontsize=10, color=GREY_TEXT)
+    ax_dd.set_facecolor(WHITE)
+    ax_dd.spines["top"].set_visible(False)
+    ax_dd.spines["right"].set_visible(False)
+    ax_dd.spines["left"].set_color(GREY_TEXT)
+    ax_dd.spines["bottom"].set_color(GREY_TEXT)
+    ax_dd.tick_params(colors=GREY_TEXT, labelsize=9)
+    ax_dd.grid(axis="y", color=ICE, linewidth=0.6)
+    ax_dd.set_axisbelow(True)
+    ax_dd.xaxis.set_major_locator(mdates.YearLocator())
+    ax_dd.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
+    ax_dd.set_ylim(metrics["max_drawdown"] * 100 * 1.15, 5)
+
+    # ---- Row 4 left: Year-by-year return bars ----
+    ax_yr = fig.add_subplot(gs[3, :2])
     yearly = metrics["yearly_summary"]
     years = [s["year"] for s in yearly]
-    end_net = [s["end_net"] for s in yearly]
-    plot_x = ["Start"] + [str(y) for y in years]
-    plot_y = [metrics["initial_capital_eur"]] + end_net
-
-    ax1.plot(plot_x, plot_y, linewidth=3, color=NAVY, marker="o", markersize=8,
-             markerfacecolor=GOLD, markeredgecolor=NAVY, markeredgewidth=1.5)
-    for i, val in enumerate(plot_y):
-        ax1.annotate(
-            f"{val:,.0f} €",
-            (i, val), textcoords="offset points", xytext=(0, 12),
-            ha="center", fontsize=8.5, color=NAVY_DARK, fontweight="bold",
-        )
-    ax1.set_title("Capital evolution (net of taxes)",
-                  fontsize=12, fontweight="bold", color=NAVY_DARK, pad=14)
-    ax1.set_facecolor(WHITE)
-    ax1.spines["top"].set_visible(False)
-    ax1.spines["right"].set_visible(False)
-    ax1.spines["left"].set_color(GREY_TEXT)
-    ax1.spines["bottom"].set_color(GREY_TEXT)
-    ax1.tick_params(colors=GREY_TEXT, labelsize=9)
-    ax1.grid(axis="y", color=ICE, linewidth=0.6)
-    ax1.set_axisbelow(True)
-    ax1.set_ylim(0, max(plot_y) * 1.18)
-
-    # ---- Row 2 right: Year-by-year return bars ----
-    ax2 = fig.add_subplot(gs[1, 2:])
     returns = [s["return_net"] * 100 for s in yearly]
     colors = [GREEN if r >= 0 else RED for r in returns]
-    bars = ax2.bar(years, returns, color=colors, edgecolor="none", width=0.7)
+    bars = ax_yr.bar(years, returns, color=colors, edgecolor="none", width=0.7)
     for bar, r in zip(bars, returns):
-        ax2.text(
+        ax_yr.text(
             bar.get_x() + bar.get_width()/2,
             r + (3 if r >= 0 else -7),
             f"{r:+.1f}%",
             ha="center", fontsize=9, color=NAVY_DARK, fontweight="bold",
         )
-    ax2.axhline(0, color=GREY_TEXT, linewidth=0.8)
-    ax2.set_title("Annual net return", fontsize=12, fontweight="bold",
-                  color=NAVY_DARK, pad=14)
-    ax2.set_facecolor(WHITE)
-    ax2.spines["top"].set_visible(False)
-    ax2.spines["right"].set_visible(False)
-    ax2.spines["left"].set_color(GREY_TEXT)
-    ax2.spines["bottom"].set_color(GREY_TEXT)
-    ax2.tick_params(colors=GREY_TEXT, labelsize=9)
-    ax2.grid(axis="y", color=ICE, linewidth=0.6)
-    ax2.set_axisbelow(True)
-    ymin = min(returns) - 20
-    ymax = max(returns) + 25
-    ax2.set_ylim(ymin, ymax)
+    ax_yr.axhline(0, color=GREY_TEXT, linewidth=0.8)
+    ax_yr.set_title("Net annual return %", fontsize=11, fontweight="bold",
+                    color=NAVY_DARK, pad=10)
+    ax_yr.set_facecolor(WHITE)
+    ax_yr.spines["top"].set_visible(False)
+    ax_yr.spines["right"].set_visible(False)
+    ax_yr.spines["left"].set_color(GREY_TEXT)
+    ax_yr.spines["bottom"].set_color(GREY_TEXT)
+    ax_yr.tick_params(colors=GREY_TEXT, labelsize=9)
+    ax_yr.grid(axis="y", color=ICE, linewidth=0.6)
+    ax_yr.set_axisbelow(True)
+    ax_yr.set_ylim(min(returns) - 25, max(returns) + 30)
 
-    # ---- Row 3 left: EUR/USD rate trajectory ----
-    ax3 = fig.add_subplot(gs[2, :2])
-    rates = [(h["date"], h["eur_usd_rate"]) for h in history]
-    dates = [r[0] for r in rates]
-    rate_values = [r[1] for r in rates]
-    ax3.plot(dates, rate_values, color=NAVY, linewidth=2.0)
-    ax3.fill_between(range(len(dates)), rate_values, min(rate_values) - 0.02,
-                     color=NAVY, alpha=0.10)
-    ax3.axhline(1.0, color=GREY_TEXT, linestyle="--", linewidth=0.7, alpha=0.6)
-    ax3.text(len(dates) - 1, 1.0, "  parity (1.0)", fontsize=8, color=GREY_TEXT, va="center")
-    ax3.set_title("EUR/USD at each rebalance (real historical data)",
-                  fontsize=12, fontweight="bold", color=NAVY_DARK, pad=14)
-    ax3.set_facecolor(WHITE)
-    ax3.spines["top"].set_visible(False)
-    ax3.spines["right"].set_visible(False)
-    ax3.spines["left"].set_color(GREY_TEXT)
-    ax3.spines["bottom"].set_color(GREY_TEXT)
-    ax3.tick_params(colors=GREY_TEXT, labelsize=8)
-    # Show only year-Q1 labels
-    year_label_indices = [i for i, d in enumerate(dates) if d.endswith("-01-31") or d.endswith("-01-30")]
-    ax3.set_xticks(year_label_indices)
-    ax3.set_xticklabels([dates[i][:4] for i in year_label_indices])
-    ax3.grid(axis="y", color=ICE, linewidth=0.6)
-    ax3.set_axisbelow(True)
-
-    # ---- Row 3 right: Top stocks by selection frequency ----
-    ax4 = fig.add_subplot(gs[2, 2:])
+    # ---- Row 4 right: Top stocks by selection frequency ----
+    ax4 = fig.add_subplot(gs[3, 2:])
     buys = trades[trades["action"] == "BUY"]
     top_picks = buys["ticker"].value_counts().head(12)
     ax4.barh(top_picks.index[::-1], top_picks.values[::-1],
@@ -183,8 +232,8 @@ def build_dashboard():
     for i, (ticker, count) in enumerate(zip(top_picks.index[::-1], top_picks.values[::-1])):
         ax4.text(count + 0.05, i, str(count), va="center",
                  fontsize=9, color=NAVY_DARK, fontweight="bold")
-    ax4.set_title(f"Most-selected stocks (across {metrics['n_rebalances']} rebalances)",
-                  fontsize=12, fontweight="bold", color=NAVY_DARK, pad=14)
+    ax4.set_title(f"Most selected stocks (across {metrics['n_rebalances']} rebalances)",
+                  fontsize=11, fontweight="bold", color=NAVY_DARK, pad=10)
     ax4.set_facecolor(WHITE)
     ax4.spines["top"].set_visible(False)
     ax4.spines["right"].set_visible(False)
@@ -197,11 +246,12 @@ def build_dashboard():
 
     # Footer
     fig.text(
-        0.5, 0.02,
+        0.5, 0.015,
         f"Backtest scope: {metrics['n_rebalances']} quarterly rebalances  ·  "
         f"{metrics['n_trades']} total trades  ·  "
         f"Universe: {metrics.get('us_universe_size', '?')} US + "
-        f"{metrics.get('ibex_universe_size', '?')} IBEX stocks",
+        f"{metrics.get('ibex_universe_size', '?')} IBEX stocks  ·  "
+        f"All values net of Spanish IRPF",
         ha="center", fontsize=8.5, color=GREY_TEXT, style="italic",
     )
 

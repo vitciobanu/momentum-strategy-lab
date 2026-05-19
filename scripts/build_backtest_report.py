@@ -8,6 +8,7 @@ USAGE:
 import json
 import pandas as pd
 from pathlib import Path
+from datetime import datetime
 
 ROOT = Path(__file__).parent.parent
 BACKTESTS_DIR = ROOT / "backtests"
@@ -16,6 +17,13 @@ OUTPUT_FILE = BACKTESTS_DIR / "backtest-results.md"
 
 def fmt_eur(v):
     return f"{v:,.0f} €".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+def fmt_eur_full(v):
+    """Format with 2 decimals, European style."""
+    s = f"{v:,.2f}"
+    # 12,238.50 -> 12.238,50
+    return s.replace(",", "X").replace(".", ",").replace("X", ".") + " €"
 
 
 def fmt_pct(v):
@@ -29,6 +37,7 @@ def build_report():
 
     data_source = m.get("data_source", "synthetic")
     is_real = data_source == "real"
+    monthly_log = m.get("monthly_log", [])
 
     lines = []
     lines.append("# Backtest results (2019-2025)")
@@ -97,6 +106,64 @@ def build_report():
     lines.append("![Backtest Dashboard](backtest-dashboard.png)")
     lines.append("")
 
+    # ----- Drawdown narrative -----
+    if monthly_log:
+        lines.append("## The 2021-2022 drawdown: what really happened")
+        lines.append("")
+
+        # Compute key drawdown stats
+        df_m = pd.DataFrame(monthly_log)
+        df_m["date"] = pd.to_datetime(df_m["date"])
+        df_m = df_m.sort_values("date").reset_index(drop=True)
+
+        # The worst drawdown point
+        worst_idx = df_m["drawdown_pct"].idxmin()
+        worst_date = df_m["date"].iloc[worst_idx]
+        worst_value = df_m["value_eur"].iloc[worst_idx]
+        worst_dd = df_m["drawdown_pct"].iloc[worst_idx]
+
+        # The peak just before the worst drawdown
+        pre_worst = df_m.iloc[:worst_idx + 1]
+        peak_idx = pre_worst["value_eur"].idxmax()
+        peak_date = df_m["date"].iloc[peak_idx]
+        peak_value = df_m["value_eur"].iloc[peak_idx]
+
+        # Recovery date: first month after worst_idx where value >= peak_value
+        post = df_m.iloc[worst_idx:]
+        recovery_rows = post[post["value_eur"] >= peak_value]
+        if len(recovery_rows) > 0:
+            recovery_date = recovery_rows["date"].iloc[0]
+            months_total = (recovery_date - peak_date).days / 30
+            months_to_trough = (worst_date - peak_date).days / 30
+            months_to_recover = (recovery_date - worst_date).days / 30
+        else:
+            recovery_date = None
+            months_total = None
+
+        lines.append(f"The strategy reached a peak in **{peak_date.strftime('%B %Y')}** at "
+                     f"**{fmt_eur_full(peak_value)}**, then suffered a sustained "
+                     f"decline reaching its lowest point in **{worst_date.strftime('%B %Y')}** at "
+                     f"**{fmt_eur_full(worst_value)}** — a drawdown of "
+                     f"**{worst_dd:.2f}%** from the previous peak.")
+        lines.append("")
+
+        if recovery_date is not None:
+            lines.append(f"From peak to trough took **{months_to_trough:.0f} months**. "
+                         f"The portfolio then took another **{months_to_recover:.0f} months** "
+                         f"to reach the previous peak again, finally crossing it in "
+                         f"**{recovery_date.strftime('%B %Y')}**. Total time underwater: "
+                         f"**~{months_total:.0f} months**.")
+            lines.append("")
+            lines.append(f"This is the most important number to internalize before "
+                         f"trusting the strategy. The +56.95% headline CAGR is real, "
+                         f"but reaching it required holding through almost two years "
+                         f"of seeing the portfolio worth less than its previous best. "
+                         f"Anyone who panicked and exited near the trough crystallized "
+                         f"a {worst_dd:.0f}% loss; those who held saw the portfolio "
+                         f"continue to **{fmt_eur(m['final_capital_eur'])}** by the end "
+                         f"of the backtest.")
+        lines.append("")
+
     # ----- Year-by-year breakdown -----
     lines.append("## Year-by-year breakdown")
     lines.append("")
@@ -112,6 +179,35 @@ def build_report():
             f"| {fmt_eur(s['realized_gain'])} |"
         )
     lines.append("")
+
+    # ----- Monthly trajectory table -----
+    if monthly_log:
+        lines.append("## Monthly trajectory")
+        lines.append("")
+        lines.append("Portfolio value at the end of each month, net of yearly tax. "
+                     "The drawdown column shows how far below the running peak the "
+                     "portfolio was at that point.")
+        lines.append("")
+        lines.append("| Date | Value (€) | Monthly return | Drawdown from peak |")
+        lines.append("|------|----------:|---------------:|-------------------:|")
+
+        df_m = pd.DataFrame(monthly_log)
+        df_m["date"] = pd.to_datetime(df_m["date"])
+        df_m = df_m.sort_values("date").reset_index(drop=True)
+        df_m["monthly_return_pct"] = df_m["value_eur"].pct_change() * 100
+
+        for _, row in df_m.iterrows():
+            mr = row["monthly_return_pct"]
+            mr_str = f"{mr:+.2f}%" if pd.notna(mr) else "—"
+            dd = row["drawdown_pct"]
+            dd_str = f"{dd:.2f}%" if dd < -0.01 else "0,00%"
+            lines.append(
+                f"| {row['date'].strftime('%Y-%m')} "
+                f"| {fmt_eur_full(row['value_eur'])} "
+                f"| {mr_str} "
+                f"| {dd_str} |"
+            )
+        lines.append("")
 
     # ----- Most-selected stocks -----
     buys = trades[trades["action"] == "BUY"]

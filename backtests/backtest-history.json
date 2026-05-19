@@ -15,21 +15,21 @@
       "SLR",
       "NTGY"
     ],
-    "momentum_us_top_pct": {
-      "ENPH": 115.0,
-      "VICR": 106.5,
-      "ARWR": 100.97,
-      "CIEN": 59.35
+    "momentum_us_top": {
+      "ENPH": 1.15,
+      "VICR": 1.065,
+      "ARWR": 1.0097,
+      "CIEN": 0.5935
     },
-    "momentum_ibex_top_pct": {
-      "SLR": 68.72,
-      "NTGY": 19.65
+    "momentum_ibex_top": {
+      "SLR": 0.6872,
+      "NTGY": 0.1965
     },
     "orders_to_sell": [],
     "orders_to_buy": [
       {
         "ticker": "ENPH",
-        "market": "US",
+        "market": "SP",
         "shares": 51.4426,
         "ref_price": 7.23,
         "currency": "USD",
@@ -37,7 +37,7 @@
       },
       {
         "ticker": "VICR",
-        "market": "US",
+        "market": "SP",
         "shares": 9.4422,
         "ref_price": 39.39,
         "currency": "USD",
@@ -45,7 +45,7 @@
       },
       {
         "ticker": "ARWR",
-        "market": "US",
+        "market": "SP",
         "shares": 26.3407,
         "ref_price": 14.12,
         "currency": "USD",
@@ -53,7 +53,7 @@
       },
       {
         "ticker": "CIEN",
-        "market": "US",
+        "market": "SP",
         "shares": 9.7645,
         "ref_price": 38.09,
         "currency": "USD",
@@ -94,20 +94,20 @@
       "ANA",
       "SLR"
     ],
-    "momentum_us_top_pct": {
-      "ARWR": 185.83,
-      "AMD": 134.56,
-      "ENPH": 122.41,
-      "LLY": 60.06
+    "momentum_us_top": {
+      "ARWR": 1.8583,
+      "AMD": 1.3456,
+      "ENPH": 1.2241,
+      "LLY": 0.6006
     },
-    "momentum_ibex_top_pct": {
-      "ANA": 43.04,
-      "SLR": 36.9
+    "momentum_ibex_top": {
+      "ANA": 0.4304,
+      "SLR": 0.369
     },
     "orders_to_sell": [
       {
         "ticker": "VICR",
-        "market": "US",
+        "market": "SP",
         "shares": 9.4422,
         "ref_price": 37.51,
         "currency": "USD",
@@ -115,7 +115,7 @@
       },
       {
         "ticker": "CIEN",
-        "market": "US",
+        "market": "SP",
         "shares": 9.7645,
         "ref_price": 38.36,
         "currency": "USD",
@@ -133,7 +133,7 @@
     "orders_to_buy": [
       {
         "ticker": "AMD",
-        "market": "US",
+        "market": "SP",
         "shares": 14.7296,
         "ref_price": 27.63,
         "currency": "USD",
@@ -141,7 +141,7 @@
       },
       {
         "ticker": "LLY",
-        "market": "US",
+        "market": "SP",
         "shares": 3.4773,
         "ref_price": 117.04,
         "currency": "USD",
@@ -174,15 +174,15 @@
       "CLNX",
       "IBE"
     ],
-    "momentum_us_top_pct": {
-      "ENPH": 206.39,
-      "ARWR": 81.88,
-      "MELI": 78.41,
-      "AMD": 65.68
+    "momentum_us_top": {
+      "ENPH": 2.0639,
+      "ARWR": 0.8188,
+      "MELI": 0.7841,
+      "AMD": 0.6568
     },
-    "momentum_ibex_top_pct": {
-      "CLNX": 40.94,
-      "IBE": 29.68
+    "momentum_ibex_top": {
+      "CLNX": 0.4094,
+      "IBE": 0.2968
     },
     "orders_to_sell": [
       {
@@ -195,7 +195,7 @@
       },
       {
         "ticker": "LLY",
-        "market": "US",
+        "market": "SP",
         "shares": 3.4773,
         "ref_price": 108.95,
         "currency": "USD",
@@ -213,7 +213,7 @@
     "orders_to_buy": [
       {
         "ticker": "MELI",
-        "market": "US",
+        "market": "SP",
         "shares": 0.9725,
         "ref_price": 621.42,
         "currency": "USD",
@@ -238,20 +238,20 @@
       "CLNX",
       "IBE"
     ],
-    "momentum_us_top_pct": {
-      "ENPH": 389.65,
-      "ARWR": 121.54,
-      "PDD": 82.55,
-      "KLAC": 74.19
+    "momentum_us_top": {
+      "ENPH": 3.8965,
+      "ARWR": 1.2154,
+      "PDD": 0.8255,
+      "KLAC": 0.7419
     },
-    "momentum_ibex_top_pct": {
-      "CLNX": 69.32,
-      "IBE": 52.9
+    "momentum_ibex_top": {
+      "CLNX": 0.6932,
+      "IBE": 0.529
     },
     "orders_to_sell": [
       {
         "ticker": "AMD",
-        "market": "US",
+        "market": "SP",
         "shares": 14.7296,
         "ref_price": 33.93,
         "currency": "USD",
@@ -259,7 +259,7 @@
       },
       {
         "ticker": "MELI",
-        "market": "US",
+        "market": "SP",
         "shares": 0.9725,
         "ref_price": 521.52,
         "currency": "USD",
@@ -269,7 +269,7 @@
     "orders_to_buy": [
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 13.9813,
         "ref_price": 40.88,
         "currency": "USD",
@@ -277,7 +277,7 @@
       },
       {
         "ticker": "KLAC",
-        "market": "US",
+        "market": "SP",
         "shares": 3.3812,
         "ref_price": 169.04,
         "currency": "USD",
@@ -302,20 +302,20 @@
       "CLNX",
       "GRF"
     ],
-    "momentum_us_top_pct": {
-      "ARWR": 349.22,
-      "ENPH": 261.41,
-      "TER": 89.47,
-      "AMD": 87.87
+    "momentum_us_top": {
+      "ARWR": 3.4922,
+      "ENPH": 2.6141,
+      "TER": 0.8947,
+      "AMD": 0.8787
     },
-    "momentum_ibex_top_pct": {
-      "CLNX": 63.98,
-      "GRF": 38.15
+    "momentum_ibex_top": {
+      "CLNX": 0.6398,
+      "GRF": 0.3815
     },
     "orders_to_sell": [
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 13.9813,
         "ref_price": 35.22,
         "currency": "USD",
@@ -323,7 +323,7 @@
       },
       {
         "ticker": "KLAC",
-        "market": "US",
+        "market": "SP",
         "shares": 3.3812,
         "ref_price": 165.74,
         "currency": "USD",
@@ -333,7 +333,7 @@
     "orders_to_buy": [
       {
         "ticker": "TER",
-        "market": "US",
+        "market": "SP",
         "shares": 10.087,
         "ref_price": 65.99,
         "currency": "USD",
@@ -341,7 +341,7 @@
       },
       {
         "ticker": "AMD",
-        "market": "US",
+        "market": "SP",
         "shares": 14.1626,
         "ref_price": 47.0,
         "currency": "USD",
@@ -366,20 +366,20 @@
       "CLNX",
       "SLR"
     ],
-    "momentum_us_top_pct": {
-      "ENPH": 221.61,
-      "TSLA": 119.55,
-      "AMD": 64.6,
-      "PDD": 62.08
+    "momentum_us_top": {
+      "ENPH": 2.2161,
+      "TSLA": 1.1955,
+      "AMD": 0.646,
+      "PDD": 0.6208
     },
-    "momentum_ibex_top_pct": {
-      "CLNX": 61.55,
-      "SLR": 47.93
+    "momentum_ibex_top": {
+      "CLNX": 0.6155,
+      "SLR": 0.4793
     },
     "orders_to_sell": [
       {
         "ticker": "ARWR",
-        "market": "US",
+        "market": "SP",
         "shares": 26.3407,
         "ref_price": 34.43,
         "currency": "USD",
@@ -387,7 +387,7 @@
       },
       {
         "ticker": "TER",
-        "market": "US",
+        "market": "SP",
         "shares": 10.087,
         "ref_price": 62.54,
         "currency": "USD",
@@ -397,7 +397,7 @@
     "orders_to_buy": [
       {
         "ticker": "TSLA",
-        "market": "US",
+        "market": "SP",
         "shares": 14.7377,
         "ref_price": 52.13,
         "currency": "USD",
@@ -405,7 +405,7 @@
       },
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 16.1947,
         "ref_price": 47.44,
         "currency": "USD",
@@ -430,20 +430,20 @@
       "SLR",
       "CLNX"
     ],
-    "momentum_us_top_pct": {
-      "TSLA": 346.87,
-      "PDD": 285.45,
-      "VICR": 143.4,
-      "NVDA": 125.12
+    "momentum_us_top": {
+      "TSLA": 3.4687,
+      "PDD": 2.8545,
+      "VICR": 1.434,
+      "NVDA": 1.2512
     },
-    "momentum_ibex_top_pct": {
-      "SLR": 110.6,
-      "CLNX": 71.01
+    "momentum_ibex_top": {
+      "SLR": 1.106,
+      "CLNX": 0.7101
     },
     "orders_to_sell": [
       {
         "ticker": "ENPH",
-        "market": "US",
+        "market": "SP",
         "shares": 51.4426,
         "ref_price": 60.36,
         "currency": "USD",
@@ -451,7 +451,7 @@
       },
       {
         "ticker": "AMD",
-        "market": "US",
+        "market": "SP",
         "shares": 14.1626,
         "ref_price": 77.43,
         "currency": "USD",
@@ -461,7 +461,7 @@
     "orders_to_buy": [
       {
         "ticker": "VICR",
-        "market": "US",
+        "market": "SP",
         "shares": 14.2361,
         "ref_price": 81.47,
         "currency": "USD",
@@ -469,7 +469,7 @@
       },
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 109.3136,
         "ref_price": 10.61,
         "currency": "USD",
@@ -502,20 +502,20 @@
       "SLR",
       "CLNX"
     ],
-    "momentum_us_top_pct": {
-      "TSLA": 581.28,
-      "BE": 487.25,
-      "ENPH": 325.06,
-      "NVDA": 168.99
+    "momentum_us_top": {
+      "TSLA": 5.8128,
+      "BE": 4.8725,
+      "ENPH": 3.2506,
+      "NVDA": 1.6899
     },
-    "momentum_ibex_top_pct": {
-      "SLR": 132.88,
-      "CLNX": 44.23
+    "momentum_ibex_top": {
+      "SLR": 1.3288,
+      "CLNX": 0.4423
     },
     "orders_to_sell": [
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 16.1947,
         "ref_price": 89.98,
         "currency": "USD",
@@ -523,7 +523,7 @@
       },
       {
         "ticker": "VICR",
-        "market": "US",
+        "market": "SP",
         "shares": 14.2361,
         "ref_price": 78.0,
         "currency": "USD",
@@ -533,7 +533,7 @@
     "orders_to_buy": [
       {
         "ticker": "BE",
-        "market": "US",
+        "market": "SP",
         "shares": 103.718,
         "ref_price": 12.64,
         "currency": "USD",
@@ -541,7 +541,7 @@
       },
       {
         "ticker": "ENPH",
-        "market": "US",
+        "market": "SP",
         "shares": 13.3652,
         "ref_price": 98.09,
         "currency": "USD",
@@ -566,20 +566,20 @@
       "SLR",
       "FDR"
     ],
-    "momentum_us_top_pct": {
-      "ENPH": 456.69,
-      "TSLA": 442.36,
-      "PDD": 404.46,
-      "SITM": 340.32
+    "momentum_us_top": {
+      "ENPH": 4.5669,
+      "TSLA": 4.4236,
+      "PDD": 4.0446,
+      "SITM": 3.4032
     },
-    "momentum_ibex_top_pct": {
-      "SLR": 179.76,
-      "FDR": 88.74
+    "momentum_ibex_top": {
+      "SLR": 1.7976,
+      "FDR": 0.8874
     },
     "orders_to_sell": [
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 109.3136,
         "ref_price": 12.99,
         "currency": "USD",
@@ -587,7 +587,7 @@
       },
       {
         "ticker": "BE",
-        "market": "US",
+        "market": "SP",
         "shares": 103.718,
         "ref_price": 34.91,
         "currency": "USD",
@@ -597,7 +597,7 @@
     "orders_to_buy": [
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 13.7557,
         "ref_price": 165.71,
         "currency": "USD",
@@ -605,7 +605,7 @@
       },
       {
         "ticker": "SITM",
-        "market": "US",
+        "market": "SP",
         "shares": 18.6764,
         "ref_price": 122.05,
         "currency": "USD",
@@ -630,15 +630,15 @@
       "MTS",
       "FDR"
     ],
-    "momentum_us_top_pct": {
-      "HUT": 1144.97,
-      "SITM": 355.22,
-      "TSLA": 327.09,
-      "GSAT": 321.88
+    "momentum_us_top": {
+      "HUT": 11.4497,
+      "SITM": 3.5522,
+      "TSLA": 3.2709,
+      "GSAT": 3.2188
     },
-    "momentum_ibex_top_pct": {
-      "MTS": 146.71,
-      "FDR": 138.73
+    "momentum_ibex_top": {
+      "MTS": 1.4671,
+      "FDR": 1.3873
     },
     "orders_to_sell": [
       {
@@ -651,7 +651,7 @@
       },
       {
         "ticker": "ENPH",
-        "market": "US",
+        "market": "SP",
         "shares": 13.3652,
         "ref_price": 139.25,
         "currency": "USD",
@@ -659,7 +659,7 @@
       },
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 13.7557,
         "ref_price": 133.93,
         "currency": "USD",
@@ -669,7 +669,7 @@
     "orders_to_buy": [
       {
         "ticker": "HUT",
-        "market": "US",
+        "market": "SP",
         "shares": 69.5516,
         "ref_price": 27.25,
         "currency": "USD",
@@ -677,7 +677,7 @@
       },
       {
         "ticker": "GSAT",
-        "market": "US",
+        "market": "SP",
         "shares": 99.4898,
         "ref_price": 19.05,
         "currency": "USD",
@@ -710,20 +710,20 @@
       "MTS",
       "FDR"
     ],
-    "momentum_us_top_pct": {
-      "HUT": 403.89,
-      "GSAT": 356.76,
-      "MP": 212.37,
-      "MOD": 204.96
+    "momentum_us_top": {
+      "HUT": 4.0389,
+      "GSAT": 3.5676,
+      "MP": 2.1237,
+      "MOD": 2.0496
     },
-    "momentum_ibex_top_pct": {
-      "MTS": 177.03,
-      "FDR": 138.25
+    "momentum_ibex_top": {
+      "MTS": 1.7703,
+      "FDR": 1.3825
     },
     "orders_to_sell": [
       {
         "ticker": "TSLA",
-        "market": "US",
+        "market": "SP",
         "shares": 14.7377,
         "ref_price": 229.07,
         "currency": "USD",
@@ -731,7 +731,7 @@
       },
       {
         "ticker": "SITM",
-        "market": "US",
+        "market": "SP",
         "shares": 18.6764,
         "ref_price": 135.64,
         "currency": "USD",
@@ -741,7 +741,7 @@
     "orders_to_buy": [
       {
         "ticker": "MP",
-        "market": "US",
+        "market": "SP",
         "shares": 54.4539,
         "ref_price": 37.62,
         "currency": "USD",
@@ -749,7 +749,7 @@
       },
       {
         "ticker": "MOD",
-        "market": "US",
+        "market": "SP",
         "shares": 122.448,
         "ref_price": 16.73,
         "currency": "USD",
@@ -782,15 +782,15 @@
       "SAB",
       "BBVA"
     ],
-    "momentum_us_top_pct": {
-      "HUT": 772.09,
-      "GSAT": 456.67,
-      "MP": 190.1,
-      "SITM": 144.54
+    "momentum_us_top": {
+      "HUT": 7.7209,
+      "GSAT": 4.5667,
+      "MP": 1.901,
+      "SITM": 1.4454
     },
-    "momentum_ibex_top_pct": {
-      "SAB": 176.95,
-      "BBVA": 132.21
+    "momentum_ibex_top": {
+      "SAB": 1.7695,
+      "BBVA": 1.3221
     },
     "orders_to_sell": [
       {
@@ -803,7 +803,7 @@
       },
       {
         "ticker": "MOD",
-        "market": "US",
+        "market": "SP",
         "shares": 122.448,
         "ref_price": 11.0,
         "currency": "USD",
@@ -821,7 +821,7 @@
     "orders_to_buy": [
       {
         "ticker": "SITM",
-        "market": "US",
+        "market": "SP",
         "shares": 9.1599,
         "ref_price": 264.89,
         "currency": "USD",
@@ -854,20 +854,20 @@
       "ROVI",
       "FDR"
     ],
-    "momentum_us_top_pct": {
-      "SITM": 139.69,
-      "CYTK": 131.72,
-      "NVDA": 126.4,
-      "HUT": 106.58
+    "momentum_us_top": {
+      "SITM": 1.3969,
+      "CYTK": 1.3172,
+      "NVDA": 1.264,
+      "HUT": 1.0658
     },
-    "momentum_ibex_top_pct": {
-      "ROVI": 81.77,
-      "FDR": 77.78
+    "momentum_ibex_top": {
+      "ROVI": 0.8177,
+      "FDR": 0.7778
     },
     "orders_to_sell": [
       {
         "ticker": "GSAT",
-        "market": "US",
+        "market": "SP",
         "shares": 99.4898,
         "ref_price": 16.05,
         "currency": "USD",
@@ -875,7 +875,7 @@
       },
       {
         "ticker": "MP",
-        "market": "US",
+        "market": "SP",
         "shares": 54.4539,
         "ref_price": 39.94,
         "currency": "USD",
@@ -893,7 +893,7 @@
     "orders_to_buy": [
       {
         "ticker": "CYTK",
-        "market": "US",
+        "market": "SP",
         "shares": 55.7336,
         "ref_price": 33.19,
         "currency": "USD",
@@ -901,7 +901,7 @@
       },
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 75.5328,
         "ref_price": 24.49,
         "currency": "USD",
@@ -942,20 +942,20 @@
       "SAB",
       "ROVI"
     ],
-    "momentum_us_top_pct": {
-      "SITM": 167.77,
-      "COP": 95.54,
-      "MP": 90.88,
-      "NVDA": 81.81
+    "momentum_us_top": {
+      "SITM": 1.6777,
+      "COP": 0.9554,
+      "MP": 0.9088,
+      "NVDA": 0.8181
     },
-    "momentum_ibex_top_pct": {
-      "SAB": 41.37,
-      "ROVI": 39.42
+    "momentum_ibex_top": {
+      "SAB": 0.4137,
+      "ROVI": 0.3942
     },
     "orders_to_sell": [
       {
         "ticker": "HUT",
-        "market": "US",
+        "market": "SP",
         "shares": 69.5516,
         "ref_price": 17.8,
         "currency": "USD",
@@ -963,7 +963,7 @@
       },
       {
         "ticker": "CYTK",
-        "market": "US",
+        "market": "SP",
         "shares": 55.7336,
         "ref_price": 39.87,
         "currency": "USD",
@@ -981,7 +981,7 @@
     "orders_to_buy": [
       {
         "ticker": "COP",
-        "market": "US",
+        "market": "SP",
         "shares": 16.2568,
         "ref_price": 95.52,
         "currency": "USD",
@@ -989,7 +989,7 @@
       },
       {
         "ticker": "MP",
-        "market": "US",
+        "market": "SP",
         "shares": 40.8214,
         "ref_price": 38.04,
         "currency": "USD",
@@ -1022,20 +1022,20 @@
       "REP",
       "ANA"
     ],
-    "momentum_us_top_pct": {
-      "COP": 60.2,
-      "EOG": 56.58,
-      "XOM": 48.76,
-      "CVX": 42.21
+    "momentum_us_top": {
+      "COP": 0.602,
+      "EOG": 0.5658,
+      "XOM": 0.4876,
+      "CVX": 0.4221
     },
-    "momentum_ibex_top_pct": {
-      "REP": 52.37,
-      "ANA": 35.84
+    "momentum_ibex_top": {
+      "REP": 0.5237,
+      "ANA": 0.3584
     },
     "orders_to_sell": [
       {
         "ticker": "SITM",
-        "market": "US",
+        "market": "SP",
         "shares": 9.1599,
         "ref_price": 185.98,
         "currency": "USD",
@@ -1043,7 +1043,7 @@
       },
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 75.5328,
         "ref_price": 18.16,
         "currency": "USD",
@@ -1059,7 +1059,7 @@
       },
       {
         "ticker": "MP",
-        "market": "US",
+        "market": "SP",
         "shares": 40.8214,
         "ref_price": 33.57,
         "currency": "USD",
@@ -1077,7 +1077,7 @@
     "orders_to_buy": [
       {
         "ticker": "EOG",
-        "market": "US",
+        "market": "SP",
         "shares": 13.5663,
         "ref_price": 106.21,
         "currency": "USD",
@@ -1085,7 +1085,7 @@
       },
       {
         "ticker": "XOM",
-        "market": "US",
+        "market": "SP",
         "shares": 14.8651,
         "ref_price": 96.93,
         "currency": "USD",
@@ -1093,7 +1093,7 @@
       },
       {
         "ticker": "CVX",
-        "market": "US",
+        "market": "SP",
         "shares": 8.7976,
         "ref_price": 163.78,
         "currency": "USD",
@@ -1134,20 +1134,20 @@
       "CABK",
       "ANE"
     ],
-    "momentum_us_top_pct": {
-      "CYTK": 38.79,
-      "COP": 37.39,
-      "XOM": 35.43,
-      "ON": 29.67
+    "momentum_us_top": {
+      "CYTK": 0.3879,
+      "COP": 0.3739,
+      "XOM": 0.3543,
+      "ON": 0.2967
     },
-    "momentum_ibex_top_pct": {
-      "CABK": 33.24,
-      "ANE": 26.89
+    "momentum_ibex_top": {
+      "CABK": 0.3324,
+      "ANE": 0.2689
     },
     "orders_to_sell": [
       {
         "ticker": "EOG",
-        "market": "US",
+        "market": "SP",
         "shares": 13.5663,
         "ref_price": 131.99,
         "currency": "USD",
@@ -1155,7 +1155,7 @@
       },
       {
         "ticker": "CVX",
-        "market": "US",
+        "market": "SP",
         "shares": 8.7976,
         "ref_price": 180.9,
         "currency": "USD",
@@ -1181,7 +1181,7 @@
     "orders_to_buy": [
       {
         "ticker": "CYTK",
-        "market": "US",
+        "market": "SP",
         "shares": 37.2035,
         "ref_price": 43.66,
         "currency": "USD",
@@ -1189,7 +1189,7 @@
       },
       {
         "ticker": "ON",
-        "market": "US",
+        "market": "SP",
         "shares": 26.4416,
         "ref_price": 61.43,
         "currency": "USD",
@@ -1230,20 +1230,20 @@
       "ANE",
       "REP"
     ],
-    "momentum_us_top_pct": {
-      "MOD": 117.05,
-      "ENPH": 88.62,
-      "SANM": 51.48,
-      "LLY": 49.09
+    "momentum_us_top": {
+      "MOD": 1.1705,
+      "ENPH": 0.8862,
+      "SANM": 0.5148,
+      "LLY": 0.4909
     },
-    "momentum_ibex_top_pct": {
-      "ANE": 33.41,
-      "REP": 32.09
+    "momentum_ibex_top": {
+      "ANE": 0.3341,
+      "REP": 0.3209
     },
     "orders_to_sell": [
       {
         "ticker": "COP",
-        "market": "US",
+        "market": "SP",
         "shares": 16.2568,
         "ref_price": 121.87,
         "currency": "USD",
@@ -1251,7 +1251,7 @@
       },
       {
         "ticker": "XOM",
-        "market": "US",
+        "market": "SP",
         "shares": 14.8651,
         "ref_price": 116.01,
         "currency": "USD",
@@ -1259,7 +1259,7 @@
       },
       {
         "ticker": "CYTK",
-        "market": "US",
+        "market": "SP",
         "shares": 37.2035,
         "ref_price": 42.48,
         "currency": "USD",
@@ -1267,7 +1267,7 @@
       },
       {
         "ticker": "ON",
-        "market": "US",
+        "market": "SP",
         "shares": 26.4416,
         "ref_price": 73.45,
         "currency": "USD",
@@ -1285,7 +1285,7 @@
     "orders_to_buy": [
       {
         "ticker": "MOD",
-        "market": "US",
+        "market": "SP",
         "shares": 73.724,
         "ref_price": 23.89,
         "currency": "USD",
@@ -1293,7 +1293,7 @@
       },
       {
         "ticker": "ENPH",
-        "market": "US",
+        "market": "SP",
         "shares": 7.9558,
         "ref_price": 221.38,
         "currency": "USD",
@@ -1301,7 +1301,7 @@
       },
       {
         "ticker": "SANM",
-        "market": "US",
+        "market": "SP",
         "shares": 28.9064,
         "ref_price": 60.93,
         "currency": "USD",
@@ -1309,7 +1309,7 @@
       },
       {
         "ticker": "LLY",
-        "market": "US",
+        "market": "SP",
         "shares": 5.1177,
         "ref_price": 344.15,
         "currency": "USD",
@@ -1342,15 +1342,15 @@
       "ITX",
       "SAB"
     ],
-    "momentum_us_top_pct": {
-      "MOD": 191.77,
-      "POWL": 120.84,
-      "NFLX": 81.46,
-      "PDD": 76.14
+    "momentum_us_top": {
+      "MOD": 1.9177,
+      "POWL": 1.2084,
+      "NFLX": 0.8146,
+      "PDD": 0.7614
     },
-    "momentum_ibex_top_pct": {
-      "ITX": 53.73,
-      "SAB": 32.9
+    "momentum_ibex_top": {
+      "ITX": 0.5373,
+      "SAB": 0.329
     },
     "orders_to_sell": [
       {
@@ -1363,7 +1363,7 @@
       },
       {
         "ticker": "ENPH",
-        "market": "US",
+        "market": "SP",
         "shares": 7.9558,
         "ref_price": 164.2,
         "currency": "USD",
@@ -1371,7 +1371,7 @@
       },
       {
         "ticker": "SANM",
-        "market": "US",
+        "market": "SP",
         "shares": 28.9064,
         "ref_price": 52.26,
         "currency": "USD",
@@ -1379,7 +1379,7 @@
       },
       {
         "ticker": "LLY",
-        "market": "US",
+        "market": "SP",
         "shares": 5.1177,
         "ref_price": 395.86,
         "currency": "USD",
@@ -1397,7 +1397,7 @@
     "orders_to_buy": [
       {
         "ticker": "POWL",
-        "market": "US",
+        "market": "SP",
         "shares": 119.7003,
         "ref_price": 13.35,
         "currency": "USD",
@@ -1405,7 +1405,7 @@
       },
       {
         "ticker": "NFLX",
-        "market": "US",
+        "market": "SP",
         "shares": 48.4389,
         "ref_price": 32.99,
         "currency": "USD",
@@ -1413,7 +1413,7 @@
       },
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 23.4483,
         "ref_price": 68.15,
         "currency": "USD",
@@ -1454,20 +1454,20 @@
       "SAB",
       "BBVA"
     ],
-    "momentum_us_top_pct": {
-      "AAOI": 246.51,
-      "POWL": 152.82,
-      "MOD": 151.68,
-      "NVDA": 132.93
+    "momentum_us_top": {
+      "AAOI": 2.4651,
+      "POWL": 1.5282,
+      "MOD": 1.5168,
+      "NVDA": 1.3293
     },
-    "momentum_ibex_top_pct": {
-      "SAB": 68.75,
-      "BBVA": 59.2
+    "momentum_ibex_top": {
+      "SAB": 0.6875,
+      "BBVA": 0.592
     },
     "orders_to_sell": [
       {
         "ticker": "NFLX",
-        "market": "US",
+        "market": "SP",
         "shares": 48.4389,
         "ref_price": 43.9,
         "currency": "USD",
@@ -1475,7 +1475,7 @@
       },
       {
         "ticker": "PDD",
-        "market": "US",
+        "market": "SP",
         "shares": 23.4483,
         "ref_price": 89.82,
         "currency": "USD",
@@ -1493,7 +1493,7 @@
     "orders_to_buy": [
       {
         "ticker": "AAOI",
-        "market": "US",
+        "market": "SP",
         "shares": 321.6336,
         "ref_price": 6.75,
         "currency": "USD",
@@ -1501,7 +1501,7 @@
       },
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 46.459,
         "ref_price": 46.73,
         "currency": "USD",
@@ -1534,20 +1534,20 @@
       "ITX",
       "IDR"
     ],
-    "momentum_us_top_pct": {
-      "AAOI": 298.91,
-      "POWL": 236.13,
-      "META": 222.25,
-      "NVDA": 222.22
+    "momentum_us_top": {
+      "AAOI": 2.9891,
+      "POWL": 2.3613,
+      "META": 2.2225,
+      "NVDA": 2.2222
     },
-    "momentum_ibex_top_pct": {
-      "ITX": 53.84,
-      "IDR": 51.38
+    "momentum_ibex_top": {
+      "ITX": 0.5384,
+      "IDR": 0.5138
     },
     "orders_to_sell": [
       {
         "ticker": "MOD",
-        "market": "US",
+        "market": "SP",
         "shares": 73.724,
         "ref_price": 39.5,
         "currency": "USD",
@@ -1573,7 +1573,7 @@
     "orders_to_buy": [
       {
         "ticker": "META",
-        "market": "US",
+        "market": "SP",
         "shares": 7.5882,
         "ref_price": 301.27,
         "currency": "USD",
@@ -1614,20 +1614,20 @@
       "ROVI",
       "ACS"
     ],
-    "momentum_us_top_pct": {
-      "AAOI": 708.37,
-      "VRT": 237.76,
-      "NVDA": 153.43,
-      "MOD": 149.9
+    "momentum_us_top": {
+      "AAOI": 7.0837,
+      "VRT": 2.3776,
+      "NVDA": 1.5343,
+      "MOD": 1.499
     },
-    "momentum_ibex_top_pct": {
-      "ROVI": 55.07,
-      "ACS": 47.97
+    "momentum_ibex_top": {
+      "ROVI": 0.5507,
+      "ACS": 0.4797
     },
     "orders_to_sell": [
       {
         "ticker": "POWL",
-        "market": "US",
+        "market": "SP",
         "shares": 119.7003,
         "ref_price": 39.51,
         "currency": "USD",
@@ -1635,7 +1635,7 @@
       },
       {
         "ticker": "META",
-        "market": "US",
+        "market": "SP",
         "shares": 7.5882,
         "ref_price": 390.14,
         "currency": "USD",
@@ -1661,7 +1661,7 @@
     "orders_to_buy": [
       {
         "ticker": "VRT",
-        "market": "US",
+        "market": "SP",
         "shares": 61.0049,
         "ref_price": 56.33,
         "currency": "USD",
@@ -1669,7 +1669,7 @@
       },
       {
         "ticker": "MOD",
-        "market": "US",
+        "market": "SP",
         "shares": 49.7381,
         "ref_price": 69.09,
         "currency": "USD",
@@ -1710,20 +1710,20 @@
       "ROVI",
       "BBVA"
     ],
-    "momentum_us_top_pct": {
-      "AAOI": 614.43,
-      "VRT": 447.39,
-      "MOD": 355.24,
-      "POWL": 255.28
+    "momentum_us_top": {
+      "AAOI": 6.1443,
+      "VRT": 4.4739,
+      "MOD": 3.5524,
+      "POWL": 2.5528
     },
-    "momentum_ibex_top_pct": {
-      "ROVI": 101.34,
-      "BBVA": 66.02
+    "momentum_ibex_top": {
+      "ROVI": 1.0134,
+      "BBVA": 0.6602
     },
     "orders_to_sell": [
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 46.459,
         "ref_price": 86.4,
         "currency": "USD",
@@ -1741,7 +1741,7 @@
     "orders_to_buy": [
       {
         "ticker": "POWL",
-        "market": "US",
+        "market": "SP",
         "shares": 84.5532,
         "ref_price": 47.67,
         "currency": "USD",
@@ -1766,20 +1766,20 @@
       "ROVI",
       "SAB"
     ],
-    "momentum_us_top_pct": {
-      "VRT": 232.83,
-      "ASTS": 170.63,
-      "MOD": 166.75,
-      "NVDA": 164.37
+    "momentum_us_top": {
+      "VRT": 2.3283,
+      "ASTS": 1.7063,
+      "MOD": 1.6675,
+      "NVDA": 1.6437
     },
-    "momentum_ibex_top_pct": {
-      "ROVI": 100.53,
-      "SAB": 60.9
+    "momentum_ibex_top": {
+      "ROVI": 1.0053,
+      "SAB": 0.609
     },
     "orders_to_sell": [
       {
         "ticker": "AAOI",
-        "market": "US",
+        "market": "SP",
         "shares": 321.6336,
         "ref_price": 9.55,
         "currency": "USD",
@@ -1787,7 +1787,7 @@
       },
       {
         "ticker": "POWL",
-        "market": "US",
+        "market": "SP",
         "shares": 84.5532,
         "ref_price": 61.21,
         "currency": "USD",
@@ -1797,7 +1797,7 @@
     "orders_to_buy": [
       {
         "ticker": "ASTS",
-        "market": "US",
+        "market": "SP",
         "shares": 208.7653,
         "ref_price": 20.68,
         "currency": "USD",
@@ -1805,7 +1805,7 @@
       },
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 36.8934,
         "ref_price": 117.02,
         "currency": "USD",
@@ -1830,20 +1830,20 @@
       "ITX",
       "SAB"
     ],
-    "momentum_us_top_pct": {
-      "ASTS": 690.03,
-      "MOD": 236.18,
-      "SMTC": 227.08,
-      "IESC": 220.78
+    "momentum_us_top": {
+      "ASTS": 6.9003,
+      "MOD": 2.3618,
+      "SMTC": 2.2708,
+      "IESC": 2.2078
     },
-    "momentum_ibex_top_pct": {
-      "ITX": 63.26,
-      "SAB": 63.02
+    "momentum_ibex_top": {
+      "ITX": 0.6326,
+      "SAB": 0.6302
     },
     "orders_to_sell": [
       {
         "ticker": "VRT",
-        "market": "US",
+        "market": "SP",
         "shares": 61.0049,
         "ref_price": 109.29,
         "currency": "USD",
@@ -1859,7 +1859,7 @@
       },
       {
         "ticker": "NVDA",
-        "market": "US",
+        "market": "SP",
         "shares": 36.8934,
         "ref_price": 132.76,
         "currency": "USD",
@@ -1869,7 +1869,7 @@
     "orders_to_buy": [
       {
         "ticker": "SMTC",
-        "market": "US",
+        "market": "SP",
         "shares": 107.2646,
         "ref_price": 44.19,
         "currency": "USD",
@@ -1877,7 +1877,7 @@
       },
       {
         "ticker": "IESC",
-        "market": "US",
+        "market": "SP",
         "shares": 21.6776,
         "ref_price": 218.66,
         "currency": "USD",
@@ -1918,20 +1918,20 @@
       "IAG",
       "SAB"
     ],
-    "momentum_us_top_pct": {
-      "ASTS": 635.19,
-      "RKLB": 425.15,
-      "PLTR": 370.04,
-      "HOOD": 246.93
+    "momentum_us_top": {
+      "ASTS": 6.3519,
+      "RKLB": 4.2515,
+      "PLTR": 3.7004,
+      "HOOD": 2.4693
     },
-    "momentum_ibex_top_pct": {
-      "IAG": 109.16,
-      "SAB": 55.64
+    "momentum_ibex_top": {
+      "IAG": 1.0916,
+      "SAB": 0.5564
     },
     "orders_to_sell": [
       {
         "ticker": "MOD",
-        "market": "US",
+        "market": "SP",
         "shares": 49.7381,
         "ref_price": 101.45,
         "currency": "USD",
@@ -1939,7 +1939,7 @@
       },
       {
         "ticker": "SMTC",
-        "market": "US",
+        "market": "SP",
         "shares": 107.2646,
         "ref_price": 66.96,
         "currency": "USD",
@@ -1947,7 +1947,7 @@
       },
       {
         "ticker": "IESC",
-        "market": "US",
+        "market": "SP",
         "shares": 21.6776,
         "ref_price": 221.28,
         "currency": "USD",
@@ -1965,7 +1965,7 @@
     "orders_to_buy": [
       {
         "ticker": "RKLB",
-        "market": "US",
+        "market": "SP",
         "shares": 172.6305,
         "ref_price": 29.05,
         "currency": "USD",
@@ -1973,7 +1973,7 @@
       },
       {
         "ticker": "PLTR",
-        "market": "US",
+        "market": "SP",
         "shares": 60.7942,
         "ref_price": 82.49,
         "currency": "USD",
@@ -1981,7 +1981,7 @@
       },
       {
         "ticker": "HOOD",
-        "market": "US",
+        "market": "SP",
         "shares": 96.5335,
         "ref_price": 51.95,
         "currency": "USD",
@@ -2014,15 +2014,15 @@
       "IAG",
       "IDR"
     ],
-    "momentum_us_top_pct": {
-      "ASTS": 928.96,
-      "RKLB": 375.53,
-      "PLTR": 284.16,
-      "HOOD": 152.4
+    "momentum_us_top": {
+      "ASTS": 9.2896,
+      "RKLB": 3.7553,
+      "PLTR": 2.8416,
+      "HOOD": 1.524
     },
-    "momentum_ibex_top_pct": {
-      "IAG": 51.92,
-      "IDR": 48.2
+    "momentum_ibex_top": {
+      "IAG": 0.5192,
+      "IDR": 0.482
     },
     "orders_to_sell": [
       {
@@ -2062,20 +2062,20 @@
       "IAG",
       "IDR"
     ],
-    "momentum_us_top_pct": {
-      "RKLB": 582.63,
-      "PLTR": 406.95,
-      "HOOD": 355.18,
-      "AGX": 179.34
+    "momentum_us_top": {
+      "RKLB": 5.8263,
+      "PLTR": 4.0695,
+      "HOOD": 3.5518,
+      "AGX": 1.7934
     },
-    "momentum_ibex_top_pct": {
-      "IAG": 102.64,
-      "IDR": 98.81
+    "momentum_ibex_top": {
+      "IAG": 1.0264,
+      "IDR": 0.9881
     },
     "orders_to_sell": [
       {
         "ticker": "ASTS",
-        "market": "US",
+        "market": "SP",
         "shares": 208.7653,
         "ref_price": 53.17,
         "currency": "USD",
@@ -2085,7 +2085,7 @@
     "orders_to_buy": [
       {
         "ticker": "AGX",
-        "market": "US",
+        "market": "SP",
         "shares": 35.8437,
         "ref_price": 244.98,
         "currency": "USD",
@@ -2110,15 +2110,15 @@
       "IDR",
       "UNI"
     ],
-    "momentum_us_top_pct": {
-      "BE": 780.94,
-      "HOOD": 509.54,
-      "RKLB": 347.76,
-      "PLTR": 338.93
+    "momentum_us_top": {
+      "BE": 7.8094,
+      "HOOD": 5.0954,
+      "RKLB": 3.4776,
+      "PLTR": 3.3893
     },
-    "momentum_ibex_top_pct": {
-      "IDR": 135.19,
-      "UNI": 102.26
+    "momentum_ibex_top": {
+      "IDR": 1.3519,
+      "UNI": 1.0226
     },
     "orders_to_sell": [
       {
@@ -2131,7 +2131,7 @@
       },
       {
         "ticker": "AGX",
-        "market": "US",
+        "market": "SP",
         "shares": 35.8437,
         "ref_price": 306.21,
         "currency": "USD",
@@ -2141,7 +2141,7 @@
     "orders_to_buy": [
       {
         "ticker": "BE",
-        "market": "US",
+        "market": "SP",
         "shares": 84.4445,
         "ref_price": 132.16,
         "currency": "USD",

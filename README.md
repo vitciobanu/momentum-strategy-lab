@@ -61,6 +61,32 @@ These numbers reflect real prices — not synthetic calibrations. They are very 
 
 See [backtests/backtest-results.md](backtests/backtest-results.md) for the full year-by-year breakdown and per-trade detail, and [backtests/backtest-dashboard.png](backtests/backtest-dashboard.png) for the executive summary image.
 
+
+## About the −44% drawdown
+
+The CAGR of +56,95% looks spectacular on paper, but the path to that number was painful. Between October 2021 and August 2023, the portfolio was **continuously below its previous peak** — for almost two years straight.
+
+The hard numbers:
+
+- **Peak before the crash**: October 2021, portfolio worth **~12.238 €**
+- **Bottom of the crash**: June 2022, portfolio worth **~6.822 €** (a 44,26% drawdown)
+- **Time from peak to trough**: 8 months
+- **Time back to previous peak**: another 14 months (recovery completed in August 2023)
+- **Total time underwater**: **~22 months**
+
+This is the most important fact to internalize before trusting this strategy. The headline +56,95% CAGR is real, but reaching it required:
+
+1. Watching the portfolio go from 12.238 € to 6.822 € over 8 months without exiting.
+2. Sitting through another 14 months of slow recovery, where the portfolio was always worth less than what it had been in October 2021.
+3. Continuing to execute the quarterly rebalances mechanically during all of it.
+
+Anyone who panicked and exited during 2022 crystallized a 44% loss. Anyone who held, saw the portfolio grow to **46.916 €** by the end of 2025 — multiplying the trough value by **~7x** over the following 3,5 years.
+
+The hardest part of this strategy is not technical (the scripts handle the math). It is psychological: the discipline to not exit during the worst 22 months matters more than the +57% headline number. If 44% drawdowns are unbearable for you, this strategy is not the right one — no matter how good the backtest looks.
+
+The drawdown chart in [backtests/backtest-dashboard.png](backtests/backtest-dashboard.png) shows the full trajectory; the monthly trajectory table in [backtests/backtest-results.md](backtests/backtest-results.md) lists the exact value at the end of each month.
+
+
 ## Why this works (in theory)
 
 1. **Behavioral bias.** Investors react slowly to good news, so prices drift upward over weeks-months rather than jumping in one day.

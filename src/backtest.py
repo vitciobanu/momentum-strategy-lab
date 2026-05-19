@@ -314,7 +314,7 @@ def main():
 
                     orders_to_sell.append({
                         "ticker": t,
-                        "market": "IBEX" if t in ibex_set else "US",
+                        "market": "IBEX" if t in ibex_set else "SP",
                         "shares": round(info["shares"], 4),
                         "ref_price": round(float(price), 4),
                         "currency": currency,
@@ -326,7 +326,7 @@ def main():
                         "quarter": f"Q{(date.month - 1) // 3 + 1} {year}",
                         "action": "SELL",
                         "ticker": t,
-                        "market": "IBEX" if t in ibex_set else "US",
+                        "market": "IBEX" if t in ibex_set else "SP",
                         "shares": round(info["shares"], 4),
                         "price_local": round(float(price), 4),
                         "currency": currency,
@@ -359,13 +359,13 @@ def main():
                     holdings[t] = {
                         "shares": shares,
                         "avg_price_eur": avg_price_eur,
-                        "market": "US",
+                        "market": "SP",
                         "buy_date": date.strftime("%Y-%m-%d"),
                     }
                     cash_eur -= invest_eur
                     orders_to_buy.append({
                         "ticker": t,
-                        "market": "US",
+                        "market": "SP",
                         "shares": round(shares, 4),
                         "ref_price": round(float(price_usd), 4),
                         "currency": "USD",
@@ -377,7 +377,7 @@ def main():
                         "quarter": f"Q{(date.month - 1) // 3 + 1} {year}",
                         "action": "BUY",
                         "ticker": t,
-                        "market": "US",
+                        "market": "SP",
                         "shares": round(shares, 4),
                         "price_local": round(float(price_usd), 4),
                         "currency": "USD",
@@ -437,8 +437,8 @@ def main():
                 "cash_before_eur": round(cash_before_eur, 2),
                 "selected_us": top_us,
                 "selected_ibex": top_ibex,
-                "momentum_us_top_pct": {t: round(float(mom_us_t[t]) * 100, 2) for t in top_us},
-                "momentum_ibex_top_pct": {t: round(float(mom_ibex_t[t]) * 100, 2) for t in top_ibex},
+                "momentum_us_top": {t: round(float(mom_us_t[t]), 4) for t in top_us},
+                "momentum_ibex_top": {t: round(float(mom_ibex_t[t]), 4) for t in top_ibex},
                 "orders_to_sell": orders_to_sell,
                 "orders_to_buy": orders_to_buy,
                 "_note": "Backtest entry. Commissions excluded.",
@@ -544,6 +544,20 @@ def main():
     trades_df.to_csv(BT_TRADES_FILE, index=False)
     print(f"      Wrote {BT_TRADES_FILE.name} ({len(trades_df)} trades)")
 
+    # Build the monthly log with drawdown for downstream charts and report.
+    # valor_serie already has yearly taxes deducted (the v1.3.1 fix), so this
+    # IS the net trajectory the investor would have seen month-by-month.
+    running_peak = valor_serie.cummax()
+    drawdown_pct = (valor_serie / running_peak - 1) * 100
+    monthly_log_export = [
+        {
+            "date": d.strftime("%Y-%m-%d"),
+            "value_eur": round(float(v), 2),
+            "drawdown_pct": round(float(drawdown_pct.loc[d]), 4),
+        }
+        for d, v in valor_serie.items()
+    ]
+
     metrics = {
         "data_source": "real",
         "initial_capital_eur": INITIAL_CAPITAL,
@@ -562,6 +576,7 @@ def main():
             {k: (round(v, 4) if isinstance(v, float) else v) for k, v in s.items()}
             for s in yearly_summary
         ],
+        "monthly_log": monthly_log_export,
     }
     with open(BT_METRICS_FILE, "w") as f:
         json.dump(metrics, f, indent=2, default=str)
