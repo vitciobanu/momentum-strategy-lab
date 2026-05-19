@@ -149,6 +149,30 @@ Before the first run, edit `data/portfolio.json` as follows:
 
 Every quarter (Jan/Apr/Jul/Oct, days 5-10) execute the following four steps. The whole thing takes about 15-30 minutes.
 
+### Step 0 (real-money only) — Record dividends received during the quarter
+
+If the strategy operates on a real-money account and any held position has paid dividends since the last rebalance, those payments must be recorded BEFORE running the rebalance script. The procedure differs slightly between EUR and USD dividends.
+
+1. Download the IBKR dividend statement covering the quarter (Performance & Reports  → Statements → Activity Statement → Dividends section).
+2. For each dividend received, run:
+
+```bash
+   python scripts/append-dividend.py
+```
+
+   The script will prompt for ticker, date, currency, gross amount, withholding tax, and optional broker fee. Behaviour differs by currency:
+
+   - **EUR dividends** (Spanish stocks): IBKR credits EUR directly. The script computes `net_amount_eur = gross - tax - fee` and adds it to `cash_eur` in `portfolio.json`.
+   - **USD dividends** (US stocks): IBKR credits USD to a separate USD cash pot. The script records the entry in `history.json` for audit trail (gross USD, tax USD, fee USD, net USD) but **does NOT update `cash_eur`**, because no EUR cash has actually arrived yet.
+
+3. **If you received USD dividends**: before proceeding, convert your USD balance to EUR using IBKR (typically "Convert All to EUR" or an EUR.USD trade). Then manually update `cash_eur` in `portfolio.json` to reflect the actual EUR amount received from the conversion.
+
+4. Verify that `cash_eur` in `portfolio.json` matches your IBKR EUR cash balance before proceeding to Step 1.
+
+**Note on reversals**: IBKR occasionally reverses a dividend (most common with scrip dividends like AENA). When the statement shows a payment, reversal, and re-issue, ignore the cancelled lines and enter only the NET effective amount once. The script does not model reversals as separate entries.
+
+For DEMO accounts: skip this step entirely. Paper trading does not pay real dividends.
+
 ### Step 1 — Generate the plan
 
 In the morning of the rebalance day:
@@ -208,12 +232,16 @@ The `append-rebalance.py` output prints this exact command for copy-paste.
 
 ---
 
-## history.json: two entries per rebalance
+## history.json schema
 
-`data/history.json` records two entries per rebalance, distinguished by a top-level `type` field:
+`data/history.json` records different entry types, distinguished by a top-level `type` field:
 
-- **`"type": "PLAN"`** — written by `src/rebalance.py` in the morning. Records what the algorithm decided: selected tickers, momentum 12-1 values (as percentages under `momentum_us_top_pct` and `momentum_ibex_top_pct`), reference prices, proposed orders. The reference EUR/USD rate in this entry is what the script saw when it ran.
+- **`"type": "PLAN"`** — written by `src/rebalance.py` in the morning. Records what the algorithm decided: selected tickers, momentum 12-1 values, reference prices, proposed orders.
 - **`"type": "EXECUTION"`** — written by `scripts/append-rebalance.py` after orders are filled. Records what actually happened in the market: fill prices, actual EUR/USD rates IBKR applied to each order, real commissions, realized P&L on sells.
+- **`"type": "DIVIDEND"`** — written by `scripts/append-dividend.py` when a dividend is recorded (operation on real-money account only). Records gross amount, withholding tax, tax code, and optional fee. For EUR dividends: the net amount is added to `cash_eur`. For USD dividends: the entry is audit-only — the USD sits in IBKR's separate USD cash pot until the user manually converts it to EUR.
+- **`"type": "CAPITAL_INJECTION"` / `"CAPITAL_WITHDRAWAL"`** — written manually when capital is added or removed.
+
+Both PLAN and EXECUTION entries share the same `date` for a given rebalance. DIVIDEND entries have their own payment date and can appear at any time between rebalances. The append-only design preserves full audit history regardless of entry type.
 
 Both entries share the same `date`. PLAN tells you "why" the strategy chose what it chose. EXECUTION tells you "what really happened" when you placed the orders. Useful months later when you want to audit a past decision.
 
@@ -330,6 +358,7 @@ momentum-strategy-lab/
 │   ├── universe.py              # Universe definitions (IBEX 35 + US Large Cap)
 │   └── cagr.py                  # Money-weighted (XIRR) and time-weighted (TWR) returns
 ├── scripts/
+│   ├── append-dividend.py             # Records a dividend payment (use with real-money accounts only)
 │   ├── append-rebalance.py            # Records executed trades into JSONs
 │   ├── build_backtest_dashboard.py    # Generates the executive dashboard image
 │   ├── build_backtest_report.py       # Generates backtest-results.md

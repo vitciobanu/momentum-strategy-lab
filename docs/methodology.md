@@ -257,6 +257,69 @@ To be transparent about the limitations:
    strategy worked well during recovery (2020-2021 and 2023-2024). Future
    regimes may differ.
 
+## Dividends in real-money operation
+
+The backtest does not explicitly model dividends. Yahoo Finance's historical price data is already adjusted for dividends and splits, which means the strategy's reported CAGR (+56,95%) **implicitly includes** the price impact of reinvested dividends. This is mathematically equivalent to assuming dividends are reinvested at the ex-dividend day's price.
+
+In real-money operation, dividends behave differently:
+
+- They arrive as **cash** in the IBKR account, not as a price adjustment to existing positions
+- They are subject to **withholding tax** at source: 15% for US stocks (with W-8BEN active), 19% for Spanish stocks
+- Some positions carry **broker fees** (e.g., ADR fees on foreign-domiciled US listings, typically a few cents per share)
+- The user later declares the gross income and source-country withholding in their annual IRPF return
+
+### Two cash pots: EUR and USD
+
+A critical detail of IBKR's accounting: the broker maintains **two separate cash pots** per account, one for each currency. When MSFT pays a USD dividend, the USD lands in the USD pot. It is NOT auto-converted to EUR. The user sees a portfolio summary like:
+
+| Currency | Amount |
+|---|---|
+| EUR (base currency) | 140,09 |
+| USD | 4,55 |
+| **Total Cash (in EUR)** | **144,01** |
+
+The "Total in EUR" is purely informational — IBKR applies a current market rate to give a unified figure. But the user actually owns two pots of cash.
+
+### Recording flow
+
+Before running the quarterly rebalance, the user downloads the IBKR dividend statement and runs `scripts/append-dividend.py` once per dividend. The script handles each currency differently:
+
+**EUR dividends** (Spanish stocks like ELE, ITX, BBVA, ACS):
+- The script asks for gross, tax, optional fee
+- Computes `net_amount_eur = gross - tax - fee`
+- Updates `cash_eur` in `portfolio.json` (adds the net)
+- Appends a `"type": "DIVIDEND"` entry to `history.json`
+
+**USD dividends** (US stocks like MSFT, NVDA, MOD):
+- The script asks for gross USD, tax USD, optional fee USD
+- Computes `net_amount_usd = gross - tax - fee`
+- Does **not** update `cash_eur` (the dollars are not in the EUR pot)
+- Appends a `"type": "DIVIDEND"` entry to `history.json` for audit trail only
+
+### Bringing USD into EUR before the rebalance
+
+Since `rebalance.py` operates on `cash_eur`, any USD dividends accumulated during the quarter must be converted to EUR before the rebalance is run. The user does this manually in IBKR (via "Convert All to EUR" or an EUR.USD trade) and then **manually updates** `cash_eur` in `portfolio.json` with the EUR amount actually received from the conversion.
+
+A future `scripts/add-activity.py` script (planned for v2.0.0) will provide a `CURRENCY_CONVERSION` activity type to record this conversion in `history.json` and update `cash_eur` automatically. Until then, the user edits `portfolio.json` directly.
+
+### Reversals
+
+IBKR occasionally reverses a previously-paid dividend. The most common case is scrip dividends (cash-or-shares optional dividends, like AENA), where IBKR initially books the cash amount, reverses it when the user opts for shares, and sometimes re-issues a smaller cash payment for the fractional residue.
+
+The script does **not** model reversals as separate entry types. When the statement shows a payment + reversal + re-issue sequence, the cancelled lines should be ignored, and only the NET effective amount entered as a single DIVIDEND entry. This keeps `history.json` clean and matches what the IRPF declaration requires (net annual income per source).
+
+### Why dividends are not modeled in the backtest
+
+Modeling dividends explicitly in the backtest would require:
+
+- Historical ex-dividend dates and per-share amounts for all 192 universe stocks (192 × 7 years × 4 quarters ≈ 5000 dividend events)
+- Source-country tax assumptions applied retrospectively
+- A decision on reinvestment timing (immediately vs. next quarterly rebalance)
+
+The complexity is significant and the impact on results is modest: estimated 0,3% to 1,0% of annual CAGR drag from the extra tax on dividends that the adjusted-price methodology does not capture. This is small compared to other modeling uncertainties (real commissions, slippage, regime changes), and given the demo-validation purpose of the backtest, the trade-off favors simplicity.
+
+If the strategy reaches a more mature production stage with larger capital deployed, modeling dividends explicitly may become worthwhile and is left as future work.
+
 ## References
 
 - Jegadeesh, N., & Titman, S. (1993). *Returns to Buying Winners and Selling Losers:

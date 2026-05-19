@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.0] - 2026-05-19
+
+**Monthly trajectory, drawdown visibility, and dividend tracking**
+
+### Added
+- `backtests/backtest-metrics.json` now includes a `monthly_log` array
+  with `{date, value_eur, drawdown_pct}` for every month of the simulation
+  (84 entries for 2019-2025). Computed from `valor_serie`, so values are
+  net of yearly tax.
+- `backtests/backtest-dashboard.png` redesigned: shows the full
+  month-by-month equity curve (84 points instead of 8 yearly snapshots),
+  a dedicated drawdown chart below, and auto-annotated markers for the
+  pre-crash peak (Oct 2021, 12.238 €) and worst trough (Jun 2022,
+  6.822 €).
+- `backtests/backtest-results.md` adds two new sections:
+  "The 2021-2022 drawdown: what really happened" with auto-computed
+  narrative, and "Monthly trajectory" with a full month-by-month table
+  including value, monthly return, and drawdown from peak.
+- `README.md` new section "About the -44% drawdown" explaining the
+  22-month underwater period (Oct 2021 → Aug 2023) and the psychological
+  discipline required to execute through it.
+- New script `scripts/append-dividend.py` for recording dividend
+  payments on real-money accounts. Handles EUR and USD dividends
+  with their withholding tax (15% US with W-8BEN, 19% Spain) and
+  optional broker fees (e.g., ADR fees). EUR dividends update
+  `cash_eur` in `portfolio.json` directly. USD dividends are recorded
+  in `history.json` for audit trail but do NOT update `cash_eur`,
+  because IBKR holds USD in a separate cash pot until the user
+  manually converts it to EUR. Same safety features as
+  `append-rebalance.py`: `.bak` backups, `--dry-run` flag, structured
+  prompts.
+- `docs/methodology.md` new section "Dividends in real-money operation"
+  documenting the dividend recording flow and the reversal handling
+  policy.
+
+### Notes
+- The strategy logic, universe, and tax modeling are unchanged.
+  Global metrics from v1.3.1 (CAGR +56,95%, Sharpe 1,24, Max DD
+  -44,26%, final capital 46.916 €) remain identical.
+- Dividends are NOT modeled in the backtest. Yahoo Finance prices
+  used in the backtest are already dividend-adjusted, so the CAGR
+  implicitly includes the price impact of reinvested dividends. The
+  new `append-dividend.py` script handles the *cash-flow* side of
+  dividends in real-money operation, which the adjusted-price
+  backtest does not capture.
+
+---
+
 ## [1.3.1] - 2026-05-19
 
 **Fixed yearly starting capital**
