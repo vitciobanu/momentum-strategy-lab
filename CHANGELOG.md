@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.3.1] - 2026-05-19
+
+**Fixed yearly starting capital**
+
+### Fixed
+- `src/backtest.py`: yearly tax payments are now correctly deducted from
+  the start-of-next-year capital. Previously the running portfolio value
+  did not propagate the tax subtraction, distorting yearly returns in
+  years that followed a tax payment (2021, 2024, 2025). Global metrics
+  (CAGR, Sharpe, Max DD) are unchanged.
+
+---
+
 ## [1.3.0] - 2026-05-18
 
 **Automated rebalance bookkeeping**
