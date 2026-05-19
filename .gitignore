@@ -34,3 +34,4 @@ Thumbs.db
 # Local data dumps
 !docs/*.csv
 !docs/*.xlsx
+notes/
