@@ -477,7 +477,7 @@ def main():
             "tax": tax,
             "realized_gain": realized,
         })
-        df_log.loc[df_log.index >= f"{year+1}-01-01", "value_eur"] -= (
+        df_log.loc[df_log.index >= f"{year}-12-31", "value_eur"] -= (
             tax if year < final_year else 0
         )
 

@@ -27,7 +27,7 @@ Reproducible run of `src/backtest.py` against **REAL historical price data** fro
 | Final capital | **46.916 €** |
 | Total return | +2245.78% |
 | **CAGR (net of taxes)** | **+56.95%** |
-| Annualized volatility | 44.41% |
+| Annualized volatility | 44.61% |
 | **Sharpe ratio** | **1.24** |
 | **Max drawdown** | **-44.26%** |
 | Total taxes | 10.390 € |
@@ -44,11 +44,11 @@ Reproducible run of `src/backtest.py` against **REAL historical price data** fro
 |------|--------------:|------------------:|-----------:|---------:|--------------:|
 | 2019 | 2.000 € | 3.985 € | **+99.27%** | 0 € | -38 € |
 | 2020 | 3.985 € | 10.038 € | **+151.88%** | 677 € | 3.564 € |
-| 2021 | 10.715 € | 9.693 € | **-9.54%** | 858 € | 4.514 € |
-| 2022 | 10.550 € | 8.016 € | **-24.02%** | 0 € | -784 € |
+| 2021 | 10.038 € | 9.693 € | **-3.44%** | 858 € | 4.514 € |
+| 2022 | 9.693 € | 8.016 € | **-17.30%** | 0 € | -784 € |
 | 2023 | 8.016 € | 16.067 € | **+100.44%** | 476 € | 2.503 € |
-| 2024 | 16.543 € | 24.112 € | **+45.75%** | 2.454 € | 12.259 € |
-| 2025 | 26.566 € | 46.916 € | **+76.60%** | 2.963 € | 14.679 € |
+| 2024 | 16.067 € | 24.112 € | **+50.07%** | 2.454 € | 12.259 € |
+| 2025 | 24.112 € | 46.916 € | **+94.57%** | 2.963 € | 14.679 € |
 
 ## Most-selected stocks
 
@@ -138,7 +138,7 @@ One row per executed buy/sell. Sells show realized return at exit; buys leave th
 | Q4 2020 | SELL | PDD | US | 16.1947 | 89.98 USD | 1.1647 | 1.251 € | +78.40% |
 | Q4 2020 | SELL | VICR | US | 14.2361 | 78.00 USD | 1.1647 | 953 € | -3.22% |
 
-### 2021 (10 buys, 10 sells, 35.339 € total volume — net annual return **-9.54%**)
+### 2021 (10 buys, 10 sells, 35.339 € total volume — net annual return **-3.44%**)
 
 | Quarter | Action | Ticker | Market | Shares | Price | EUR/USD | Amount (€) | Return % |
 |---------|--------|--------|--------|-------:|------:|--------:|-----------:|---------:|
@@ -163,7 +163,7 @@ One row per executed buy/sell. Sells show realized return at exit; buys leave th
 | Q4 2021 | SELL | MOD | US | 122.4480 | 11.00 USD | 1.1561 | 1.165 € | -32.49% |
 | Q4 2021 | SELL | MTS | IBEX | 60.0918 | 29.34 EUR |  | 1.763 € | +21.11% |
 
-### 2022 (16 buys, 15 sells, 46.517 € total volume — net annual return **-24.02%**)
+### 2022 (16 buys, 15 sells, 46.517 € total volume — net annual return **-17.30%**)
 
 | Quarter | Action | Ticker | Market | Shares | Price | EUR/USD | Amount (€) | Return % |
 |---------|--------|--------|--------|-------:|------:|--------:|-----------:|---------:|
@@ -236,7 +236,7 @@ One row per executed buy/sell. Sells show realized return at exit; buys leave th
 | Q4 2023 | SELL | MOD | US | 73.7240 | 39.50 USD | 1.0576 | 2.754 € | +69.81% |
 | Q4 2023 | SELL | SAB | IBEX | 1416.7496 | 1.17 EUR |  | 1.659 € | +23.94% |
 
-### 2024 (11 buys, 11 sells, 81.349 € total volume — net annual return **+45.75%**)
+### 2024 (11 buys, 11 sells, 81.349 € total volume — net annual return **+50.07%**)
 
 | Quarter | Action | Ticker | Market | Shares | Price | EUR/USD | Amount (€) | Return % |
 |---------|--------|--------|--------|-------:|------:|--------:|-----------:|---------:|
@@ -263,7 +263,7 @@ One row per executed buy/sell. Sells show realized return at exit; buys leave th
 | Q4 2024 | SELL | ROVI | IBEX | 45.7885 | 78.10 EUR |  | 3.576 € | +21.94% |
 | Q4 2024 | SELL | VRT | US | 61.0049 | 109.29 USD | 1.0883 | 6.126 € | +92.82% |
 
-### 2025 (8 buys, 8 sells, 100.371 € total volume — net annual return **+76.60%**)
+### 2025 (8 buys, 8 sells, 100.371 € total volume — net annual return **+94.57%**)
 
 | Quarter | Action | Ticker | Market | Shares | Price | EUR/USD | Amount (€) | Return % |
 |---------|--------|--------|--------|-------:|------:|--------:|-----------:|---------:|
