@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.1] - 2026-05-21
+
+**Fixed dropped buy on cash-constrained rebalances**
+
+### Fixed
+- `src/backtest.py`: a quarterly rebalance no longer skips the last buy
+  when held winners have consumed more than their target weight.
+  Previously, if the sum of the fresh target amounts exceeded available
+  cash, the sequential buy loop spent the cash on the first positions
+  and skipped the final one, leaving the portfolio with 5 positions
+  instead of 6 and an inflated cash balance. Both buy loops (US and
+  IBEX) now invest `min(target, remaining cash)`, so all selected
+  positions are bought; the last one may enter below its nominal target
+  weight, which honestly reflects the rotation-only rebalancing design
+  (held winners are deliberately left to run). The intended 5% cash
+  reserve is unaffected — it lives in the 65/30 target weights, not in
+  this buy guard.
+
+---
+
 ## [1.4.0] - 2026-05-19
 
 **Monthly trajectory, drawdown visibility, and dividend tracking**

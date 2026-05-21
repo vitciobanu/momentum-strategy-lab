@@ -3,40 +3,40 @@
   "_purpose": "Final state of the historical backtest. Same schema as data/portfolio.json.",
   "initial_capital_eur": 2000.0,
   "net_capital_contributed_eur": 2000.0,
-  "cash_eur": 1239.8,
+  "cash_eur": 1244.63,
   "positions": {
     "RKLB": {
-      "shares": 172.6305,
+      "shares": 179.403,
       "avg_price_eur": 28.0351,
       "market": "US",
       "buy_date": "2025-01-31"
     },
     "PLTR": {
-      "shares": 60.7942,
+      "shares": 63.1792,
       "avg_price_eur": 79.6082,
       "market": "US",
       "buy_date": "2025-01-31"
     },
     "HOOD": {
-      "shares": 96.5335,
+      "shares": 100.3206,
       "avg_price_eur": 50.1351,
       "market": "US",
       "buy_date": "2025-01-31"
     },
     "IDR": {
-      "shares": 154.6641,
+      "shares": 159.3263,
       "avg_price_eur": 28.02,
       "market": "IBEX",
       "buy_date": "2025-04-30"
     },
     "BE": {
-      "shares": 84.4445,
+      "shares": 87.5279,
       "avg_price_eur": 114.5631,
       "market": "US",
       "buy_date": "2025-10-31"
     },
     "UNI": {
-      "shares": 3816.2608,
+      "shares": 3955.6074,
       "avg_price_eur": 2.34,
       "market": "IBEX",
       "buy_date": "2025-10-31"

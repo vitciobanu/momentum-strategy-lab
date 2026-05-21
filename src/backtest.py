@@ -351,8 +351,8 @@ def main():
                     price_usd = all_prices.loc[date, t]
                     if pd.isna(price_usd):
                         continue
-                    invest_eur = target_per_sp_eur
-                    if invest_eur <= 0 or invest_eur > cash_eur:
+                    invest_eur = min(target_per_sp_eur, cash_eur)
+                    if invest_eur <= 0:
                         continue
                     avg_price_eur = price_usd / eur_usd
                     shares = invest_eur / avg_price_eur
@@ -391,8 +391,8 @@ def main():
                     price_eur = all_prices.loc[date, t]
                     if pd.isna(price_eur):
                         continue
-                    invest_eur = target_per_ibex_eur
-                    if invest_eur <= 0 or invest_eur > cash_eur:
+                    invest_eur = min(target_per_ibex_eur, cash_eur)
+                    if invest_eur <= 0:
                         continue
                     shares = invest_eur / price_eur
                     holdings[t] = {

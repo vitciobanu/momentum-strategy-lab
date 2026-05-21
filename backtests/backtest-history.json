@@ -218,6 +218,14 @@
         "ref_price": 621.42,
         "currency": "USD",
         "value_eur": 545.75
+      },
+      {
+        "ticker": "CLNX",
+        "market": "IBEX",
+        "shares": 14.9249,
+        "ref_price": 27.39,
+        "currency": "EUR",
+        "value_eur": 408.79
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -225,9 +233,9 @@
   {
     "date": "2019-10-31",
     "eur_usd_rate": 1.115,
-    "portfolio_value_eur_before": 3154.49,
-    "portfolio_value_eur_after": 3154.49,
-    "cash_before_eur": 408.79,
+    "portfolio_value_eur_before": 3244.04,
+    "portfolio_value_eur_after": 3244.04,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "ENPH",
       "ARWR",
@@ -270,18 +278,18 @@
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 13.9813,
+        "shares": 14.3782,
         "ref_price": 40.88,
         "currency": "USD",
-        "value_eur": 512.6
+        "value_eur": 527.16
       },
       {
         "ticker": "KLAC",
         "market": "US",
-        "shares": 3.3812,
+        "shares": 2.4799,
         "ref_price": 169.04,
         "currency": "USD",
-        "value_eur": 512.6
+        "value_eur": 375.96
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -289,9 +297,9 @@
   {
     "date": "2020-01-31",
     "eur_usd_rate": 1.1093,
-    "portfolio_value_eur_before": 3692.66,
-    "portfolio_value_eur_after": 3692.66,
-    "cash_before_eur": 286.7,
+    "portfolio_value_eur_before": 3862.83,
+    "portfolio_value_eur_after": 3862.83,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "ARWR",
       "ENPH",
@@ -316,36 +324,36 @@
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 13.9813,
+        "shares": 14.3782,
         "ref_price": 35.22,
         "currency": "USD",
-        "value_eur": 443.9
+        "value_eur": 456.5
       },
       {
         "ticker": "KLAC",
         "market": "US",
-        "shares": 3.3812,
+        "shares": 2.4799,
         "ref_price": 165.74,
         "currency": "USD",
-        "value_eur": 505.18
+        "value_eur": 370.52
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "TER",
         "market": "US",
-        "shares": 10.087,
+        "shares": 10.5519,
         "ref_price": 65.99,
         "currency": "USD",
-        "value_eur": 600.06
+        "value_eur": 627.71
       },
       {
         "ticker": "AMD",
         "market": "US",
-        "shares": 14.1626,
+        "shares": 4.7042,
         "ref_price": 47.0,
         "currency": "USD",
-        "value_eur": 600.06
+        "value_eur": 199.31
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -353,9 +361,9 @@
   {
     "date": "2020-04-30",
     "eur_usd_rate": 1.0955,
-    "portfolio_value_eur_before": 4315.72,
-    "portfolio_value_eur_after": 4315.72,
-    "cash_before_eur": 35.67,
+    "portfolio_value_eur_before": 4470.35,
+    "portfolio_value_eur_after": 4470.35,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "ENPH",
       "TSLA",
@@ -388,28 +396,28 @@
       {
         "ticker": "TER",
         "market": "US",
-        "shares": 10.087,
+        "shares": 10.5519,
         "ref_price": 62.54,
         "currency": "USD",
-        "value_eur": 575.85
+        "value_eur": 602.39
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "TSLA",
         "market": "US",
-        "shares": 14.7377,
+        "shares": 15.2658,
         "ref_price": 52.13,
         "currency": "USD",
-        "value_eur": 701.3
+        "value_eur": 726.43
       },
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 16.1947,
+        "shares": 16.2525,
         "ref_price": 47.44,
         "currency": "USD",
-        "value_eur": 701.3
+        "value_eur": 703.8
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -417,9 +425,9 @@
   {
     "date": "2020-07-31",
     "eur_usd_rate": 1.1774,
-    "portfolio_value_eur_before": 6061.95,
-    "portfolio_value_eur_after": 6061.95,
-    "cash_before_eur": 36.76,
+    "portfolio_value_eur_before": 6186.09,
+    "portfolio_value_eur_after": 6186.09,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "TSLA",
       "PDD",
@@ -452,36 +460,36 @@
       {
         "ticker": "AMD",
         "market": "US",
-        "shares": 14.1626,
+        "shares": 4.7042,
         "ref_price": 77.43,
         "currency": "USD",
-        "value_eur": 931.38
+        "value_eur": 309.36
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "VICR",
         "market": "US",
-        "shares": 14.2361,
+        "shares": 14.5277,
         "ref_price": 81.47,
         "currency": "USD",
-        "value_eur": 985.07
+        "value_eur": 1005.24
       },
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 109.3136,
+        "shares": 111.5522,
         "ref_price": 10.61,
         "currency": "USD",
-        "value_eur": 985.07
+        "value_eur": 1005.24
       },
       {
         "ticker": "SLR",
         "market": "IBEX",
-        "shares": 70.8723,
+        "shares": 72.3237,
         "ref_price": 12.83,
         "currency": "EUR",
-        "value_eur": 909.29
+        "value_eur": 927.91
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -489,9 +497,9 @@
   {
     "date": "2020-10-31",
     "eur_usd_rate": 1.1647,
-    "portfolio_value_eur_before": 6926.82,
-    "portfolio_value_eur_after": 6926.82,
-    "cash_before_eur": 725.95,
+    "portfolio_value_eur_before": 7101.94,
+    "portfolio_value_eur_after": 7101.94,
+    "cash_before_eur": 8.2,
     "selected_us": [
       "TSLA",
       "BE",
@@ -516,36 +524,36 @@
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 16.1947,
+        "shares": 16.2525,
         "ref_price": 89.98,
         "currency": "USD",
-        "value_eur": 1251.14
+        "value_eur": 1255.6
       },
       {
         "ticker": "VICR",
         "market": "US",
-        "shares": 14.2361,
+        "shares": 14.5277,
         "ref_price": 78.0,
         "currency": "USD",
-        "value_eur": 953.39
+        "value_eur": 972.92
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "BE",
         "market": "US",
-        "shares": 103.718,
+        "shares": 106.3401,
         "ref_price": 12.64,
         "currency": "USD",
-        "value_eur": 1125.61
+        "value_eur": 1154.06
       },
       {
         "ticker": "ENPH",
         "market": "US",
-        "shares": 13.3652,
+        "shares": 12.8552,
         "ref_price": 98.09,
         "currency": "USD",
-        "value_eur": 1125.61
+        "value_eur": 1082.66
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -553,9 +561,9 @@
   {
     "date": "2021-01-31",
     "eur_usd_rate": 1.2136,
-    "portfolio_value_eur_before": 11558.54,
-    "portfolio_value_eur_after": 11558.54,
-    "cash_before_eur": 679.27,
+    "portfolio_value_eur_before": 11715.83,
+    "portfolio_value_eur_after": 11715.83,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "ENPH",
       "TSLA",
@@ -578,38 +586,54 @@
     },
     "orders_to_sell": [
       {
+        "ticker": "CLNX",
+        "market": "IBEX",
+        "shares": 14.9249,
+        "ref_price": 44.75,
+        "currency": "EUR",
+        "value_eur": 667.89
+      },
+      {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 109.3136,
+        "shares": 111.5522,
         "ref_price": 12.99,
         "currency": "USD",
-        "value_eur": 1170.06
+        "value_eur": 1194.02
       },
       {
         "ticker": "BE",
         "market": "US",
-        "shares": 103.718,
+        "shares": 106.3401,
         "ref_price": 34.91,
         "currency": "USD",
-        "value_eur": 2983.52
+        "value_eur": 3058.94
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 13.7557,
+        "shares": 13.9429,
         "ref_price": 165.71,
         "currency": "USD",
-        "value_eur": 1878.26
+        "value_eur": 1903.82
       },
       {
         "ticker": "SITM",
         "market": "US",
-        "shares": 18.6764,
+        "shares": 18.9306,
         "ref_price": 122.05,
         "currency": "USD",
-        "value_eur": 1878.26
+        "value_eur": 1903.82
+      },
+      {
+        "ticker": "FDR",
+        "market": "IBEX",
+        "shares": 56.2226,
+        "ref_price": 19.8,
+        "currency": "EUR",
+        "value_eur": 1113.21
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -617,9 +641,9 @@
   {
     "date": "2021-04-30",
     "eur_usd_rate": 1.2018,
-    "portfolio_value_eur_before": 9704.83,
-    "portfolio_value_eur_after": 9704.83,
-    "cash_before_eur": 1076.32,
+    "portfolio_value_eur_before": 10363.35,
+    "portfolio_value_eur_after": 10363.35,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "HUT",
       "SITM",
@@ -644,52 +668,52 @@
       {
         "ticker": "SLR",
         "market": "IBEX",
-        "shares": 70.8723,
+        "shares": 72.3237,
         "ref_price": 17.055,
         "currency": "EUR",
-        "value_eur": 1208.73
+        "value_eur": 1233.48
       },
       {
         "ticker": "ENPH",
         "market": "US",
-        "shares": 13.3652,
+        "shares": 12.8552,
         "ref_price": 139.25,
         "currency": "USD",
-        "value_eur": 1548.6
+        "value_eur": 1489.51
       },
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 13.7557,
+        "shares": 13.9429,
         "ref_price": 133.93,
         "currency": "USD",
-        "value_eur": 1532.95
+        "value_eur": 1553.81
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "HUT",
         "market": "US",
-        "shares": 69.5516,
+        "shares": 74.271,
         "ref_price": 27.25,
         "currency": "USD",
-        "value_eur": 1577.04
+        "value_eur": 1684.04
       },
       {
         "ticker": "GSAT",
         "market": "US",
-        "shares": 99.4898,
+        "shares": 106.2406,
         "ref_price": 19.05,
         "currency": "USD",
-        "value_eur": 1577.04
+        "value_eur": 1684.04
       },
       {
         "ticker": "MTS",
         "market": "IBEX",
-        "shares": 60.0918,
+        "shares": 37.5115,
         "ref_price": 24.225,
         "currency": "EUR",
-        "value_eur": 1455.72
+        "value_eur": 908.71
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -697,9 +721,9 @@
   {
     "date": "2021-07-31",
     "eur_usd_rate": 1.187,
-    "portfolio_value_eur_before": 10620.46,
-    "portfolio_value_eur_after": 10620.46,
-    "cash_before_eur": 756.81,
+    "portfolio_value_eur_before": 11463.29,
+    "portfolio_value_eur_after": 11463.29,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "HUT",
       "GSAT",
@@ -724,44 +748,36 @@
       {
         "ticker": "TSLA",
         "market": "US",
-        "shares": 14.7377,
+        "shares": 15.2658,
         "ref_price": 229.07,
         "currency": "USD",
-        "value_eur": 2844.12
+        "value_eur": 2946.03
       },
       {
         "ticker": "SITM",
         "market": "US",
-        "shares": 18.6764,
+        "shares": 18.9306,
         "ref_price": 135.64,
         "currency": "USD",
-        "value_eur": 2134.18
+        "value_eur": 2163.22
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "MP",
         "market": "US",
-        "shares": 54.4539,
+        "shares": 58.7753,
         "ref_price": 37.62,
         "currency": "USD",
-        "value_eur": 1725.82
+        "value_eur": 1862.78
       },
       {
         "ticker": "MOD",
         "market": "US",
-        "shares": 122.448,
+        "shares": 132.1653,
         "ref_price": 16.73,
         "currency": "USD",
-        "value_eur": 1725.82
-      },
-      {
-        "ticker": "FDR",
-        "market": "IBEX",
-        "shares": 46.6492,
-        "ref_price": 34.15,
-        "currency": "EUR",
-        "value_eur": 1593.07
+        "value_eur": 1862.78
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -769,9 +785,9 @@
   {
     "date": "2021-10-31",
     "eur_usd_rate": 1.1561,
-    "portfolio_value_eur_before": 12915.34,
-    "portfolio_value_eur_after": 12915.34,
-    "cash_before_eur": 690.39,
+    "portfolio_value_eur_before": 13899.53,
+    "portfolio_value_eur_after": 13899.53,
+    "cash_before_eur": 1383.68,
     "selected_us": [
       "HUT",
       "GSAT",
@@ -794,46 +810,54 @@
     },
     "orders_to_sell": [
       {
+        "ticker": "FDR",
+        "market": "IBEX",
+        "shares": 56.2226,
+        "ref_price": 33.05,
+        "currency": "EUR",
+        "value_eur": 1858.16
+      },
+      {
         "ticker": "MTS",
         "market": "IBEX",
-        "shares": 60.0918,
+        "shares": 37.5115,
         "ref_price": 29.34,
         "currency": "EUR",
-        "value_eur": 1763.09
+        "value_eur": 1100.59
       },
       {
         "ticker": "MOD",
         "market": "US",
-        "shares": 122.448,
+        "shares": 132.1653,
         "ref_price": 11.0,
         "currency": "USD",
-        "value_eur": 1165.06
-      },
-      {
-        "ticker": "FDR",
-        "market": "IBEX",
-        "shares": 46.6492,
-        "ref_price": 33.05,
-        "currency": "EUR",
-        "value_eur": 1541.76
+        "value_eur": 1257.52
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "SITM",
         "market": "US",
-        "shares": 9.1599,
+        "shares": 9.8579,
         "ref_price": 264.89,
         "currency": "USD",
-        "value_eur": 2098.74
+        "value_eur": 2258.67
       },
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 2781.8787,
+        "shares": 2993.8686,
         "ref_price": 0.6964,
         "currency": "EUR",
-        "value_eur": 1937.3
+        "value_eur": 2084.93
+      },
+      {
+        "ticker": "BBVA",
+        "market": "IBEX",
+        "shares": 207.2488,
+        "ref_price": 6.062,
+        "currency": "EUR",
+        "value_eur": 1256.34
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -841,9 +865,9 @@
   {
     "date": "2022-01-31",
     "eur_usd_rate": 1.1233,
-    "portfolio_value_eur_before": 10133.87,
-    "portfolio_value_eur_after": 10133.87,
-    "cash_before_eur": 1124.26,
+    "portfolio_value_eur_before": 10842.71,
+    "portfolio_value_eur_after": 10842.71,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "SITM",
       "CYTK",
@@ -868,60 +892,68 @@
       {
         "ticker": "GSAT",
         "market": "US",
-        "shares": 99.4898,
+        "shares": 106.2406,
         "ref_price": 16.05,
         "currency": "USD",
-        "value_eur": 1421.54
+        "value_eur": 1517.99
       },
       {
         "ticker": "MP",
         "market": "US",
-        "shares": 54.4539,
+        "shares": 58.7753,
         "ref_price": 39.94,
         "currency": "USD",
-        "value_eur": 1936.16
+        "value_eur": 2089.81
       },
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 2781.8787,
+        "shares": 2993.8686,
         "ref_price": 0.6874,
         "currency": "EUR",
-        "value_eur": 1912.26
+        "value_eur": 2057.99
+      },
+      {
+        "ticker": "BBVA",
+        "market": "IBEX",
+        "shares": 207.2488,
+        "ref_price": 5.634,
+        "currency": "EUR",
+        "value_eur": 1167.64
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "CYTK",
         "market": "US",
-        "shares": 55.7336,
+        "shares": 59.632,
         "ref_price": 33.19,
         "currency": "USD",
-        "value_eur": 1646.75
+        "value_eur": 1761.94
       },
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 75.5328,
+        "shares": 80.8161,
         "ref_price": 24.49,
         "currency": "USD",
-        "value_eur": 1646.75
+        "value_eur": 1761.94
       },
       {
         "ticker": "ROVI",
         "market": "IBEX",
-        "shares": 23.2428,
+        "shares": 24.8686,
         "ref_price": 65.4,
         "currency": "EUR",
-        "value_eur": 1520.08
+        "value_eur": 1626.41
       },
       {
         "ticker": "FDR",
         "market": "IBEX",
-        "shares": 54.0954,
+        "shares": 57.8792,
         "ref_price": 28.1,
         "currency": "EUR",
-        "value_eur": 1520.08
+        "value_eur": 1626.41
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -929,9 +961,9 @@
   {
     "date": "2022-04-30",
     "eur_usd_rate": 1.0541,
-    "portfolio_value_eur_before": 9065.54,
-    "portfolio_value_eur_after": 9065.54,
-    "cash_before_eur": 60.55,
+    "portfolio_value_eur_before": 9698.31,
+    "portfolio_value_eur_after": 9698.31,
+    "cash_before_eur": 56.74,
     "selected_us": [
       "SITM",
       "COP",
@@ -956,52 +988,52 @@
       {
         "ticker": "HUT",
         "market": "US",
-        "shares": 69.5516,
+        "shares": 74.271,
         "ref_price": 17.8,
         "currency": "USD",
-        "value_eur": 1174.48
+        "value_eur": 1254.17
       },
       {
         "ticker": "CYTK",
         "market": "US",
-        "shares": 55.7336,
+        "shares": 59.632,
         "ref_price": 39.87,
         "currency": "USD",
-        "value_eur": 2108.05
+        "value_eur": 2255.51
       },
       {
         "ticker": "FDR",
         "market": "IBEX",
-        "shares": 54.0954,
+        "shares": 57.8792,
         "ref_price": 26.12,
         "currency": "EUR",
-        "value_eur": 1412.97
+        "value_eur": 1511.8
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "COP",
         "market": "US",
-        "shares": 16.2568,
+        "shares": 17.3915,
         "ref_price": 95.52,
         "currency": "USD",
-        "value_eur": 1473.15
+        "value_eur": 1575.97
       },
       {
         "ticker": "MP",
         "market": "US",
-        "shares": 40.8214,
+        "shares": 43.6707,
         "ref_price": 38.04,
         "currency": "USD",
-        "value_eur": 1473.15
+        "value_eur": 1575.97
       },
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 1827.7297,
+        "shares": 1955.304,
         "ref_price": 0.744,
         "currency": "EUR",
-        "value_eur": 1359.83
+        "value_eur": 1454.75
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1009,9 +1041,9 @@
   {
     "date": "2022-07-31",
     "eur_usd_rate": 1.0218,
-    "portfolio_value_eur_before": 8677.77,
-    "portfolio_value_eur_after": 8677.77,
-    "cash_before_eur": 449.92,
+    "portfolio_value_eur_before": 9284.72,
+    "portfolio_value_eur_after": 9284.72,
+    "cash_before_eur": 471.53,
     "selected_us": [
       "COP",
       "EOG",
@@ -1036,84 +1068,84 @@
       {
         "ticker": "SITM",
         "market": "US",
-        "shares": 9.1599,
+        "shares": 9.8579,
         "ref_price": 185.98,
         "currency": "USD",
-        "value_eur": 1667.21
+        "value_eur": 1794.25
       },
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 75.5328,
+        "shares": 80.8161,
         "ref_price": 18.16,
         "currency": "USD",
-        "value_eur": 1342.41
+        "value_eur": 1436.31
       },
       {
         "ticker": "ROVI",
         "market": "IBEX",
-        "shares": 23.2428,
+        "shares": 24.8686,
         "ref_price": 51.0,
         "currency": "EUR",
-        "value_eur": 1185.38
+        "value_eur": 1268.3
       },
       {
         "ticker": "MP",
         "market": "US",
-        "shares": 40.8214,
+        "shares": 43.6707,
         "ref_price": 33.57,
         "currency": "USD",
-        "value_eur": 1341.14
+        "value_eur": 1434.75
       },
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 1827.7297,
+        "shares": 1955.304,
         "ref_price": 0.6246,
         "currency": "EUR",
-        "value_eur": 1141.6
+        "value_eur": 1221.28
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "EOG",
         "market": "US",
-        "shares": 13.5663,
+        "shares": 14.5152,
         "ref_price": 106.21,
         "currency": "USD",
-        "value_eur": 1410.14
+        "value_eur": 1508.77
       },
       {
         "ticker": "XOM",
         "market": "US",
-        "shares": 14.8651,
+        "shares": 15.9049,
         "ref_price": 96.93,
         "currency": "USD",
-        "value_eur": 1410.14
+        "value_eur": 1508.77
       },
       {
         "ticker": "CVX",
         "market": "US",
-        "shares": 8.7976,
+        "shares": 9.413,
         "ref_price": 163.78,
         "currency": "USD",
-        "value_eur": 1410.14
+        "value_eur": 1508.77
       },
       {
         "ticker": "REP",
         "market": "IBEX",
-        "shares": 107.3538,
+        "shares": 114.8625,
         "ref_price": 12.125,
         "currency": "EUR",
-        "value_eur": 1301.67
+        "value_eur": 1392.71
       },
       {
         "ticker": "ANA",
         "market": "IBEX",
-        "shares": 6.4889,
+        "shares": 6.9427,
         "ref_price": 200.6,
         "currency": "EUR",
-        "value_eur": 1301.67
+        "value_eur": 1392.71
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1121,9 +1153,9 @@
   {
     "date": "2022-10-31",
     "eur_usd_rate": 0.9883,
-    "portfolio_value_eur_before": 10114.06,
-    "portfolio_value_eur_after": 10114.06,
-    "cash_before_eur": 293.92,
+    "portfolio_value_eur_before": 10821.4,
+    "portfolio_value_eur_after": 10821.4,
+    "cash_before_eur": 314.7,
     "selected_us": [
       "CYTK",
       "COP",
@@ -1148,68 +1180,68 @@
       {
         "ticker": "EOG",
         "market": "US",
-        "shares": 13.5663,
+        "shares": 14.5152,
         "ref_price": 131.99,
         "currency": "USD",
-        "value_eur": 1811.82
+        "value_eur": 1938.54
       },
       {
         "ticker": "CVX",
         "market": "US",
-        "shares": 8.7976,
+        "shares": 9.413,
         "ref_price": 180.9,
         "currency": "USD",
-        "value_eur": 1610.34
+        "value_eur": 1722.97
       },
       {
         "ticker": "REP",
         "market": "IBEX",
-        "shares": 107.3538,
+        "shares": 114.8625,
         "ref_price": 13.745,
         "currency": "EUR",
-        "value_eur": 1475.58
+        "value_eur": 1578.79
       },
       {
         "ticker": "ANA",
         "market": "IBEX",
-        "shares": 6.4889,
+        "shares": 6.9427,
         "ref_price": 182.1,
         "currency": "EUR",
-        "value_eur": 1181.62
+        "value_eur": 1264.27
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "CYTK",
         "market": "US",
-        "shares": 37.2035,
+        "shares": 39.8054,
         "ref_price": 43.66,
         "currency": "USD",
-        "value_eur": 1643.54
+        "value_eur": 1758.48
       },
       {
         "ticker": "ON",
         "market": "US",
-        "shares": 26.4416,
+        "shares": 28.2908,
         "ref_price": 61.43,
         "currency": "USD",
-        "value_eur": 1643.54
+        "value_eur": 1758.48
       },
       {
         "ticker": "CABK",
         "market": "IBEX",
-        "shares": 452.4633,
+        "shares": 484.1067,
         "ref_price": 3.353,
         "currency": "EUR",
-        "value_eur": 1517.11
+        "value_eur": 1623.21
       },
       {
         "ticker": "ANE",
         "market": "IBEX",
-        "shares": 38.1567,
+        "shares": 40.8252,
         "ref_price": 39.76,
         "currency": "EUR",
-        "value_eur": 1517.11
+        "value_eur": 1623.21
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1217,9 +1249,9 @@
   {
     "date": "2023-01-31",
     "eur_usd_rate": 1.0862,
-    "portfolio_value_eur_before": 9978.42,
-    "portfolio_value_eur_after": 9978.42,
-    "cash_before_eur": 51.98,
+    "portfolio_value_eur_before": 10676.3,
+    "portfolio_value_eur_after": 10676.3,
+    "cash_before_eur": 55.89,
     "selected_us": [
       "MOD",
       "ENPH",
@@ -1244,84 +1276,84 @@
       {
         "ticker": "COP",
         "market": "US",
-        "shares": 16.2568,
+        "shares": 17.3915,
         "ref_price": 121.87,
         "currency": "USD",
-        "value_eur": 1823.99
+        "value_eur": 1951.3
       },
       {
         "ticker": "XOM",
         "market": "US",
-        "shares": 14.8651,
+        "shares": 15.9049,
         "ref_price": 116.01,
         "currency": "USD",
-        "value_eur": 1587.65
+        "value_eur": 1698.7
       },
       {
         "ticker": "CYTK",
         "market": "US",
-        "shares": 37.2035,
+        "shares": 39.8054,
         "ref_price": 42.48,
         "currency": "USD",
-        "value_eur": 1454.99
+        "value_eur": 1556.74
       },
       {
         "ticker": "ON",
         "market": "US",
-        "shares": 26.4416,
+        "shares": 28.2908,
         "ref_price": 73.45,
         "currency": "USD",
-        "value_eur": 1788.01
+        "value_eur": 1913.05
       },
       {
         "ticker": "CABK",
         "market": "IBEX",
-        "shares": 452.4633,
+        "shares": 484.1067,
         "ref_price": 4.067,
         "currency": "EUR",
-        "value_eur": 1840.17
+        "value_eur": 1968.86
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "MOD",
         "market": "US",
-        "shares": 73.724,
+        "shares": 78.8802,
         "ref_price": 23.89,
         "currency": "USD",
-        "value_eur": 1621.49
+        "value_eur": 1734.9
       },
       {
         "ticker": "ENPH",
         "market": "US",
-        "shares": 7.9558,
+        "shares": 8.5123,
         "ref_price": 221.38,
         "currency": "USD",
-        "value_eur": 1621.49
+        "value_eur": 1734.9
       },
       {
         "ticker": "SANM",
         "market": "US",
-        "shares": 28.9064,
+        "shares": 30.9281,
         "ref_price": 60.93,
         "currency": "USD",
-        "value_eur": 1621.49
+        "value_eur": 1734.9
       },
       {
         "ticker": "LLY",
         "market": "US",
-        "shares": 5.1177,
+        "shares": 5.4757,
         "ref_price": 344.15,
         "currency": "USD",
-        "value_eur": 1621.49
+        "value_eur": 1734.9
       },
       {
         "ticker": "REP",
         "market": "IBEX",
-        "shares": 99.189,
+        "shares": 106.1262,
         "ref_price": 15.09,
         "currency": "EUR",
-        "value_eur": 1496.76
+        "value_eur": 1601.45
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1329,9 +1361,9 @@
   {
     "date": "2023-04-30",
     "eur_usd_rate": 1.102,
-    "portfolio_value_eur_before": 8923.63,
-    "portfolio_value_eur_after": 8923.63,
-    "cash_before_eur": 564.05,
+    "portfolio_value_eur_before": 9547.75,
+    "portfolio_value_eur_after": 9547.75,
+    "cash_before_eur": 603.5,
     "selected_us": [
       "MOD",
       "POWL",
@@ -1356,84 +1388,84 @@
       {
         "ticker": "ANE",
         "market": "IBEX",
-        "shares": 38.1567,
+        "shares": 40.8252,
         "ref_price": 32.56,
         "currency": "EUR",
-        "value_eur": 1242.38
+        "value_eur": 1329.27
       },
       {
         "ticker": "ENPH",
         "market": "US",
-        "shares": 7.9558,
+        "shares": 8.5123,
         "ref_price": 164.2,
         "currency": "USD",
-        "value_eur": 1185.44
+        "value_eur": 1268.34
       },
       {
         "ticker": "SANM",
         "market": "US",
-        "shares": 28.9064,
+        "shares": 30.9281,
         "ref_price": 52.26,
         "currency": "USD",
-        "value_eur": 1370.82
+        "value_eur": 1466.7
       },
       {
         "ticker": "LLY",
         "market": "US",
-        "shares": 5.1177,
+        "shares": 5.4757,
         "ref_price": 395.86,
         "currency": "USD",
-        "value_eur": 1838.39
+        "value_eur": 1966.96
       },
       {
         "ticker": "REP",
         "market": "IBEX",
-        "shares": 99.189,
+        "shares": 106.1262,
         "ref_price": 13.345,
         "currency": "EUR",
-        "value_eur": 1323.68
+        "value_eur": 1416.25
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "POWL",
         "market": "US",
-        "shares": 119.7003,
+        "shares": 128.0721,
         "ref_price": 13.35,
         "currency": "USD",
-        "value_eur": 1450.09
+        "value_eur": 1551.51
       },
       {
         "ticker": "NFLX",
         "market": "US",
-        "shares": 48.4389,
+        "shares": 51.8267,
         "ref_price": 32.99,
         "currency": "USD",
-        "value_eur": 1450.09
+        "value_eur": 1551.51
       },
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 23.4483,
+        "shares": 25.0882,
         "ref_price": 68.15,
         "currency": "USD",
-        "value_eur": 1450.09
+        "value_eur": 1551.51
       },
       {
         "ticker": "ITX",
         "market": "IBEX",
-        "shares": 42.9572,
+        "shares": 45.9615,
         "ref_price": 31.16,
         "currency": "EUR",
-        "value_eur": 1338.55
+        "value_eur": 1432.16
       },
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 1416.7496,
+        "shares": 1515.836,
         "ref_price": 0.9448,
         "currency": "EUR",
-        "value_eur": 1338.55
+        "value_eur": 1432.16
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1441,9 +1473,9 @@
   {
     "date": "2023-07-31",
     "eur_usd_rate": 1.0993,
-    "portfolio_value_eur_before": 12153.34,
-    "portfolio_value_eur_after": 12153.34,
-    "cash_before_eur": 497.39,
+    "portfolio_value_eur_before": 13003.34,
+    "portfolio_value_eur_after": 13003.34,
+    "cash_before_eur": 532.18,
     "selected_us": [
       "AAOI",
       "POWL",
@@ -1468,52 +1500,52 @@
       {
         "ticker": "NFLX",
         "market": "US",
-        "shares": 48.4389,
+        "shares": 51.8267,
         "ref_price": 43.9,
         "currency": "USD",
-        "value_eur": 1934.38
+        "value_eur": 2069.67
       },
       {
         "ticker": "PDD",
         "market": "US",
-        "shares": 23.4483,
+        "shares": 25.0882,
         "ref_price": 89.82,
         "currency": "USD",
-        "value_eur": 1915.88
+        "value_eur": 2049.87
       },
       {
         "ticker": "ITX",
         "market": "IBEX",
-        "shares": 42.9572,
+        "shares": 45.9615,
         "ref_price": 34.81,
         "currency": "EUR",
-        "value_eur": 1495.34
+        "value_eur": 1599.92
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "AAOI",
         "market": "US",
-        "shares": 321.6336,
+        "shares": 344.1285,
         "ref_price": 6.75,
         "currency": "USD",
-        "value_eur": 1974.92
+        "value_eur": 2113.04
       },
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 46.459,
+        "shares": 49.7083,
         "ref_price": 46.73,
         "currency": "USD",
-        "value_eur": 1974.92
+        "value_eur": 2113.04
       },
       {
         "ticker": "BBVA",
         "market": "IBEX",
-        "shares": 252.8434,
+        "shares": 270.5271,
         "ref_price": 7.21,
         "currency": "EUR",
-        "value_eur": 1823.0
+        "value_eur": 1950.5
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1521,9 +1553,9 @@
   {
     "date": "2023-10-31",
     "eur_usd_rate": 1.0576,
-    "portfolio_value_eur_before": 13302.04,
-    "portfolio_value_eur_after": 13302.04,
-    "cash_before_eur": 70.15,
+    "portfolio_value_eur_before": 14232.37,
+    "portfolio_value_eur_after": 14232.37,
+    "cash_before_eur": 75.06,
     "selected_us": [
       "AAOI",
       "POWL",
@@ -1548,52 +1580,52 @@
       {
         "ticker": "MOD",
         "market": "US",
-        "shares": 73.724,
+        "shares": 78.8802,
         "ref_price": 39.5,
         "currency": "USD",
-        "value_eur": 2753.5
+        "value_eur": 2946.07
       },
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 1416.7496,
+        "shares": 1515.836,
         "ref_price": 1.171,
         "currency": "EUR",
-        "value_eur": 1659.01
+        "value_eur": 1775.04
       },
       {
         "ticker": "BBVA",
         "market": "IBEX",
-        "shares": 252.8434,
+        "shares": 270.5271,
         "ref_price": 7.422,
         "currency": "EUR",
-        "value_eur": 1876.6
+        "value_eur": 2007.85
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "META",
         "market": "US",
-        "shares": 7.5882,
+        "shares": 8.1189,
         "ref_price": 301.27,
         "currency": "USD",
-        "value_eur": 2161.58
+        "value_eur": 2312.76
       },
       {
         "ticker": "ITX",
         "market": "IBEX",
-        "shares": 61.2997,
+        "shares": 65.587,
         "ref_price": 32.55,
         "currency": "EUR",
-        "value_eur": 1995.31
+        "value_eur": 2134.86
       },
       {
         "ticker": "IDR",
         "market": "IBEX",
-        "shares": 150.5891,
+        "shares": 161.1212,
         "ref_price": 13.25,
         "currency": "EUR",
-        "value_eur": 1995.31
+        "value_eur": 2134.86
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1601,9 +1633,9 @@
   {
     "date": "2024-01-31",
     "eur_usd_rate": 1.0816,
-    "portfolio_value_eur_before": 19551.71,
-    "portfolio_value_eur_after": 19551.71,
-    "cash_before_eur": 207.07,
+    "portfolio_value_eur_before": 20919.14,
+    "portfolio_value_eur_after": 20919.14,
+    "cash_before_eur": 221.55,
     "selected_us": [
       "AAOI",
       "VRT",
@@ -1628,68 +1660,68 @@
       {
         "ticker": "POWL",
         "market": "US",
-        "shares": 119.7003,
+        "shares": 128.0721,
         "ref_price": 39.51,
         "currency": "USD",
-        "value_eur": 4372.56
+        "value_eur": 4678.37
       },
       {
         "ticker": "META",
         "market": "US",
-        "shares": 7.5882,
+        "shares": 8.1189,
         "ref_price": 390.14,
         "currency": "USD",
-        "value_eur": 2737.1
+        "value_eur": 2928.53
       },
       {
         "ticker": "ITX",
         "market": "IBEX",
-        "shares": 61.2997,
+        "shares": 65.587,
         "ref_price": 39.71,
         "currency": "EUR",
-        "value_eur": 2434.21
+        "value_eur": 2604.46
       },
       {
         "ticker": "IDR",
         "market": "IBEX",
-        "shares": 150.5891,
+        "shares": 161.1212,
         "ref_price": 16.47,
         "currency": "EUR",
-        "value_eur": 2480.2
+        "value_eur": 2653.67
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "VRT",
         "market": "US",
-        "shares": 61.0049,
+        "shares": 65.2716,
         "ref_price": 56.33,
         "currency": "USD",
-        "value_eur": 3177.15
+        "value_eur": 3399.36
       },
       {
         "ticker": "MOD",
         "market": "US",
-        "shares": 49.7381,
+        "shares": 53.2168,
         "ref_price": 69.09,
         "currency": "USD",
-        "value_eur": 3177.15
+        "value_eur": 3399.36
       },
       {
         "ticker": "ROVI",
         "market": "IBEX",
-        "shares": 45.7885,
+        "shares": 48.991,
         "ref_price": 64.05,
         "currency": "EUR",
-        "value_eur": 2932.76
+        "value_eur": 3137.87
       },
       {
         "ticker": "ACS",
         "market": "IBEX",
-        "shares": 80.1519,
+        "shares": 85.7576,
         "ref_price": 36.59,
         "currency": "EUR",
-        "value_eur": 2932.76
+        "value_eur": 3137.87
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1697,9 +1729,9 @@
   {
     "date": "2024-04-30",
     "eur_usd_rate": 1.0665,
-    "portfolio_value_eur_before": 23257.39,
-    "portfolio_value_eur_after": 23257.39,
-    "cash_before_eur": 11.33,
+    "portfolio_value_eur_before": 24884.0,
+    "portfolio_value_eur_after": 24884.0,
+    "cash_before_eur": 12.12,
     "selected_us": [
       "AAOI",
       "VRT",
@@ -1724,28 +1756,36 @@
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 46.459,
+        "shares": 49.7083,
         "ref_price": 86.4,
         "currency": "USD",
-        "value_eur": 3763.76
+        "value_eur": 4027.0
       },
       {
         "ticker": "ACS",
         "market": "IBEX",
-        "shares": 80.1519,
+        "shares": 85.7576,
         "ref_price": 37.58,
         "currency": "EUR",
-        "value_eur": 3012.11
+        "value_eur": 3222.77
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "POWL",
         "market": "US",
-        "shares": 84.5532,
+        "shares": 90.4668,
         "ref_price": 47.67,
         "currency": "USD",
-        "value_eur": 3779.33
+        "value_eur": 4043.65
+      },
+      {
+        "ticker": "BBVA",
+        "market": "IBEX",
+        "shares": 316.2893,
+        "ref_price": 10.175,
+        "currency": "EUR",
+        "value_eur": 3218.24
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1753,9 +1793,9 @@
   {
     "date": "2024-07-31",
     "eur_usd_rate": 1.0825,
-    "portfolio_value_eur_before": 24542.99,
-    "portfolio_value_eur_after": 24542.99,
-    "cash_before_eur": 3007.88,
+    "portfolio_value_eur_before": 26110.54,
+    "portfolio_value_eur_after": 26110.54,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "VRT",
       "ASTS",
@@ -1780,36 +1820,52 @@
       {
         "ticker": "AAOI",
         "market": "US",
-        "shares": 321.6336,
+        "shares": 344.1285,
         "ref_price": 9.55,
         "currency": "USD",
-        "value_eur": 2837.51
+        "value_eur": 3035.96
       },
       {
         "ticker": "POWL",
         "market": "US",
-        "shares": 84.5532,
+        "shares": 90.4668,
         "ref_price": 61.21,
         "currency": "USD",
-        "value_eur": 4781.06
+        "value_eur": 5115.45
+      },
+      {
+        "ticker": "BBVA",
+        "market": "IBEX",
+        "shares": 316.2893,
+        "ref_price": 9.704,
+        "currency": "EUR",
+        "value_eur": 3069.27
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "ASTS",
         "market": "US",
-        "shares": 208.7653,
+        "shares": 222.099,
         "ref_price": 20.68,
         "currency": "USD",
-        "value_eur": 3988.24
+        "value_eur": 4242.96
       },
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 36.8934,
+        "shares": 39.2498,
         "ref_price": 117.02,
         "currency": "USD",
-        "value_eur": 3988.24
+        "value_eur": 4242.96
+      },
+      {
+        "ticker": "SAB",
+        "market": "IBEX",
+        "shares": 1401.0014,
+        "ref_price": 1.952,
+        "currency": "EUR",
+        "value_eur": 2734.75
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1817,9 +1873,9 @@
   {
     "date": "2024-10-31",
     "eur_usd_rate": 1.0883,
-    "portfolio_value_eur_before": 26802.7,
-    "portfolio_value_eur_after": 26802.7,
-    "cash_before_eur": 2649.97,
+    "portfolio_value_eur_before": 28292.6,
+    "portfolio_value_eur_after": 28292.6,
+    "cash_before_eur": 0.0,
     "selected_us": [
       "ASTS",
       "MOD",
@@ -1844,60 +1900,52 @@
       {
         "ticker": "VRT",
         "market": "US",
-        "shares": 61.0049,
+        "shares": 65.2716,
         "ref_price": 109.29,
         "currency": "USD",
-        "value_eur": 6126.28
+        "value_eur": 6554.75
       },
       {
         "ticker": "ROVI",
         "market": "IBEX",
-        "shares": 45.7885,
+        "shares": 48.991,
         "ref_price": 78.1,
         "currency": "EUR",
-        "value_eur": 3576.09
+        "value_eur": 3826.19
       },
       {
         "ticker": "NVDA",
         "market": "US",
-        "shares": 36.8934,
+        "shares": 39.2498,
         "ref_price": 132.76,
         "currency": "USD",
-        "value_eur": 4500.57
+        "value_eur": 4788.02
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "SMTC",
         "market": "US",
-        "shares": 107.2646,
+        "shares": 113.2272,
         "ref_price": 44.19,
         "currency": "USD",
-        "value_eur": 4355.44
+        "value_eur": 4597.55
       },
       {
         "ticker": "IESC",
         "market": "US",
-        "shares": 21.6776,
+        "shares": 22.8826,
         "ref_price": 218.66,
         "currency": "USD",
-        "value_eur": 4355.44
+        "value_eur": 4597.55
       },
       {
         "ticker": "ITX",
         "market": "IBEX",
-        "shares": 76.872,
+        "shares": 81.1451,
         "ref_price": 52.3,
         "currency": "EUR",
-        "value_eur": 4020.41
-      },
-      {
-        "ticker": "SAB",
-        "market": "IBEX",
-        "shares": 2247.9202,
-        "ref_price": 1.7885,
-        "currency": "EUR",
-        "value_eur": 4020.41
+        "value_eur": 4243.89
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -1905,9 +1953,9 @@
   {
     "date": "2025-01-31",
     "eur_usd_rate": 1.0362,
-    "portfolio_value_eur_before": 29782.88,
-    "portfolio_value_eur_after": 29782.88,
-    "cash_before_eur": 101.22,
+    "portfolio_value_eur_before": 30951.29,
+    "portfolio_value_eur_after": 30951.29,
+    "cash_before_eur": 1729.97,
     "selected_us": [
       "ASTS",
       "RKLB",
@@ -1932,68 +1980,68 @@
       {
         "ticker": "MOD",
         "market": "US",
-        "shares": 49.7381,
+        "shares": 53.2168,
         "ref_price": 101.45,
         "currency": "USD",
-        "value_eur": 4869.65
+        "value_eur": 5210.23
       },
       {
         "ticker": "SMTC",
         "market": "US",
-        "shares": 107.2646,
+        "shares": 113.2272,
         "ref_price": 66.96,
         "currency": "USD",
-        "value_eur": 6931.52
+        "value_eur": 7316.83
       },
       {
         "ticker": "IESC",
         "market": "US",
-        "shares": 21.6776,
+        "shares": 22.8826,
         "ref_price": 221.28,
         "currency": "USD",
-        "value_eur": 4629.24
+        "value_eur": 4886.57
       },
       {
         "ticker": "ITX",
         "market": "IBEX",
-        "shares": 76.872,
+        "shares": 81.1451,
         "ref_price": 52.72,
         "currency": "EUR",
-        "value_eur": 4052.69
+        "value_eur": 4277.97
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "RKLB",
         "market": "US",
-        "shares": 172.6305,
+        "shares": 179.403,
         "ref_price": 29.05,
         "currency": "USD",
-        "value_eur": 4839.72
+        "value_eur": 5029.58
       },
       {
         "ticker": "PLTR",
         "market": "US",
-        "shares": 60.7942,
+        "shares": 63.1792,
         "ref_price": 82.49,
         "currency": "USD",
-        "value_eur": 4839.72
+        "value_eur": 5029.58
       },
       {
         "ticker": "HOOD",
         "market": "US",
-        "shares": 96.5335,
+        "shares": 100.3206,
         "ref_price": 51.95,
         "currency": "USD",
-        "value_eur": 4839.72
+        "value_eur": 5029.58
       },
       {
         "ticker": "IAG",
         "market": "IBEX",
-        "shares": 1106.3476,
+        "shares": 1149.7508,
         "ref_price": 4.038,
         "currency": "EUR",
-        "value_eur": 4467.43
+        "value_eur": 4642.69
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -2001,9 +2049,9 @@
   {
     "date": "2025-04-30",
     "eur_usd_rate": 1.1329,
-    "portfolio_value_eur_before": 28891.24,
-    "portfolio_value_eur_after": 28891.24,
-    "cash_before_eur": 1597.74,
+    "portfolio_value_eur_before": 29762.15,
+    "portfolio_value_eur_after": 29762.15,
+    "cash_before_eur": 3690.12,
     "selected_us": [
       "ASTS",
       "RKLB",
@@ -2028,20 +2076,20 @@
       {
         "ticker": "SAB",
         "market": "IBEX",
-        "shares": 2247.9202,
+        "shares": 1401.0014,
         "ref_price": 2.564,
         "currency": "EUR",
-        "value_eur": 5763.67
+        "value_eur": 3592.17
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "IDR",
         "market": "IBEX",
-        "shares": 154.6641,
+        "shares": 159.3263,
         "ref_price": 28.02,
         "currency": "EUR",
-        "value_eur": 4333.69
+        "value_eur": 4464.32
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -2049,9 +2097,9 @@
   {
     "date": "2025-07-31",
     "eur_usd_rate": 1.1416,
-    "portfolio_value_eur_before": 47334.32,
-    "portfolio_value_eur_after": 47334.32,
-    "cash_before_eur": 3027.72,
+    "portfolio_value_eur_before": 49051.26,
+    "portfolio_value_eur_after": 49051.26,
+    "cash_before_eur": 2817.97,
     "selected_us": [
       "RKLB",
       "PLTR",
@@ -2076,20 +2124,20 @@
       {
         "ticker": "ASTS",
         "market": "US",
-        "shares": 208.7653,
+        "shares": 222.099,
         "ref_price": 53.17,
         "currency": "USD",
-        "value_eur": 9723.24
+        "value_eur": 10344.26
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "AGX",
         "market": "US",
-        "shares": 35.8437,
+        "shares": 37.1438,
         "ref_price": 244.98,
         "currency": "USD",
-        "value_eur": 7691.83
+        "value_eur": 7970.83
       }
     ],
     "_note": "Backtest entry. Commissions excluded."
@@ -2097,9 +2145,9 @@
   {
     "date": "2025-10-31",
     "eur_usd_rate": 1.1536,
-    "portfolio_value_eur_before": 59533.67,
-    "portfolio_value_eur_after": 59533.67,
-    "cash_before_eur": 5059.13,
+    "portfolio_value_eur_before": 61707.48,
+    "portfolio_value_eur_after": 61707.48,
+    "cash_before_eur": 5191.4,
     "selected_us": [
       "BE",
       "HOOD",
@@ -2124,36 +2172,36 @@
       {
         "ticker": "IAG",
         "market": "IBEX",
-        "shares": 1106.3476,
+        "shares": 1149.7508,
         "ref_price": 4.764,
         "currency": "EUR",
-        "value_eur": 5270.64
+        "value_eur": 5477.41
       },
       {
         "ticker": "AGX",
         "market": "US",
-        "shares": 35.8437,
+        "shares": 37.1438,
         "ref_price": 306.21,
         "currency": "USD",
-        "value_eur": 9514.3
+        "value_eur": 9859.41
       }
     ],
     "orders_to_buy": [
       {
         "ticker": "BE",
         "market": "US",
-        "shares": 84.4445,
+        "shares": 87.5279,
         "ref_price": 132.16,
         "currency": "USD",
-        "value_eur": 9674.22
+        "value_eur": 10027.46
       },
       {
         "ticker": "UNI",
         "market": "IBEX",
-        "shares": 3816.2608,
+        "shares": 3955.6074,
         "ref_price": 2.34,
         "currency": "EUR",
-        "value_eur": 8930.05
+        "value_eur": 9256.12
       }
     ],
     "_note": "Backtest entry. Commissions excluded."

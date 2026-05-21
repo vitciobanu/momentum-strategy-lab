@@ -147,7 +147,7 @@ def build_dashboard():
     ax_eq.annotate(
         f"Crash trough\n{worst_dd_date.strftime('%b %Y')}\n{worst_dd_value:,.0f} €",
         xy=(worst_dd_date, worst_dd_value),
-        xytext=(worst_dd_date, worst_dd_value - 7500),
+        xytext=(worst_dd_date, worst_dd_value - 10000),
         fontsize=8.5, color=RED_DARK, fontweight="bold",
         ha="center", va="top",
         arrowprops=dict(arrowstyle="->", color=RED, lw=1),
